@@ -86,6 +86,25 @@ interested in joining the project.
 
 % Authors: Tom A., Tom R., Wolfgang K., Erik T.
 
+The \texttt{astropy.table} and \texttt{astropy.nddata} sub-packages contain
+classes (\texttt{Table} and \texttt{NDData}) that allow users to represent
+astronomical data in the form of tables or n-dimensional gridded datasets,
+including meta-data (for example units).
+
+The \texttt{Table} class provides a high-level wrapper to Numpy structured
+arrays, which are essentially arrays that have fields (or columns) with
+heterogeneous data types, and any number of rows. Numpy structured arrays are
+however difficult to manipulate or modify, so the \texttt{Table} class makes
+it easy for users to create a table from columns, add/remove columns or rows,
+and mask values from the table. In addition, tables can be easily read/written
+from/to common file formats using the \texttt{Table.read} and
+\texttt{Table.write} methods. In addition to providing easy manipulation and
+input/output of table objects, the \texttt{Table} class allows units to be
+specified for each column using the \texttt{astropy.units} framework, and also
+allows the \texttt{Table} object to contain arbitrary meta-data (stored in
+\texttt{Table.meta}).
+
+The \texttt{NDData} class ...
 
 \subsection{File Formats}
 
