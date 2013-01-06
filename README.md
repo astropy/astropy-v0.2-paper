@@ -45,3 +45,9 @@ For authors with small number of commits, the order will likely be arbitrary.
 
 There will be papers for future major releases of Astropy, so if you are not
 included in this paper, you will still eventually get credited for your work!
+
+Contributing
+============
+
+All contributions should be made via pull requests so that we can
+review/discuss changes/additions if necessary.
