@@ -1,0 +1,120 @@
+\begin{thebibliography}{27}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+
+\bibitem[{{Barrett} \& {Bridgman}(1999)}]{barrett1999pyfits}
+{Barrett}, P.~E., \& {Bridgman}, W.~T. 1999, in Astronomical Society of the
+  Pacific Conference Series, Vol. 172, Astronomical Data Analysis Software and
+  Systems VIII, 483
+
+\bibitem[{{Blaauw} {et~al.}(1960){Blaauw}, {Gum}, {Pawsey}, \&
+  {Westerhout}}]{galcoords}
+{Blaauw}, A., {Gum}, C.~S., {Pawsey}, J.~L., \& {Westerhout}, G. 1960, \mnras,
+  121, 123
+
+\bibitem[{Calabretta(2013)}]{calabretta2013wcslib}
+Calabretta, M.~R. 2013, WCSLIB 4.17 and PGSBOX 4.17 Documentation
+
+\bibitem[{Calabretta \& Greisen(2002)}]{calabretta2002wcs}
+Calabretta, M.~R., \& Greisen, E.~W. 2002, Astronomy \& Astrophysics, 1077
+
+\bibitem[{Calabretta {et~al.}(2004)Calabretta, Valdes, Greisen, \&
+  L.}]{calabretta2004wcs}
+Calabretta, M.~R., Valdes, F.~G., Greisen, E.~W., \& L., A.~S. 2004,
+  Unpublished draft
+
+\bibitem[{Derriere {et~al.}(2012)Derriere, Gray, Louys, McDowell, Ochsenbein,
+  Osuna, Rino, \& Salgado}]{derriere2012vounit}
+Derriere, S., Gray, N., Louys, M., McDowell, J., Ochsenbein, F., Osuna, P.,
+  Rino, B., \& Salgado, J. 2012, Units in the VO, Version 1.0, ivoa proposed
+  recommendation 20 august 2012 edn.
+
+\bibitem[{George \& Angelini(1995)}]{george1995ogip}
+George, I., \& Angelini, L. 1995, Specification of Physical Units within OGIP
+  (Office of Guest Investigator Programs) FITS files
+
+\bibitem[{Greisen \& Calabretta(2002)}]{greisen2002wcs}
+Greisen, E.~W., \& Calabretta, M.~R. 2002, Astronomy \& Astrophysics, 1061
+
+\bibitem[{Greisen {et~al.}(2006)Greisen, Calabretta, Valdes, \&
+  Allen}]{greisen2006wcs}
+Greisen, E.~W., Calabretta, M.~R., Valdes, F.~G., \& Allen, S.~L. 2006,
+  Astronomy \& Astrophysics, 747
+
+\bibitem[{Group(2008)}]{fits2008}
+Group, F.~W. 2008, Definition of the Flexible Image Transport System (FITS)
+
+\bibitem[{{Hinshaw} {et~al.}(2012){Hinshaw}, {Larson}, {Komatsu}, {Spergel},
+  {Bennett}, {Dunkley}, {Nolta}, {Halpern}, {Hill}, {Odegard}, {Page}, {Smith},
+  {Weiland}, {Gold}, {Jarosik}, {Kogut}, {Limon}, {Meyer}, {Tucker}, {Wollack},
+  \& {Wright}}]{Hinshaw13}
+{Hinshaw}, G. {et~al.} 2012, ArXiv e-prints, 1212.5226
+
+\bibitem[{{Hogg}(1999)}]{Hogg99}
+{Hogg}, D.~W. 1999, ArXiv Astrophysics e-prints, arXiv:astro-ph/9905116
+
+\bibitem[{Jones {et~al.}(2001)Jones, Oliphant, \& Peterson}]{jones2001scipy}
+Jones, E., Oliphant, T., \& Peterson, P. 2001, http://www. scipy. org/
+
+\bibitem[{{Kaplan}(2005)}]{usnocircular179}
+{Kaplan}, G.~H. 2005, U.S.~Naval Observatory Circulars, 179,
+  arXiv:astro-ph/0602086
+
+\bibitem[{{Komatsu} {et~al.}(2009){Komatsu}, {Dunkley}, {Nolta}, {Bennett},
+  {Gold}, {Hinshaw}, {Jarosik}, {Larson}, {Limon}, {Page}, {Spergel},
+  {Halpern}, {Hill}, {Kogut}, {Meyer}, {Tucker}, {Weiland}, {Wollack}, \&
+  {Wright}}]{Komatsu09}
+{Komatsu}, E. {et~al.} 2009, \apjs, 180, 330, 0803.0547
+
+\bibitem[{{Komatsu} {et~al.}(2011){Komatsu}, {Smith}, {Dunkley}, {Bennett},
+  {Gold}, {Hinshaw}, {Jarosik}, {Larson}, {Nolta}, {Page}, {Spergel},
+  {Halpern}, {Hill}, {Kogut}, {Limon}, {Meyer}, {Odegard}, {Tucker}, {Weiland},
+  {Wollack}, \& {Wright}}]{Komatsu11}
+------. 2011, \apjs, 192, 18, 1001.4538
+
+\bibitem[{{Linder}(2003)}]{Linder03}
+{Linder}, E.~V. 2003, Physical Review Letters, 90, 091301,
+  arXiv:astro-ph/0208512
+
+\bibitem[{Ochsenbein(2000)}]{ochsenbein2000cds}
+Ochsenbein, F. 2000, Astronomical Catalogues and Tables Adopted Standards,
+  Version 2.0
+
+\bibitem[{Oliphant(2006)}]{oliphant2006guide}
+Oliphant, T. 2006, A Guide to NumPy, Vol.~1 (Trelgol Publishing USA)
+
+\bibitem[{Oschenbein {et~al.}(2004)Oschenbein, Williams, Davenhall, Durand,
+  Fernique, Giaretta, Hanisch, McGlynn, Szalay, Taylor, \&
+  Wicenec}]{ochsenbein2004votable}
+Oschenbein, F. {et~al.} 2004, VOTable Format Definition, Version 1.1,
+  International Virtual Observatory Alliance (IVOA)
+
+\bibitem[{Oschenbein {et~al.}(2009)Oschenbein, Williams, Davenhall, Durand,
+  Fernique, Giaretta, Hanisch, McGlynn, Szalay, Taylor, \&
+  Wicenec}]{ochsenbein2009votable}
+------. 2009, VOTable Format Definition, Version 1.2, International Virtual
+  Observatory Alliance (IVOA)
+
+\bibitem[{{Reid} \& {Brunthaler}(2004)}]{reid04}
+{Reid}, M.~J., \& {Brunthaler}, A. 2004, \apj, 616, 872, arXiv:astro-ph/0408107
+
+\bibitem[{{Rhodes}(2011)}]{pyephem}
+{Rhodes}, B.~C. 2011, {PyEphem: Astronomical Ephemeris for Python}, 1112.014
+
+\bibitem[{{Soffel} {et~al.}(2003){Soffel}, {Klioner}, {Petit}, {Wolf},
+  {Kopeikin}, {Bretagnon}, {Brumberg}, {Capitaine}, {Damour}, {Fukushima},
+  {Guinot}, {Huang}, {Lindegren}, {Ma}, {Nordtvedt}, {Ries}, {Seidelmann},
+  {Vokrouhlick{\'y}}, {Will}, \& {Xu}}]{soffel03}
+{Soffel}, M. {et~al.} 2003, \aj, 126, 2687, arXiv:astro-ph/0303376
+
+\bibitem[{{Tollerud}(2012)}]{astropysics}
+{Tollerud}, E. 2012, {Astropysics: Astrophysics utilities for python}, 1207.007
+
+\bibitem[{Van Der~Walt {et~al.}(2011)Van Der~Walt, Colbert, \&
+  Varoquaux}]{van2011numpy}
+Van Der~Walt, S., Colbert, S., \& Varoquaux, G. 2011, Computing in Science \&
+  Engineering, 13, 22
+
+\bibitem[{{Wright}(2006)}]{Wright06}
+{Wright}, E.~L. 2006, \pasp, 118, 1711, arXiv:astro-ph/0609593
+
+\end{thebibliography}
