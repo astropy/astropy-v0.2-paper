@@ -29,6 +29,9 @@ repositories by the final 0.2.0 release will be included on the paper:
 * astropy-website
 * package-template
 
+In addition, anyone who has attended the CfA or STScI coordination meetings
+will also be included.
+
 The author list will be:
 
 1. Astropy Collaboration (first author)
@@ -37,11 +40,14 @@ The author list will be:
 
 3. The developers
 
+4. Other contributors, including coordination meeting participants.
+
 The coordination committee and the developers will be ordered by
 contributions, which for this paper will broadly be related to the number of
 commits (we will not use the number of commits blindly as a metric, since it
 does not always fully represent the extent of contributions by an individual).
-For authors with small number of commits, the order will likely be arbitrary.
+For authors with small and equal number of commits, the order will likely be
+arbitrary. Other contributors will be listed alphabetically.
 
 There will be papers for future major releases of Astropy, so if you are not
 included in this paper, you will still eventually get credited for your work!
