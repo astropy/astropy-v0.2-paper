@@ -1,5 +1,8 @@
 \documentclass[12pt,preprint]{aastex}
 
+\usepackage{natbib}
+\bibpunct{(}{)}{;}{a}{}{,}
+
 \begin{document}
 
 \title{Astropy: A Community Python Package for Astronomy}
@@ -81,8 +84,53 @@ interested in joining the project.
 
 % Authors: Tom R., Erik T., Perry G.
 
+The Python programming language\footnote{\url{http://www.astropy.org}} has
+arguably been one of the fastest-growing programming languages in the
+Astronomy community in the last decade. While there have been a number of
+efforts to develop Python packages for Astronomy-specific functionality, these
+efforts have been fragmented, and several dozens of packages have been
+developed across the community with little or no coordination, leading to
+duplication and a lack of homogeneity across packages. This in turn has made
+it difficult for users to get set up with all the required packages needed in
+an Astronomer's toolkit. Since a number of these packages depend on individual
+or small groups of developers, packages are sometimes no longer maintained, or
+simply become unavailable, which is detrimental to long-term research and
+research reproducibility.
 
-\section{Components}
+The Astropy project was started in 2011 out of a desire to bring together
+developers across the field of Astronomy in order to coordinate efforts to
+develop a common Python library covering much of the Astronomy-specific
+functionality needed by researchers, with the aim of complementing more
+general standard scientific packages such as NumPy
+\citep{oliphant2006guide,van2011numpy} and SciPy \citep{jones2001scipy}, which
+are invaluable for numerical array-based calculations, and more general
+scientific algorithms (e.g. interpolation, integration, clustering, etc.)
+respectively. To date, over 130 people are signed up to the
+\textit{development} mailing list for the Astropy project\footnote{
+\url{https://groups.google.com/forum/?fromgroups\#!forum/astropy-dev}}.
+
+Most efforts in the Astropy project to date have gone towards developing the
+core \texttt{astropy} package. However, we note the scope of the Astropy
+project is not simply to create a core package, but more generally to bring
+together authors of existing packages to work together and agree on including
+a common set of functionality in the core package (and in some cases
+deprecating their packages if all functionality ends up in \texttt{astropy}),
+since the aim is ultimately to simplify the landscape of packages available to
+users. In addition, the Astropy project includes more specialized Python
+packages (which we call \textit{affiliated} packages) that are not included in
+the core package for various reasons: for some the functionality is in early
+stages of development and is not robust; or the license is not compatible with
+Astropy; the package includes large files; or the functionality is mature, but
+too specific to be included in a core package.
+
+In this paper, we announce the first public release (v0.2) of the
+\texttt{astropy} package. We provide an overview of the current capabilities
+(\S\ref{sec:capabilities}), our development workflow (\S\ref{sec:workflow}),
+and planned functionality (\S\ref{sec:future}).
+
+\section{Capabilities}
+
+\label{sec:capabilities}
 
 
 \subsection{Units, Quantities, and Physical Constants}
@@ -154,6 +202,8 @@ The \texttt{NDData} class ...
 
 \section{Development workflow}
 
+\label{sec:workflow}
+
 % Describe tools used in the development process, and how development is managed (not specifically how we use git, but higher-level.
 
 % Authors: Tom R., Erik T., Perry G.
@@ -161,12 +211,18 @@ The \texttt{NDData} class ...
 
 \section{Planned functionality}
 
+\label{sec:future}
+
 % Authors: Tom R., Erik T., Perry G.
 
 
 \section{Summary}
 
+\label{sec:summary}
+
 % Authors: Tom R., Erik T., Perry G.
 
+\bibliographystyle{apj_custom}
+\bibliography{apj-jour,references}
 
 \end{document}
