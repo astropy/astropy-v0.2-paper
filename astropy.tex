@@ -1,11 +1,16 @@
-\documentclass[12pt,preprint]{aastex}
+\documentclass[traditabstract]{aa}
+
+\usepackage{url}
 
 \usepackage{natbib}
 \bibpunct{(}{)}{;}{a}{}{,}
 
+\newcommand{\astropy}{\texttt{astropy}}
+
 \begin{document}
 
-\newcommand{\astropy}{\texttt{astropy}}
+\titlerunning{Astropy}
+\authorrunning{The Astropy Collaboration}
 
 \title{Astropy: A Community Python Package for Astronomy}
 
@@ -16,60 +21,157 @@
 % Please wrap text to 78 characters.
 
 \author{
-The Astropy Collaboration,
+The Astropy Collaboration
+  \and
 % Coordination committee
-Erik Tollerud,
-Thomas P. Robitaille,
-Perry Greenfield,
+Erik Tollerud\inst{\ref{inst:irvine}}
+  \and
+Thomas P. Robitaille\inst{\ref{inst:mpia}}
+  \and
+Perry Greenfield\inst{\ref{inst:stsci}}
+  \and
 % Developers (other than coordination committee).
-Michael Droettboom,
-Tom Aldcroft,
-Erik Bray,
-Matt Davis,
-Adam Ginsburg,
-Adrian Price-Wheelan,
-Wolfgang Kerzendorf,
-Alexander Conley,
-Neil Crighton,
-Kyle Barbary,
-Demitri Muna,
-Henry Ferguson,
-Frederic Grollier,
-Pransanth Nair,
-Hans M. G\"unther,
-Christoph Deil,
-Simon Conseil,
-Julien Woillez,
-Roban Kramer,
-James Turner,
-Leo Singer,
+Michael Droettboom\inst{\ref{inst:stsci}}
+  \and
+Tom Aldcroft\inst{\ref{inst:cfa}}
+  \and
+Erik Bray\inst{\ref{inst:stsci}}
+  \and
+Matt Davis\inst{\ref{inst:stsci}}
+  \and
+Adam Ginsburg\inst{\ref{inst:colorado}}
+  \and
+Adrian M. Price-Whelan\inst{\ref{inst:columbia}}
+  \and
+Wolfgang Kerzendorf\inst{\ref{inst:toronto}}
+  \and
+Alexander Conley\inst{\ref{inst:colorado}}
+  \and
+Neil Crighton\inst{\ref{inst:mpia}}
+  \and
+Kyle Barbary\inst{\ref{inst:argonne}}
+  \and
+Demitri Muna
+  \and
+Henry Ferguson\inst{\ref{inst:stsci}}
+  \and
+Frederic Grollier
+  \and
+Pransanth Nair
+  \and
+Hans M. G\"unther\inst{\ref{inst:cfa}}
+  \and
+Christoph Deil\inst{\ref{inst:mpik}}
+  \and
+Simon Conseil\inst{\ref{inst:oamp}}
+  \and
+Julien Woillez
+  \and
+Roban Kramer
+  \and
+James Turner\inst{\ref{inst:gemini_s}}
+  \and
+Leo Singer
+  \and
 % Other contributors, alphabetical, including coordination meeting
 % participants
-Eric Barron,
-Azalee Bostroem,
-Doug Burke,
-Andy Casey,
-Steve Crawford,
-Nadia Dencheva,
-Justin Ely,
-Tim Jenness,
-Kathleen Labrie,
-Pey Lian Lim,
-Francesco Pierfederici,
-Andrew Pontzen,
-Andy Ptak,
-Brian Refsdal,
-Mathieu Servillat,
-Ole Streicher
+Eric Barron
+  \and
+Azalee Bostroem\inst{\ref{inst:stsci}}
+  \and
+Doug Burke\inst{\ref{inst:cfa}}
+  \and
+Andy Casey\inst{\ref{inst:stromlo}}
+  \and
+Steve Crawford\inst{\ref{inst:saao}}
+  \and
+Nadia Dencheva\inst{\ref{inst:stsci}}
+  \and
+Justin Ely\inst{\ref{inst:stsci}}
+  \and
+Tim Jenness\inst{\ref{inst:jac}}
+  \and
+Kathleen Labrie\inst{\ref{inst:gemini_s}}
+  \and
+Pey Lian Lim\inst{\ref{inst:stsci}}
+  \and
+Francesco Pierfederici\inst{\ref{inst:stsci}}
+  \and
+Andrew Pontzen\inst{\ref{inst:oxford}}
+  \and
+Andy Ptak\inst{\ref{inst:gsfc}}
+  \and
+Brian Refsdal
+  \and
+Mathieu Servillat\inst{\ref{inst:saclay}}
+  \and
+Ole Streicher\inst{\ref{inst:leibniz}}
 }
 
-\begin{abstract}
+\institute{
+  Center for Cosmology, Department of Physics and Astronomy, University of California at Irvine, Irvine, CA, 92697, USA
+  \label{inst:irvine}
+    \and
+  Max Planck Institute for Astronomy, K\"onigstuhl 17, Heidelberg 69117, Germany
+  \label{inst:mpia}
+    \and
+  Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218
+  \label{inst:stsci}
+    \and
+  Harvard-Smithsonian Center for Astrophysics, 60 Garden Street, Cambridge, MA, 02138, USA
+  \label{inst:cfa}
+    \and
+  Center for Astrophysics and Space Astronomy, University of Colorado, Boulder, CO 80309, USA
+  \label{inst:colorado}
+    \and
+  Department of Astronomy, Columbia University, Pupin Hall, 550W 120th St., New York, NY 10027, USA
+  \label{inst:columbia}
+    \and
+  Department of Astronomy and Astrophysics, University of Toronto, 50 Saint George Street, Toronto, ON M5S3H4, Canada
+  \label{inst:toronto}
+    \and
+  Argonne National Lab
+  \label{inst:argonne}
+    \and
+  Max-Planck-Institute for Nuclear Physics, P.O. Box 103980, 69029 Heidelberg, Germany
+  \label{inst:mpik}
+    \and
+  Laboratoire d'Astrophysique de Marseille, OAMP, Universit\'e Aix-Marseille et CNRS,
+Marseille, France
+  \label{inst:oamp}
+    \and
+  Gemini South Observatory
+  \label{inst:gemini_s}
+    \and
+  Research School of Astronomy and Astrophysics, Australian National University, Mount Stromlo Observatory
+  \label{inst:stromlo}
+    \and
+  SAAO, P.O. Box 9, Observatory 7935, Cape Town, South Africa
+  \label{inst:saao}
+    \and
+  Joint Astronomy Centre, 660 North A'ohoku Place, Hilo, HI 96720, USA
+  \label{inst:jac}
+    \and
+  Oxford Astrophysics, Denys Wilkinson Building, Keble Road, Oxford OX1 3RH, UK; Balliol College, Broad Street, Oxford OX1 3BJ, UK
+  \label{inst:oxford}
+  	\and
+  NASA Goddard Space Flight Center
+  \label{inst:gsfc}
+    \and
+  Laboratoire AIM (CEA/DSM/IRFU/SAp, CNRS, Universite Paris Diderot), CEA Saclay, Bat. 709, 91191 Gif-sur-Yvette, France
+  \label{inst:saclay}
+    \and
+  Leibniz Institute for Astrophysics Potsdam (AIP)
+  \label{inst:leibniz}
+}
+
+\abstract{
 We present the first public version of the open-source and community-developed
-Python package, Astropy. This package aims to provide core Astronomy-related
+Python package, Astropy. This package aims to provide core astronomy-related
 functionality to the community, including for example support for
 domain-specific file formats such as Flexible Image Transport System (FITS)
 files, Virtual Observatory (VO), and common ASCII table formats, unit and
-physical quantity conversions, physical constants specific to Astronomy,
+physical quantity conversions, physical constants specific to astronomy,
 celestial coordinate and time transformations, world coordinate system (WCS)
 support, generalized containers for representing gridded as well as tabular
 data, and a framework for cosmological transformations and conversions.
@@ -77,7 +179,10 @@ Significant functionality is under active development, such as a model fitting
 framework, VO client and server tools, and aperture and point spread function
 (PSF) photometry tools. Participation in development is open to anyone
 interested in joining the project.
-\end{abstract}
+
+}
+
+\maketitle
 
 \tableofcontents
 
