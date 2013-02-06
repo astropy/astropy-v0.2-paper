@@ -5,6 +5,8 @@
 
 \begin{document}
 
+\newcommand{\astropy}{\texttt{astropy}}
+
 \title{Astropy: A Community Python Package for Astronomy}
 
 % The author list is not final, and the order of authors may still change.
@@ -84,49 +86,53 @@ interested in joining the project.
 
 % Authors: Tom R., Erik T., Perry G.
 
-The Python programming language\footnote{\url{http://www.astropy.org}} has
-arguably been one of the fastest-growing programming languages in the
-Astronomy community in the last decade. While there have been a number of
-efforts to develop Python packages for Astronomy-specific functionality, these
-efforts have been fragmented, and several dozens of packages have been
-developed across the community with little or no coordination, leading to
-duplication and a lack of homogeneity across packages. This in turn has made
-it difficult for users to get set up with all the required packages needed in
-an Astronomer's toolkit. Since a number of these packages depend on individual
-or small groups of developers, packages are sometimes no longer maintained, or
-simply become unavailable, which is detrimental to long-term research and
-research reproducibility.
+The Python programming language\footnote{\url{http://www.astropy.org}} has been
+one of the fastest-growing programming languages in the astronomy community in
+the last decade. While there have been a number of efforts to develop Python
+packages for astronomy-specific functionality, these efforts have been
+fragmented, and several dozens of packages have been developed across the
+community with little or no coordination, leading to duplication and a lack of
+homogeneity across packages. This in turn has made it difficult for users to
+get set up with all the required packages needed in an Astronomer's toolkit.
+Since a number of these packages depend on individual or small groups of
+developers, packages are sometimes no longer maintained, or simply become
+unavailable, which is detrimental to long-term research and research
+reproducibility.
 
-The Astropy project was started in 2011 out of a desire to bring together
-developers across the field of Astronomy in order to coordinate efforts to
-develop a common Python library covering much of the Astronomy-specific
-functionality needed by researchers, with the aim of complementing more
-general standard scientific packages such as NumPy
-\citep{oliphant2006guide,van2011numpy} and SciPy \citep{jones2001scipy}, which
-are invaluable for numerical array-based calculations, and more general
+The Astropy project was started\footnote{The first discussions took place on
+the \texttt{astropy} mailing list at
+\url{http://mail.scipy.org/mailman/listinfo/astropy}} in 2011 out of a desire
+to bring together developers across the field of astronomy in order to
+coordinate efforts to develop a common Python library. The aim of this library
+was to cover much of the astronomy-specific functionality needed by
+researchers, complementing more general standard scientific packages such as
+NumPy \citep{oliphant2006guide,van2011numpy} and SciPy \citep{jones2001scipy},
+which are invaluable for numerical array-based calculations, and more general
 scientific algorithms (e.g. interpolation, integration, clustering, etc.)
 respectively. To date, over 130 people are signed up to the
 \textit{development} mailing list for the Astropy project\footnote{
 \url{https://groups.google.com/forum/?fromgroups\#!forum/astropy-dev}}.
 
 Most efforts in the Astropy project to date have gone towards developing the
-core \texttt{astropy} package. However, we note the scope of the Astropy
-project is not simply to create a core package, but more generally to bring
-together authors of existing packages to work together and agree on including
-a common set of functionality in the core package (and in some cases
-deprecating their packages if all functionality ends up in \texttt{astropy}),
-since the aim is ultimately to simplify the landscape of packages available to
-users. In addition, the Astropy project includes more specialized Python
-packages (which we call \textit{affiliated} packages) that are not included in
-the core package for various reasons: for some the functionality is in early
-stages of development and is not robust; or the license is not compatible with
-Astropy; the package includes large files; or the functionality is mature, but
-too specific to be included in a core package.
+core \astropy package. However, we note the scope of the Astropy project is
+not simply to create a core package, but more generally to bring together
+authors of existing packages to work together and agree on including a common
+set of functionality in the core package (and in some cases deprecating their
+packages if all functionality ends up in \astropy), since the aim is
+ultimately to simplify the landscape of packages available to users. In
+addition, the Astropy project includes more specialized Python packages (which
+we call \textit{affiliated} packages) that are not included in the core
+package for various reasons: for some the functionality is in early stages of
+development and is not robust; or the license is not compatible with Astropy;
+the package includes large files; or the functionality is mature, but too
+specific to be included in a core package.
 
-In this paper, we announce the first public release (v0.2) of the
-\texttt{astropy} package. We provide an overview of the current capabilities
+
+In this paper, we present the first public release (v0.2) of the \astropy
+package. We provide an overview of the current capabilities
 (\S\ref{sec:capabilities}), our development workflow (\S\ref{sec:workflow}),
 and planned functionality (\S\ref{sec:future}).
+
 
 \section{Capabilities}
 
@@ -162,13 +168,14 @@ arrays, which are essentially arrays that have fields (or columns) with
 heterogeneous data types, and any number of rows. Numpy structured arrays are
 however difficult to manipulate or modify, so the \texttt{Table} class makes
 it easy for users to create a table from columns, add/remove columns or rows,
-and mask values from the table. In addition, tables can be easily read/written
-from/to common file formats using the \texttt{Table.read} and
+and mask values from the table. In addition, tables can be easily
+read/written from/to common file formats using the \texttt{Table.read} and
 \texttt{Table.write} methods. In addition to providing easy manipulation and
 input/output of table objects, the \texttt{Table} class allows units to be
-specified for each column using the \texttt{astropy.units} framework, and also
-allows the \texttt{Table} object to contain arbitrary meta-data (stored in
-\texttt{Table.meta}).
+specified for each column using the \texttt{astropy.units} framework, and
+also allows the \texttt{Table} object to contain arbitrary meta-data (stored
+in \texttt{Table.meta}).
+
 
 The \texttt{NDData} class ...
 
