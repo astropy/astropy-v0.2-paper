@@ -1,6 +1,17 @@
-\documentclass[12pt,preprint]{aastex}
+\documentclass[traditabstract]{aa}
+
+\usepackage{url}
+
+\usepackage{xspace}
+\usepackage{natbib}
+\bibpunct{(}{)}{;}{a}{}{,}
+
+\newcommand{\astropy}{\texttt{astropy}\xspace}
 
 \begin{document}
+
+\titlerunning{Astropy}
+\authorrunning{The Astropy Collaboration}
 
 \title{Astropy: A Community Python Package for Astronomy}
 
@@ -11,60 +22,157 @@
 % Please wrap text to 78 characters.
 
 \author{
-The Astropy Collaboration,
+The Astropy Collaboration
+  \and
 % Coordination committee
-Erik Tollerud,
-Thomas P. Robitaille,
-Perry Greenfield,
+Erik Tollerud\inst{\ref{inst:irvine}}
+  \and
+Thomas P. Robitaille\inst{\ref{inst:mpia}}
+  \and
+Perry Greenfield\inst{\ref{inst:stsci}}
+  \and
 % Developers (other than coordination committee).
-Michael Droettboom,
-Tom Aldcroft,
-Erik Bray,
-Matt Davis,
-Adam Ginsburg,
-Adrian Price-Wheelan,
-Wolfgang Kerzendorf,
-Alexander Conley,
-Neil Crighton,
-Kyle Barbary,
-Demitri Muna,
-Henry Ferguson,
-Frederic Grollier,
-Pransanth Nair,
-Hans M. G\"unther,
-Christoph Deil,
-Simon Conseil,
-Julien Woillez,
-Roban Kramer,
-James Turner,
-Leo Singer,
+Michael Droettboom\inst{\ref{inst:stsci}}
+  \and
+Tom Aldcroft\inst{\ref{inst:cfa}}
+  \and
+Erik Bray\inst{\ref{inst:stsci}}
+  \and
+Matt Davis\inst{\ref{inst:stsci}}
+  \and
+Adam Ginsburg\inst{\ref{inst:colorado}}
+  \and
+Adrian M. Price-Whelan\inst{\ref{inst:columbia}}
+  \and
+Wolfgang Kerzendorf\inst{\ref{inst:toronto}}
+  \and
+Alexander Conley\inst{\ref{inst:colorado}}
+  \and
+Neil Crighton\inst{\ref{inst:mpia}}
+  \and
+Kyle Barbary\inst{\ref{inst:argonne}}
+  \and
+Demitri Muna
+  \and
+Henry Ferguson\inst{\ref{inst:stsci}}
+  \and
+Frederic Grollier
+  \and
+Pransanth Nair
+  \and
+Hans M. G\"unther\inst{\ref{inst:cfa}}
+  \and
+Christoph Deil\inst{\ref{inst:mpik}}
+  \and
+Simon Conseil\inst{\ref{inst:oamp}}
+  \and
+Julien Woillez
+  \and
+Roban Kramer
+  \and
+James Turner\inst{\ref{inst:gemini_s}}
+  \and
+Leo Singer
+  \and
 % Other contributors, alphabetical, including coordination meeting
 % participants
-Eric Barron,
-Azalee Bostroem,
-Doug Burke,
-Andy Casey,
-Steve Crawford,
-Nadia Dencheva,
-Justin Ely,
-Tim Jenness,
-Kathleen Labrie,
-Pey Lian Lim,
-Francesco Pierfederici,
-Andrew Pontzen,
-Andy Ptak,
-Brian Refsdal,
-Mathieu Servillat,
-Ole Streicher
+Eric Barron
+  \and
+Azalee Bostroem\inst{\ref{inst:stsci}}
+  \and
+Doug Burke\inst{\ref{inst:cfa}}
+  \and
+Andy Casey\inst{\ref{inst:stromlo}}
+  \and
+Steve Crawford\inst{\ref{inst:saao}}
+  \and
+Nadia Dencheva\inst{\ref{inst:stsci}}
+  \and
+Justin Ely\inst{\ref{inst:stsci}}
+  \and
+Tim Jenness\inst{\ref{inst:jac}}
+  \and
+Kathleen Labrie\inst{\ref{inst:gemini_s}}
+  \and
+Pey Lian Lim\inst{\ref{inst:stsci}}
+  \and
+Francesco Pierfederici\inst{\ref{inst:stsci}}
+  \and
+Andrew Pontzen\inst{\ref{inst:oxford}}
+  \and
+Andy Ptak\inst{\ref{inst:gsfc}}
+  \and
+Brian Refsdal
+  \and
+Mathieu Servillat\inst{\ref{inst:saclay}}
+  \and
+Ole Streicher\inst{\ref{inst:leibniz}}
 }
 
-\begin{abstract}
+\institute{
+  Center for Cosmology, Department of Physics and Astronomy, University of California at Irvine, Irvine, CA, 92697, USA
+  \label{inst:irvine}
+    \and
+  Max Planck Institute for Astronomy, K\"onigstuhl 17, Heidelberg 69117, Germany
+  \label{inst:mpia}
+    \and
+  Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218
+  \label{inst:stsci}
+    \and
+  Harvard-Smithsonian Center for Astrophysics, 60 Garden Street, Cambridge, MA, 02138, USA
+  \label{inst:cfa}
+    \and
+  Center for Astrophysics and Space Astronomy, University of Colorado, Boulder, CO 80309, USA
+  \label{inst:colorado}
+    \and
+  Department of Astronomy, Columbia University, Pupin Hall, 550W 120th St., New York, NY 10027, USA
+  \label{inst:columbia}
+    \and
+  Department of Astronomy and Astrophysics, University of Toronto, 50 Saint George Street, Toronto, ON M5S3H4, Canada
+  \label{inst:toronto}
+    \and
+  Argonne National Lab
+  \label{inst:argonne}
+    \and
+  Max-Planck-Institute for Nuclear Physics, P.O. Box 103980, 69029 Heidelberg, Germany
+  \label{inst:mpik}
+    \and
+  Laboratoire d'Astrophysique de Marseille, OAMP, Universit\'e Aix-Marseille et CNRS,
+Marseille, France
+  \label{inst:oamp}
+    \and
+  Gemini South Observatory
+  \label{inst:gemini_s}
+    \and
+  Research School of Astronomy and Astrophysics, Australian National University, Mount Stromlo Observatory
+  \label{inst:stromlo}
+    \and
+  SAAO, P.O. Box 9, Observatory 7935, Cape Town, South Africa
+  \label{inst:saao}
+    \and
+  Joint Astronomy Centre, 660 North A'ohoku Place, Hilo, HI 96720, USA
+  \label{inst:jac}
+    \and
+  Oxford Astrophysics, Denys Wilkinson Building, Keble Road, Oxford OX1 3RH, UK; Balliol College, Broad Street, Oxford OX1 3BJ, UK
+  \label{inst:oxford}
+  	\and
+  NASA Goddard Space Flight Center
+  \label{inst:gsfc}
+    \and
+  Laboratoire AIM (CEA/DSM/IRFU/SAp, CNRS, Universite Paris Diderot), CEA Saclay, Bat. 709, 91191 Gif-sur-Yvette, France
+  \label{inst:saclay}
+    \and
+  Leibniz Institute for Astrophysics Potsdam (AIP)
+  \label{inst:leibniz}
+}
+
+\abstract{
 We present the first public version of the open-source and community-developed
-Python package, Astropy. This package aims to provide core Astronomy-related
+Python package, Astropy. This package aims to provide core astronomy-related
 functionality to the community, including for example support for
 domain-specific file formats such as Flexible Image Transport System (FITS)
 files, Virtual Observatory (VO), and common ASCII table formats, unit and
-physical quantity conversions, physical constants specific to Astronomy,
+physical quantity conversions, physical constants specific to astronomy,
 celestial coordinate and time transformations, world coordinate system (WCS)
 support, generalized containers for representing gridded as well as tabular
 data, and a framework for cosmological transformations and conversions.
@@ -72,7 +180,10 @@ Significant functionality is under active development, such as a model fitting
 framework, VO client and server tools, and aperture and point spread function
 (PSF) photometry tools. Participation in development is open to anyone
 interested in joining the project.
-\end{abstract}
+
+}
+
+\maketitle
 
 \tableofcontents
 
@@ -81,8 +192,57 @@ interested in joining the project.
 
 % Authors: Tom R., Erik T., Perry G.
 
+The Python programming language\footnote{\url{http://www.astropy.org}} has been
+one of the fastest-growing programming languages in the astronomy community in
+the last decade. While there have been a number of efforts to develop Python
+packages for astronomy-specific functionality, these efforts have been
+fragmented, and several dozens of packages have been developed across the
+community with little or no coordination, leading to duplication and a lack of
+homogeneity across packages. This in turn has made it difficult for users to
+get set up with all the required packages needed in an Astronomer's toolkit.
+Since a number of these packages depend on individual or small groups of
+developers, packages are sometimes no longer maintained, or simply become
+unavailable, which is detrimental to long-term research and research
+reproducibility.
 
-\section{Components}
+The Astropy project was started\footnote{Following discussions on
+the \texttt{astropy} mailing list at
+\url{http://mail.scipy.org/mailman/listinfo/astropy}} in 2011 out of a desire
+to bring together developers across the field of astronomy in order to
+coordinate efforts to develop a common Python library. The aim of this library
+was to cover much of the astronomy-specific functionality needed by
+researchers, complementing more general standard scientific packages such as
+NumPy \citep{oliphant2006guide,van2011numpy} and SciPy \citep{jones2001scipy},
+which are invaluable for numerical array-based calculations, and more general
+scientific algorithms (e.g. interpolation, integration, clustering, etc.)
+respectively. To date, over 130 people are signed up to the
+\textit{development} mailing list for the Astropy project\footnote{
+\url{https://groups.google.com/forum/?fromgroups\#!forum/astropy-dev}}.
+
+Most efforts in the Astropy project to date have gone towards developing the
+core \astropy package. However, we note the scope of the Astropy project is
+not simply to create a core package, but more generally to bring together
+authors of existing packages to work together and agree on including a common
+set of functionality in the core package (and in some cases deprecating their
+packages if all functionality ends up in \astropy), since the aim is
+ultimately to simplify the landscape of packages available to users. In
+addition, the Astropy project includes more specialized Python packages (which
+we call \textit{affiliated} packages) that are not included in the core
+package for various reasons: for some the functionality is in early stages of
+development and is not robust; or the license is not compatible with Astropy;
+the package includes large files; or the functionality is mature, but too
+specific to be included in a core package.
+
+
+In this paper, we present the first public release (v0.2) of the \astropy
+package. We provide an overview of the current capabilities
+(\S\ref{sec:capabilities}), our development workflow (\S\ref{sec:workflow}),
+and planned functionality (\S\ref{sec:future}).
+
+
+\section{Capabilities}
+
+\label{sec:capabilities}
 
 
 \subsection{Units, Quantities, and Physical Constants}
@@ -114,13 +274,14 @@ arrays, which are essentially arrays that have fields (or columns) with
 heterogeneous data types, and any number of rows. Numpy structured arrays are
 however difficult to manipulate or modify, so the \texttt{Table} class makes
 it easy for users to create a table from columns, add/remove columns or rows,
-and mask values from the table. In addition, tables can be easily read/written
-from/to common file formats using the \texttt{Table.read} and
+and mask values from the table. In addition, tables can be easily
+read/written from/to common file formats using the \texttt{Table.read} and
 \texttt{Table.write} methods. In addition to providing easy manipulation and
 input/output of table objects, the \texttt{Table} class allows units to be
-specified for each column using the \texttt{astropy.units} framework, and also
-allows the \texttt{Table} object to contain arbitrary meta-data (stored in
-\texttt{Table.meta}).
+specified for each column using the \texttt{astropy.units} framework, and
+also allows the \texttt{Table} object to contain arbitrary meta-data (stored
+in \texttt{Table.meta}).
+
 
 The \texttt{NDData} class ...
 
@@ -154,6 +315,8 @@ The \texttt{NDData} class ...
 
 \section{Development workflow}
 
+\label{sec:workflow}
+
 % Describe tools used in the development process, and how development is managed (not specifically how we use git, but higher-level.
 
 % Authors: Tom R., Erik T., Perry G.
@@ -161,12 +324,18 @@ The \texttt{NDData} class ...
 
 \section{Planned functionality}
 
+\label{sec:future}
+
 % Authors: Tom R., Erik T., Perry G.
 
 
 \section{Summary}
 
+\label{sec:summary}
+
 % Authors: Tom R., Erik T., Perry G.
 
+\bibliographystyle{apj_custom}
+\bibliography{apj-jour,references}
 
 \end{document}
