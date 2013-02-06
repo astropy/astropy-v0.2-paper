@@ -262,6 +262,129 @@ and planned functionality (\S\ref{sec:future}).
 
 % Authors: Perry, Mike, Adrian, Tom R.
 
+The \texttt{astropy.units} package provides support for physical
+units.  It is based on the code in the \texttt{pynbody} package
+written by Andrew Pontzen, but has since diverged considerably in
+behavior and implementation.
+
+Converting between units is simple:
+
+\begin{verbatim}
+>>> from astropy import units as u
+>>> # Convert from parsec to meter
+>>> u.pc.to(u.m)
+3.0856776e+16
+\end{verbatim}
+
+The user can also define their own units, either as standalone base
+units or by composing other units together.  This is done using simple
+mathematical operators.  For example:
+
+\begin{verbatim}
+>>> # Define some custom units
+>>> cms = u.cm / u.s
+>>> mph = u.mile / u.hour
+>>> cms.to(mph, 1)
+0.02236936292054402
+\end{verbatim}
+
+Astropy knows about certain physical ``concepts'' and is able to
+deduce the purpose of a unit, even if it is user-defined.  Using the
+example of mile-per-hour (\texttt{mph}) from above:
+
+\begin{verbatim}
+>>> mph = u.mile / u.hour
+>>> mph.physical_type
+u'speed'
+\end{verbatim}
+
+\texttt{astropy.units} includes unit definitions in both the
+International System of Units (SI) and the Centimeter-Gram-Second
+(CGS) systems, as well as a number of astronomy- and
+astrophysics-specific units.  Converting between systems is possible:
+
+\begin{verbatim}
+>>> u.Pa.to_system(u.cgs)
+[Unit("1.000000e+01 Ba")]
+\end{verbatim}
+
+It's also possible to decompose units into their base units, and then
+pattern match those parts against known units.
+
+\begin{verbatim}
+>>> u.Hz.decompose()
+Unit("1 / (s)")
+>>> (1.0 / u.s).compose()
+>>> (u.s ** -1).compose()
+[Unit("Hz"), ...]
+\end{verbatim}
+
+Also included is the concept of ``equivalencies''.  These are mappings
+between units that, while not strictly convertible, can be considered
+convertible under certain conditions.  For example, we include an
+equivalency mapping between frequency and wavelength in a vacuum.  A
+conversion from wavelength to frequency is normally rejected:
+
+\begin{verbatim}
+>>> u.nm.to(u.Hz, [1000, 2000])
+UnitsException: 'nm' (length) and 'Hz'
+(frequency) are not convertible
+\end{verbatim}
+
+However, by passing an equivalency list (\texttt{u.spectral()})}, it
+does:
+
+\begin{verbatim}
+>>> u.nm.to(u.Hz, [1000, 2000],
+            equivalencies=u.spectral())
+array([  2.99792458e+14,   1.49896229e+14])
+\end{verbatim}
+
+It's well known that there are multiple string representations for
+units used in the astronomy community.  The FITS Standard
+\cite{fits2008} defines a unit standard, as well as both the Centre de
+Donn\'ees astronomiques de Strasbourg (CDS) \citep{ochsenbein2000cds}
+and the NASA/Goddard's Office of Guest Investigator Programs (OGIP)
+\citep{george1995ogip}.  In additional, the International Virtual
+Observatory Alliance (IVOA) has a forthcoming VOUnit standard
+\citep{derriere2012vounit} in an attempt to resolve some of these
+differences.  Rather than decide, \texttt{astropy.units} supports all
+of these standards\footnote{OGIP support is forthcoming at the time of
+  this writing.}, and allows the user to select the appropriate one
+when reading and writing unit string definitions to and from external
+file formats.
+
+Also included in the \texttt{astropy.units} package is the
+\texttt{Quantity} object, which represents a numerical value with an
+associated unit.  This objects support arithmetic with other numbers
+and \texttt{Quantity} objects and preserve their units:
+
+\begin{verbatim}
+>>> x = 15.1 * u.m / (32.0 * u.s)
+>>> x
+<Quantity 0.471875 m / (s)>
+>>> x.unit
+Unit("m / (s)")
+>>> x.value
+0.471875
+\end{verbatim}
+
+These \texttt{Quantity} objects are used to define a number of useful
+astronomical constants included with \texttt{astropy}, each with an
+associated unit (where applicable) and additional metadata describing
+their provenance and uncertainties.
+
+\begin{verbatim}
+>>> from astropy.constants import si
+>>> print si.c
+  Name   = Speed of light in vacuum
+  Value  = 299792458.0
+  Error  = 0.0
+  Units = m / (s)
+  Reference = CODATA 2010
+>>> print si.c.to('km/s')
+299792.458 km / (s)
+\end{verbatim}
 
 \subsection{Time}
 
