@@ -277,6 +277,8 @@ and planned functionality (\S\ref{sec:future}).
 
 % Authors: Tom A., Tom R., Wolfgang K., Erik T.
 
+\label{sec:table}
+
 The \texttt{astropy.table} and \texttt{astropy.nddata} sub-packages contain
 classes (\texttt{Table} and \texttt{NDData}) that allow users to represent
 astronomical data in the form of tables or n-dimensional gridded datasets,
@@ -314,7 +316,28 @@ The \texttt{NDData} class ...
 \subsubsection{Virtual Observatory tables}
 
 % Authors: Mike D.
+\texttt{astropy.io.votable} (formerly the standalone project
+\texttt{vo.table}) provides full support for reading and writing
+VOTable format files versions 1.1 and 1.2
+\citep{ochsenbein2004votable,ochsenbein2009votable}.  It efficently
+stores the tables in memory as Numpy structured arrays.  The file is
+read using streaming to avoid reading in the entire file at once and
+greatly reducing the memory footprint.
 
+It is possible to convert any one of the tables in a VOTable file to
+an \texttt{astropy.table.Table} object (see \ref{sec:table}), where it
+can be edited and then written back to a VOTable file without any loss
+of data.
+
+The VOTable standard is not strictly adhered to by all VOTable file
+writers in the wild.  Therefore, \texttt{astropy.io.votable} provides
+a number of tricks and workarounds to support as many VOTable sources
+as possible, whenever the result would not be ambiguous.  A validation
+tool (\texttt{volint}) is also provided that outputs recommendations
+to improve the standard compliance of a given file, as well as
+validate it against the official VOTable schema.
+
+Support for VOTable 1.3 is planned for the future.
 
 \subsection{World Coordinate Systems}
 
