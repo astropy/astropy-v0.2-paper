@@ -268,18 +268,15 @@ units.  It is based on the code in the \texttt{pynbody} package
 in behavior and implementation.
 
 Converting between units is simple:
-
 \begin{verbatim}
 >>> from astropy import units as u
 >>> # Convert from parsec to meter
 >>> u.pc.to(u.m)
 3.0856776e+16
 \end{verbatim}
-
 The user can also define their own units, either as standalone base
 units or by composing other units together.  This is done using simple
 mathematical operators.  For example:
-
 \begin{verbatim}
 >>> # Define some custom units
 >>> cms = u.cm / u.s
@@ -291,7 +288,6 @@ mathematical operators.  For example:
 Astropy knows about certain physical ``concepts'' and is able to
 deduce the purpose of a unit, even if it is user-defined.  Using the
 example of mile-per-hour (\texttt{mph}) from above:
-
 \begin{verbatim}
 >>> mph = u.mile / u.hour
 >>> mph.physical_type
@@ -302,7 +298,6 @@ u'speed'
 International System of Units (SI) and the Centimeter-Gram-Second
 (CGS) systems, as well as a number of astronomy- and
 astrophysics-specific units.  Converting between systems is possible:
-
 \begin{verbatim}
 >>> u.Pa.to_system(u.cgs)
 [Unit("1.000000e+01 Ba")]
@@ -310,7 +305,6 @@ astrophysics-specific units.  Converting between systems is possible:
 
 It's also possible to decompose units into their base units, and then
 pattern match those parts against known units.
-
 \begin{verbatim}
 >>> u.Hz.decompose()
 Unit("1 / (s)")
@@ -319,27 +313,29 @@ Unit("1 / (s)")
 [Unit("Hz"), ...]
 \end{verbatim}
 
-Also included is the concept of ``equivalencies''.  These are mappings
-between units that, while not strictly convertible, can be considered
-convertible under certain conditions.  For example, we include an
-equivalency mapping between frequency and wavelength in a vacuum.  A
-conversion from wavelength to frequency is normally rejected:
-
+Included is the concept of ``equivalencies'' in units, where there
+exists an equation that provides a relationship between two different
+physical quantities such that providing either one uniquely defines
+the other.  A standard astronomical example is the relationships
+between the frequency, wavelength and energy of a photon.  Specify
+one, and you specify all the others. It is common practice to treat
+the units as equivalent even though they aren't strictly comparable.
+This unit package supports defining such relationships, and it is one
+of the areas that distinguish itself from most other units handling
+software.  For example, wavelength and frequency are not normally
+convertible:
 \begin{verbatim}
 >>> u.nm.to(u.Hz, [1000, 2000])
 UnitsException: 'nm' (length) and 'Hz'
 (frequency) are not convertible
 \end{verbatim}
-
 However, by passing an equivalency list (\texttt{u.spectral()}), it
 does:
-
 \begin{verbatim}
 >>> u.nm.to(u.Hz, [1000, 2000],
             equivalencies=u.spectral())
 array([  2.99792458e+14,   1.49896229e+14])
 \end{verbatim}
-
 Equivalencies are also included for flux densities, and end users can
 easily implement their own equivalencies.
 
@@ -361,7 +357,6 @@ Also included in the \texttt{astropy.units} package is the
 \texttt{Quantity} object, which represents a numerical value with an
 associated unit.  This objects support arithmetic with other numbers
 and \texttt{Quantity} objects and preserve their units:
-
 \begin{verbatim}
 >>> x = 15.1 * u.m / (32.0 * u.s)
 >>> x
@@ -376,7 +371,6 @@ These \texttt{Quantity} objects are used to define a number of useful
 astronomical constants included with \texttt{astropy}, each with an
 associated unit (where applicable) and additional metadata describing
 their provenance and uncertainties.
-
 \begin{verbatim}
 >>> from astropy.constants import si
 >>> print si.c
@@ -390,7 +384,6 @@ their provenance and uncertainties.
 \end{verbatim}
 
 The combination of all of the above ends up being rather powerful:
-
 \begin{verbatim}
 >>> from astropy.constants import G, M_sun
 >>> F = G * (3. * M_sun) *
