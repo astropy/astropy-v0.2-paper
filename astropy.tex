@@ -264,8 +264,8 @@ and planned functionality (\S\ref{sec:future}).
 
 The \texttt{astropy.units} package provides support for physical
 units.  It is based on the code in the \texttt{pynbody} package
-written by Andrew Pontzen, but has since diverged considerably in
-behavior and implementation.
+[reference?]  written by Andrew Pontzen, but has since been enhanced
+in behavior and implementation.
 
 Converting between units is simple:
 
@@ -331,7 +331,7 @@ UnitsException: 'nm' (length) and 'Hz'
 (frequency) are not convertible
 \end{verbatim}
 
-However, by passing an equivalency list (\texttt{u.spectral()})}, it
+However, by passing an equivalency list (\texttt{u.spectral()}), it
 does:
 
 \begin{verbatim}
@@ -340,19 +340,22 @@ does:
 array([  2.99792458e+14,   1.49896229e+14])
 \end{verbatim}
 
+Equivalencies are also included for flux densities, and end users can
+easily implement their own equivalencies.
+
 It's well known that there are multiple string representations for
 units used in the astronomy community.  The FITS Standard
 \cite{fits2008} defines a unit standard, as well as both the Centre de
 Donn\'ees astronomiques de Strasbourg (CDS) \citep{ochsenbein2000cds}
-and the NASA/Goddard's Office of Guest Investigator Programs (OGIP)
+and NASA/Goddard's Office of Guest Investigator Programs (OGIP)
 \citep{george1995ogip}.  In additional, the International Virtual
 Observatory Alliance (IVOA) has a forthcoming VOUnit standard
 \citep{derriere2012vounit} in an attempt to resolve some of these
-differences.  Rather than decide, \texttt{astropy.units} supports all
-of these standards\footnote{OGIP support is forthcoming at the time of
-  this writing.}, and allows the user to select the appropriate one
-when reading and writing unit string definitions to and from external
-file formats.
+differences.  Rather than choose one of these, \texttt{astropy.units}
+supports all of these standards\footnote{OGIP support is forthcoming
+  at the time of this writing.}, and allows the user to select the
+appropriate one when reading and writing unit string definitions to
+and from external file formats.
 
 Also included in the \texttt{astropy.units} package is the
 \texttt{Quantity} object, which represents a numerical value with an
@@ -384,6 +387,16 @@ their provenance and uncertainties.
   Reference = CODATA 2010
 >>> print si.c.to('km/s')
 299792.458 km / (s)
+\end{verbatim}
+
+The combination of all of the above ends up being rather powerful:
+
+\begin{verbatim}
+>>> from astropy.constants import G, M_sun
+>>> F = G * (3. * M_sun) *
+        (2. * u.kg) / (1.5 * u.au)**2
+>>> F.to(u.N)
+<Quantity 0.01581795428812989 N>
 \end{verbatim}
 
 \subsection{Time}
