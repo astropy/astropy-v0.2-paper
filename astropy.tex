@@ -1,9 +1,8 @@
 \documentclass[traditabstract]{aa}
 
-\usepackage{url}
-
 \usepackage{xspace}
 \usepackage{natbib}
+\usepackage{url}
 \bibpunct{(}{)}{;}{a}{}{,}
 
 \newcommand{\astropy}{\texttt{astropy}\xspace}
@@ -246,7 +245,6 @@ development and is not robust; or the license is not compatible with Astropy;
 the package includes large files; or the functionality is mature, but too
 specific to be included in a core package.
 
-
 In this paper, we present the first public release (v0.2) of the \astropy
 package. We provide an overview of the current capabilities
 (\S\ref{sec:capabilities}), our development workflow (\S\ref{sec:workflow}),
@@ -324,6 +322,56 @@ The \texttt{NDData} class ...
 \subsection{Cosmology}
 
 % Authors: Neil Crighton, Alex Conley
+
+The \texttt{astropy.cosmology} sub-package contains classes for
+representing cosmologies, and functions for calculating commonly used
+quantities that depend on a cosmological model. It also contains a
+framework for less frequently used cosmologies that may be not be
+flat, or have a time-varying pressure to density ratio, $w$, for dark
+energy. The quantities that can be calculated are generally taken from
+those described by \citet{Hogg99}. Some examples are the angular
+diameter distance, comoving distance, critical density, distance
+modulus, lookback time, luminosity distance, and Hubble parameter as a
+function of redshift.
+
+The fundamental model for this sub-package is that any given cosmology
+is represented by a class. An instance of this class has attributes
+giving all the parameters required to uniquely specify the cosmology,
+such as the Hubble parameter, CMB temperature and the baryonic, cold
+dark matter, dark energy densities at $z=0$. One can then use methods
+of this class to perform calculations using these parameters.
+
+For example, the \texttt{FlatLambdaCDM} class represents a flat
+cosmology with a cosmological constant. To create an object
+representing a flat cosmology with a hubble parameter $H_{z=0} =
+70$~km\,s$^{-1}$\,Mpc and $\Omega_{M,z=0} = 0.3$ and bind it to the
+name \texttt{cosmo}, one would use \texttt{cosmo =
+  FlatLambdaCDM(H0=70, Om0=0.3)}. Then the comoving volume (for
+example) can be calculated at redshift $6.5$ using the
+\texttt{comoving\_volume} method;
+\texttt{cosmo.comoving\_volume(6.5)}. Further calculations can be
+performed using the many methods of \texttt{cosmo}, such as
+\texttt{cosmo.lookback\_time} and \texttt{cosmo.comoving\_distance}.
+For users who may be more comfortable using a procedural coding style,
+these methods are also available as functions that take a cosmology
+class instance as a keyword argument.
+
+In addition to the ability to define arbitrary cosmologies, the
+sub-package provides several pre-defined cosmology instances
+corresponding to commonly used cosmological parameter sets. Currently
+parameters from the from the WMAP 5-year, 7-year and 9-year results
+are included (\texttt{WMAP5}, \texttt{WMAP7} and
+\texttt{WMAP9}). There are several cosmology classes corresponding to
+non-flat cosmologies, or those with a varying dark energy pressure to
+density ratio. More exotic cosmologies can be represented by
+sub-classing one of these basic cosmology classes.
+
+All of the code in the sub-package is tested against the web-based
+cosmology calculator by \citet{Wright06} and two other widely-used
+calculators\footnote{\url{http://www.kempner.net/cosmic.php},\\ \url{http://www.icosmos.co.uk/index.html}}.
+In cases when these calculators are not precise enough to enable a
+meaningful comparison, the code is tested against calculations
+performed with \textsc{Mathematica}.
 
 
 \section{Development workflow}
