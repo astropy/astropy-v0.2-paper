@@ -1,3 +1,11 @@
+% References are split up into sections indicated by comments to avoid
+% conflicts between multiple pull requests - please ensure you insert the
+% bibtex entries into the right block. If you add a new section to the paper,
+% or re-organize the paper sections, please reflect it in this file.
+
+% Introduction
+% ************
+
 @article{jones2001scipy,
   title={SciPy: Open source scientific tools for Python},
   author={Jones, E. and Oliphant, T. and Peterson, P.},
@@ -23,6 +31,12 @@
   year={2006},
   publisher={Trelgol Publishing USA}
 }
+
+% Capabilities
+% ************
+
+% Units, Quantities, and Constants
+% ================================
 
 @manual{fits2008,
   title={Definition of the Flexible Image Transport System (FITS)},
@@ -58,6 +72,61 @@
   publisher={International Virtual Observatory Alliance (IVOA)},
   note={http://www.ivoa.net/Documents/VOUnits/}
 }
+
+% Time
+% ====
+
+
+
+% Celestial Coordinates
+% =====================
+
+
+
+% Tables and Gridded data
+% =======================
+
+
+
+% File Formats
+% ============
+
+% FITS
+% ----
+
+
+
+% ASCII Table Formats
+% -------------------
+
+
+
+% VO Table
+% --------
+
+@manual{ochsenbein2004votable,
+  title={VOTable Format Definition, Version 1.1},
+  author={Oschenbein, F. and Williams, R. and Davenhall, C. and Durand, D. and
+    Fernique, P. and Giaretta, D. and Hanisch, R. and McGlynn, T. and
+    Szalay, A. and Taylor, M. B. and Wicenec, A.},
+  organization={International Virtual Observatory Alliance (IVOA)},
+  year={2004},
+  note={http://www.ivoa.net/Documents/VOTable/20040811/REC-VOTable-1.1-20040811.html}
+}
+
+@manual{ochsenbein2009votable,
+  title={VOTable Format Definition, Version 1.2},
+  author={Oschenbein, F. and Williams, R. and Davenhall, C. and Durand, D. and
+    Fernique, P. and Giaretta, D. and Hanisch, R. and McGlynn, T. and
+    Szalay, A. and Taylor, M. B. and Wicenec, A.},
+  organization={International Virtual Observatory Alliance (IVOA)},
+  year={2009},
+  note={http://www.ivoa.net/Documents/VOTable/20091130/REC-VOTable-1.2.html}
+}
+
+% WCS
+% ===
+
 @article{greisen2002wcs,
   title={Representations of world coordinates in FITS},
   author={Greisen, E. W. and Calabretta, M. R.},
@@ -106,33 +175,16 @@
   note={http://www.atnf.csiro.au/people/mcalabre/WCS/wcslib/index.html}
 }
 
-@manual{ochsenbein2004votable,
-  title={VOTable Format Definition, Version 1.1},
-  author={Oschenbein, F. and Williams, R. and Davenhall, C. and Durand, D. and
-    Fernique, P. and Giaretta, D. and Hanisch, R. and McGlynn, T. and
-    Szalay, A. and Taylor, M. B. and Wicenec, A.},
-  organization={International Virtual Observatory Alliance (IVOA)},
-  year={2004},
-  note={http://www.ivoa.net/Documents/VOTable/20040811/REC-VOTable-1.1-20040811.html}
-}
-
-@manual{ochsenbein2009votable,
-  title={VOTable Format Definition, Version 1.2},
-  author={Oschenbein, F. and Williams, R. and Davenhall, C. and Durand, D. and
-    Fernique, P. and Giaretta, D. and Hanisch, R. and McGlynn, T. and
-    Szalay, A. and Taylor, M. B. and Wicenec, A.},
-  organization={International Virtual Observatory Alliance (IVOA)},
-  year={2009},
-  note={http://www.ivoa.net/Documents/VOTable/20091130/REC-VOTable-1.2.html}
-}
+% Cosmology
+% =========
 
 @ARTICLE{Hinshaw13,
    author = {{Hinshaw}, G. and {Larson}, D. and {Komatsu}, E. and {Spergel}, D.~N. and 
-	{Bennett}, C.~L. and {Dunkley}, J. and {Nolta}, M.~R. and {Halpern}, M. and 
-	{Hill}, R.~S. and {Odegard}, N. and {Page}, L. and {Smith}, K.~M. and 
-	{Weiland}, J.~L. and {Gold}, B. and {Jarosik}, N. and {Kogut}, A. and 
-	{Limon}, M. and {Meyer}, S.~S. and {Tucker}, G.~S. and {Wollack}, E. and 
-	{Wright}, E.~L.},
+    {Bennett}, C.~L. and {Dunkley}, J. and {Nolta}, M.~R. and {Halpern}, M. and 
+    {Hill}, R.~S. and {Odegard}, N. and {Page}, L. and {Smith}, K.~M. and 
+    {Weiland}, J.~L. and {Gold}, B. and {Jarosik}, N. and {Kogut}, A. and 
+    {Limon}, M. and {Meyer}, S.~S. and {Tucker}, G.~S. and {Wollack}, E. and 
+    {Wright}, E.~L.},
     title = "{Nine-Year Wilkinson Microwave Anisotropy Probe (WMAP) Observations: Cosmological Parameter Results}",
   journal = {ArXiv e-prints},
 archivePrefix = "arXiv",
@@ -159,10 +211,10 @@ archivePrefix = "arXiv",
 
 @ARTICLE{Komatsu09,
    author = {{Komatsu}, E. and {Dunkley}, J. and {Nolta}, M.~R. and {Bennett}, C.~L. and 
-	{Gold}, B. and {Hinshaw}, G. and {Jarosik}, N. and {Larson}, D. and 
-	{Limon}, M. and {Page}, L. and {Spergel}, D.~N. and {Halpern}, M. and 
-	{Hill}, R.~S. and {Kogut}, A. and {Meyer}, S.~S. and {Tucker}, G.~S. and 
-	{Weiland}, J.~L. and {Wollack}, E. and {Wright}, E.~L.},
+    {Gold}, B. and {Hinshaw}, G. and {Jarosik}, N. and {Larson}, D. and 
+    {Limon}, M. and {Page}, L. and {Spergel}, D.~N. and {Halpern}, M. and 
+    {Hill}, R.~S. and {Kogut}, A. and {Meyer}, S.~S. and {Tucker}, G.~S. and 
+    {Weiland}, J.~L. and {Wollack}, E. and {Wright}, E.~L.},
     title = "{Five-Year Wilkinson Microwave Anisotropy Probe Observations: Cosmological Interpretation}",
   journal = {\apjs},
 archivePrefix = "arXiv",
@@ -179,11 +231,11 @@ archivePrefix = "arXiv",
 
 @ARTICLE{Komatsu11,
    author = {{Komatsu}, E. and {Smith}, K.~M. and {Dunkley}, J. and {Bennett}, C.~L. and 
-	{Gold}, B. and {Hinshaw}, G. and {Jarosik}, N. and {Larson}, D. and 
-	{Nolta}, M.~R. and {Page}, L. and {Spergel}, D.~N. and {Halpern}, M. and 
-	{Hill}, R.~S. and {Kogut}, A. and {Limon}, M. and {Meyer}, S.~S. and 
-	{Odegard}, N. and {Tucker}, G.~S. and {Weiland}, J.~L. and {Wollack}, E. and 
-	{Wright}, E.~L.},
+    {Gold}, B. and {Hinshaw}, G. and {Jarosik}, N. and {Larson}, D. and 
+    {Nolta}, M.~R. and {Page}, L. and {Spergel}, D.~N. and {Halpern}, M. and 
+    {Hill}, R.~S. and {Kogut}, A. and {Limon}, M. and {Meyer}, S.~S. and 
+    {Odegard}, N. and {Tucker}, G.~S. and {Weiland}, J.~L. and {Wollack}, E. and 
+    {Wright}, E.~L.},
     title = "{Seven-year Wilkinson Microwave Anisotropy Probe (WMAP) Observations: Cosmological Interpretation}",
   journal = {\apjs},
 archivePrefix = "arXiv",
@@ -231,3 +283,19 @@ archivePrefix = "arXiv",
    adsurl = {http://adsabs.harvard.edu/abs/2006PASP..118.1711W},
   adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 }
+
+% Development workflow
+% ********************
+
+
+
+% Planned functionality
+% *********************
+
+
+
+% Summary
+% *******
+
+
+
