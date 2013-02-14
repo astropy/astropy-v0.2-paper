@@ -383,7 +383,10 @@ above):
 <Quantity 9.53724560923e-08 Angstrom>
 \end{verbatim}
 
-\texttt{Quantity} objects support arithmetic. When adding or subtracting, if the units are equivalent but not equal (e.g. centimeter and meter), the resulting object has units of the object on the left:
+\texttt{Quantity} objects support arithmetic. When adding or
+subtracting, if the units are equivalent but not equal
+(e.g. centimeter and meter), the resulting object has units of the
+object on the left:
 \begin{verbatim}
 >>> 110. * u.cm + 1.5 * u.m 
 <Quantity 260.0 cm>
