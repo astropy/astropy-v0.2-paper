@@ -339,9 +339,9 @@ array([  2.99792458e+14,   1.49896229e+14])
 Equivalencies are also included for flux densities, and end users can
 easily implement their own equivalencies.
 
-%TODO: add a description of the original motivation for equivalencies: 
-%flux density conversions.  Also possibly a description of the on-list 
-%discussion of the complexities in this topic 
+%TODO: add a description of the original motivation for equivalencies:
+%flux density conversions.  Also possibly a description of the on-list
+%discussion of the complexities in this topic
 
 It's well known that there are multiple string representations for
 units used in the astronomy community.  The FITS Standard
@@ -388,7 +388,7 @@ subtracting, if the units are equivalent but not equal
 (e.g. centimeter and meter), the resulting object has units of the
 object on the left:
 \begin{verbatim}
->>> 110. * u.cm + 1.5 * u.m 
+>>> 110. * u.cm + 1.5 * u.m
 <Quantity 260.0 cm>
 >>> 1.5 * u.m  + 110. * u.cm
 <Quantity 2.6 m>
@@ -400,7 +400,7 @@ to a specified set of units or ``decomposed'', effectively canceling
 and combining any equivalent units and returning a \texttt{Quantity}
 object in some set of base units (default is SI):
 
-\begin{verbatim}                                                                                                  
+\begin{verbatim}
 >>> x = 1.4E11*u.km / (0.7*u.Myr) / (4.1E11*u.s)
 >>> x
 <Quantity 0.487804878049 km / (Myr s)>
@@ -460,6 +460,24 @@ The combination of all of the above ends up being rather powerful:
 \subsection{Celestial Coordinates}
 
 % Authors: Erik T., Adrian, Demitri
+
+%% 1. Introduction/Design goals [APW & ET]
+%%     a. need a class-based representation
+%%     b. should be totally customizable
+%%     c. fast enough for “big data” (not there yet)
+%% 2. Coordinate systems overview [ET & APW]
+%% 3. Input Parsing / Creating coordinate objects [APW]
+%%     a. can all be customized
+%%     b. Angle
+%% 4. Representations/string outputs [APW]
+%% 5. Transformation infrastructure [ET]
+%%     a. can all be customized
+%% 6. Third dimension/distance added bits (incl. separations) [ET]
+
+Parsing, manipulating, and converting astronomical coordinates is an
+essential workflow element for astronomers. The
+\texttt{astropy.coordinates} sub-package contains classes and
+functions that bring this functionality to Python.
 
 
 \subsection{Tables and Gridded data}
