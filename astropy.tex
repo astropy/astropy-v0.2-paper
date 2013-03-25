@@ -310,6 +310,8 @@ Unit("1 / (s)")
 >>> (u.s ** -1).compose()
 [Unit("Hz"), ...]
 \end{verbatim}
+[TODO: won't (1.0 / u.s).compose() fail because 1/u.s is a Quantity? -
+  apw]
 
 Included is the concept of ``equivalencies'' in units, where there
 exists an equation that provides a relationship between two different
@@ -337,9 +339,9 @@ array([  2.99792458e+14,   1.49896229e+14])
 Equivalencies are also included for flux densities, and end users can
 easily implement their own equivalencies.
 
-%TODO: add a description of the original motivation for equivalencies: 
-%flux density conversions.  Also possibly a description of the on-list 
-%discussion of the complexities in this topic 
+%TODO: add a description of the original motivation for equivalencies:
+%flux density conversions.  Also possibly a description of the on-list
+%discussion of the complexities in this topic
 
 It's well known that there are multiple string representations for
 units used in the astronomy community.  The FITS Standard
@@ -357,7 +359,7 @@ and from external file formats.
 
 Also included in the \texttt{astropy.units} package is the
 \texttt{Quantity} object, which represents a numerical value with an
-associated unit.  This objects support arithmetic with other numbers
+associated unit.  These objects support arithmetic with other numbers
 and \texttt{Quantity} objects and preserve their units:
 \begin{verbatim}
 >>> x = 15.1 * u.m / (32.0 * u.s)
@@ -368,6 +370,62 @@ Unit("m / (s)")
 >>> x.value
 0.471875
 \end{verbatim}
+
+Using the \texttt{.to()} method, \texttt{Quantity} objects can be
+converted to different units. The units must either be dimensionally
+equivalent, or you must pass equivalencies through the
+\texttt{equivalencies} argument (see discussion of ``equivalencies''
+above):
+\begin{verbatim}
+>>> (1.15E13*u.km).to(u.pc)
+<Quantity 0.372689618289 pc>
+>>> (130.*u.GeV).to(u.Angstrom, equivalencies=u.spectral())
+<Quantity 9.53724560923e-08 Angstrom>
+\end{verbatim}
+
+\texttt{Quantity} objects support arithmetic. When adding or
+subtracting, if the units are equivalent but not equal
+(e.g. centimeter and meter), the resulting object has units of the
+object on the left:
+\begin{verbatim}
+>>> 110. * u.cm + 1.5 * u.m
+<Quantity 260.0 cm>
+>>> 1.5 * u.m  + 110. * u.cm
+<Quantity 2.6 m>
+\end{verbatim}
+
+For multiplication and division, the resulting object will retain all
+units used in the expression. The final object can then be converted
+to a specified set of units or ``decomposed'', effectively canceling
+and combining any equivalent units and returning a \texttt{Quantity}
+object in some set of base units (default is SI):
+
+\begin{verbatim}
+>>> x = 1.4E11*u.km / (0.7*u.Myr) / (4.1E11*u.s)
+>>> x
+<Quantity 0.487804878049 km / (Myr s)>
+>>> x.decompose()
+<Quantity 1.54579339587e-11 m / (s2)>
+>>> x.decompose(bases=u.cgs.bases)
+<Quantity 1.54579339587e-09 cm / (s2)>
+>>> x.decompose(bases=[u.kpc, u.Myr])
+<Quantity 0.000498873327903 kpc / (Myr2)>
+\end{verbatim}
+
+\texttt{Quantity} objects can also be created with \texttt{numpy}
+arrays:
+\begin{verbatim}
+>>> x = np.array([1,2,3])*u.km
+>>> x
+<Quantity [1 2 3] km>
+>>> x.unit
+Unit("km")
+>>> x.value
+array([1, 2, 3])
+\end{verbatim}
+
+[TODO: Do we want to mention that they currently don't support
+  arbitrary decimal powers?]
 
 These \texttt{Quantity} objects are used to define a number of useful
 astronomical constants included with \texttt{astropy}, each with an
@@ -403,12 +461,24 @@ The combination of all of the above ends up being rather powerful:
 
 % Authors: Erik T., Adrian, Demitri
 
-* Introduction/Design goals [APW \& ET]
-- need a class-based representation
-- should be totally customizable
-- fast enough for big data (not there yet)
+%% 1. Introduction/Design goals [APW & ET]
+%%     a. need a class-based representation
+%%     b. should be totally customizable
+%%     c. fast enough for “big data” (not there yet)
+%% 2. Coordinate systems overview [ET & APW]
+%% 3. Input Parsing / Creating coordinate objects [APW]
+%%     a. can all be customized
+%%     b. Angle
+%% 4. Representations/string outputs [APW]
+%% 5. Transformation infrastructure [ET]
+%%     a. can all be customized
+%% 6. Third dimension/distance added bits (incl. separations) [ET]
 
-* Coordinate systems overview [ET \& APW]
+Parsing, manipulating, and converting astronomical coordinates is an
+essential workflow element for astronomers. The
+\texttt{astropy.coordinates} sub-package contains classes and
+functions that bring this functionality to Python.
+
 To achieve these goals, the \texttt{coordinates} sub-package is built around
 a set of classes that represent coordinate systems.  The abstract class 
 \texttt{SphericalCoordinatesBase} is the superclass for all these systems, 
@@ -422,18 +492,6 @@ In upcoming versions, this will be expanded to include additional common
 systems, including ecliptic systems, Supergalactic coordinates, and all 
 necessary intermediate coordinate systems for the IAU 2000/2006
 equatorial-to-horizontal mapping \citep[e.g.,][]{soffel03, usnocircular179}.
-
-
-* Input Parsing / Creating coordinate objects [APW]
- - can all be customized
- - Angle
-
-* Representations/string outputs [APW]
-
-* Transformation infrastructure [ET]
- -can all be customized 
-
-* Third dimension/distance added bits (incl. separations) [ET]
 
 \subsection{Tables and Gridded data}
 
