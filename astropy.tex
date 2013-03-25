@@ -409,7 +409,19 @@ The combination of all of the above ends up being rather powerful:
 - fast enough for big data (not there yet)
 
 * Coordinate systems overview [ET \& APW]
-
+To achieve these goals, the \texttt{coordinates} sub-package is built around
+a set of classes that represent coordinate systems.  The abstract class 
+\texttt{SphericalCoordinatesBase} is the superclass for all these systems, 
+and it contains much of the functionality.  The individual systems provide
+customized initializers and appropriate formatting and representation defaults.
+For some classes, they also contain added functionality specific to a subset of
+systems, such as code to precess a coordinate to a new equinox.  The 
+implemented systems include a variety of equatorial coordinate systems 
+(ICRS, FK4, and FK5), Galactic coordinates, and Horizontal (alt/az) coordinates.
+In upcoming versions, this will be expanded to include additional common
+systems, including ecliptic systems, Supergalactic coordinates, and all 
+necessary intermediate coordinate systems for the IAU 2000/2006
+equatorial-to-horizontal mapping \citep[e.g.,][]{soffel03, usnocircular179}.
 
 
 * Input Parsing / Creating coordinate objects [APW]
