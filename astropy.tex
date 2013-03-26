@@ -477,21 +477,30 @@ The combination of all of the above ends up being rather powerful:
 Parsing, manipulating, and converting astronomical coordinates is an
 essential workflow element for astronomers. The
 \texttt{astropy.coordinates} sub-package contains classes and
-functions that bring this functionality to Python.
+functions that bring this functionality to Python. This sub-package
+was designed to present a pythonic interface for handling coordinate
+system representation and formatting, conversions between coordinate
+systems, and to provide a set of base coordinate classes upon which
+users may customize and implement new systems. The ultimate goal is to
+seamlessly support arbitrarily large data sets while maintaining an
+easy-to-use yet extensible API.
 
-To achieve these goals, the \texttt{coordinates} sub-package is built around
-a set of classes that represent coordinate systems.  The abstract class 
-\texttt{SphericalCoordinatesBase} is the superclass for all these systems, 
-and it contains much of the functionality.  The individual systems provide
-customized initializers and appropriate formatting and representation defaults.
-For some classes, they also contain added functionality specific to a subset of
-systems, such as code to precess a coordinate to a new equinox.  The 
-implemented systems include a variety of equatorial coordinate systems 
-(ICRS, FK4, and FK5), Galactic coordinates, and Horizontal (alt/az) coordinates.
-In upcoming versions, this will be expanded to include additional common
-systems, including ecliptic systems, Supergalactic coordinates, and all 
-necessary intermediate coordinate systems for the IAU 2000/2006
-equatorial-to-horizontal mapping \citep[e.g.,][]{soffel03, usnocircular179}.
+The \texttt{astropy.coordinates} sub-package is built around a set of
+classes that represent coordinate systems.  The abstract class
+\texttt{SphericalCoordinatesBase} is the superclass for all these
+systems, and it contains much of the functionality.  The individual
+systems provide customized initializers and appropriate formatting and
+representation defaults.  For some classes, they also contain added
+functionality specific to a subset of systems, such as code to precess
+a coordinate to a new equinox.  The implemented systems include a
+variety of equatorial coordinate systems (ICRS, FK4, and FK5),
+Galactic coordinates, and Horizontal (alt/az) coordinates.  In
+upcoming versions, this will be expanded to include additional common
+systems, including ecliptic systems, Supergalactic coordinates, and
+all necessary intermediate coordinate systems for the IAU 2000/2006
+equatorial-to-horizontal mapping \citep[e.g.,][]{soffel03,
+  usnocircular179}.
+
 
 \subsection{Tables and Gridded data}
 
