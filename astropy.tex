@@ -474,45 +474,43 @@ The combination of all of the above ends up being rather powerful:
 %%     a. can all be customized
 %% 6. Third dimension/distance added bits (incl. separations) [ET]
 
-Manipulation, parsing, and conversion of astronomical coordinates
-is an essential element of any astronomy workflow. The
+Manipulation, parsing, and conversion of astronomical coordinates is
+an essential element of any astronomy workflow. The
 \texttt{astropy.coordinates} sub-package contains classes and
-functions that provide this functionality for Astropy. The sub-package 
-is intended to provide a complete API that will enable compatibility between  
-python astronomy packages that make use of coordinates.  To acheive
-this end, it leverages important lessons learned from existing Python 
-coordinates packages such as \texttt{kapteyn},  \texttt{pyast},  
-\texttt{pyephem} \citep{pyephem}, and \texttt{astropysics} \citep{astropysics}.
+functions that provide this functionality for Astropy. The sub-package
+is intended to provide a complete API that will enable compatibility
+between python astronomy packages that make use of coordinates.  To
+acheive this end, it leverages important lessons learned from existing
+Python coordinates packages such as \texttt{kapteyn}, \texttt{pyast},
+\texttt{pyephem} \citep{pyephem}, and \texttt{astropysics}
+\citep{astropysics}.
 
-\texttt{astropy.coordinates} is designed to present a pythonic interface 
-for representing coordinates in computations, simplify input/output
-formatting, and allow straightforward transformation between 
-coordinate systems.  An important (not yet fully realized) design
-goal is seamlessly support of arbitrarily large data sets.
-It is also intended to allow users to easily customize and 
-implement new coordinate systems that work as well as
-the builtin systems. 
-The final main element of the design philosophy is that the code 
-should be easily readable even by those new to  python.  The
-primary guideline is that typical operations should appear in code
-similar to how they would appear if expressed in spoken or 
-written language. 
+\texttt{astropy.coordinates} is designed to present a pythonic
+interface for representing coordinates in computations, simplify
+input/output formatting, and allow straightforward transformation
+between coordinate systems.  An important (not yet fully realized)
+design goal is to seamlessly support arbitrarily large data sets.  It
+is also intended to allow users to easily customize and implement new
+coordinate systems that work consistently with the built-in systems.
+A final main element of the design philosophy is that the code should
+be easily readable -- even by those new to python.  The primary
+guideline is that typical operations should appear in code similar to
+how they would appear if expressed in spoken or written language.
 
-To achieve these goals, the \texttt{astropy.coordinates} 
-sub-package is built around a set of classes that represent 
-coordinate systems.  The abstract class
-\texttt{SphericalCoordinatesBase} is the superclass for all these
-systems, and it contains much of the functionality.  The individual
-systems provide customized initializers and appropriate formatting and
-representation defaults.  For some classes, they also contain added
-functionality specific to a subset of systems, such as code to precess
-a coordinate to a new equinox.  The implemented systems include a
-variety of equatorial coordinate systems (ICRS, FK4, and FK5),
-Galactic coordinates, and Horizontal (alt/az) coordinates.  In
-upcoming versions, this will be expanded to include additional common
-systems, including ecliptic systems, Supergalactic coordinates, and
-all necessary intermediate coordinate systems for the IAU 2000/2006
-equatorial-to-horizontal mapping \citep[e.g.,][]{soffel03,
+To achieve these goals, the \texttt{astropy.coordinates} sub-package
+is built around a set of classes that represent coordinate systems.
+The abstract class \texttt{SphericalCoordinatesBase} is the superclass
+for all of these systems and contains much of the functionality.  The
+individual systems provide customized initializers and appropriate
+formatting and representation defaults.  For some classes, they also
+contain added functionality specific to a subset of systems, such as
+code to precess a coordinate to a new equinox.  The implemented
+systems include a variety of equatorial coordinate systems (ICRS, FK4,
+and FK5), Galactic coordinates, and Horizontal (alt/az) coordinates.
+In upcoming versions, this will be expanded to include additional
+common systems, including ecliptic systems, Supergalactic coordinates,
+and all necessary intermediate coordinate systems for the IAU
+2000/2006 equatorial-to-horizontal mapping \citep[e.g.,][]{soffel03,
   usnocircular179}.
 
 
