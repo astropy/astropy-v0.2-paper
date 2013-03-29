@@ -534,6 +534,64 @@ The \texttt{NDData} class ...
 
 % Authors: Tom A.
 
+The \texttt{astropy.io.ascii} package (formerly the standalone project
+\texttt{asciitable}\footnote{https://asciitable.readthedocs.org}) provides the
+ability to read and write tabular data for a wide variety of ASCII-based
+formats.  In addition to generic formats like space-delimited, tab-delimited or
+comma-separated values, \texttt{astropy.io.ascii} provides classes for specialized
+table formats like
+CDS\footnote{\url{http://vizier.u-strasbg.fr/doc/catstd.htx}},
+IPAC\footnote{\url{http://irsa.ipac.caltech.edu/applications/DDGEN/Doc/ipac_tbl.html}},
+IRAF DAOphot, and LaTeX.  There is also a flexible class for handling
+a wide variety of fixed-width table formats.
+
+As a simple example, suppose the file named \verb|sources.dat| has the following
+table information:
+
+\begin{verbatim}
+obsid redshift  X      Y     object
+3102  0.32      4167  4085   Q1250+568-A
+877   0.22      4378  3892   "Source 82"
+\end{verbatim}
+
+This table can be read with the following:
+
+\begin{verbatim}
+>>> from astropy.io import ascii
+>>> data = ascii.read("sources.dat")
+>>> print data
+obsid redshift  X    Y      object
+----- -------- ---- ---- -----------
+ 3102     0.32 4167 4085 Q1250+568-A
+  877     0.22 4378 3892   Source 82
+\end{verbatim}
+
+This table can then be written out as a LaTeX table with the following:
+
+\begin{verbatim}
+>>> ascii.write(data, 'sources.tex',
+                Writer=ascii.Latex)
+>>> cat sources.tex
+\begin{table}
+\begin{tabular}{ccccc}
+obsid & redshift & X & Y & object \\
+3102 & 0.32 & 4167 & 4085 & Q1250+568-A \\
+877 & 0.22 & 4378 & 3892 & Source 82 \\
+\end{tabular}
+\end{table}
+\end{verbatim}
+
+As mentioned in Sec.~\ref{sec:table} there is an alternate way of
+reading and writing tables which is more intuitive in many cases.
+The previous example could be done with the following:
+
+\begin{verbatim}
+>>> from astropy.table import Table
+>>> data = Table.read('sources.dat',
+                      format='ascii')
+>>> data.write('sources.tex', format='ascii',
+               Writer=ascii.Latex)
+\end{verbatim}
 
 \subsubsection{Virtual Observatory tables}
 
