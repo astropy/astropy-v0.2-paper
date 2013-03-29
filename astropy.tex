@@ -398,6 +398,97 @@ The combination of all of the above ends up being rather powerful:
 
 % Authors: Tom A.
 
+The \texttt{astropy.time} package provides functionality for manipulating
+times and dates.  Specific emphasis is placed on supporting time scales
+(e.g. UTC, TAI, UT1) and time representations (e.g. JD, MJD, ISO 8601) that
+are used in astronomy.
+
+This package uses Cython\footnote{\url{http://www.cython.org/}} to wrap the C
+language SOFA\citep{SOFA:2010-12-01} time and calendar
+routines\footnote{\url{http://www.iausofa.org/2012_0301_C/sofa/sofa_ts_c.pdf}}.
+Leveraging the robust and well-tested
+SOFA\footnote{\url{http://www.iausofa.org}} routines ensures that the
+fundamental time scale conversions are being computed correctly.  An important
+feature of the SOFA time library is that each time is represented as a pair of
+double-precision values.  This is supported in \texttt{astropy.time} and
+provides the capability to do extremely high precision time computations.  All
+time scale conversions are done by Cython vectorized versions of the SOFA
+routines and are reasonable fast and memory efficient.
+
+The basic way to use \texttt{astropy.time} is to create a \texttt{Time} object
+by supplying one or more input time values as well as the time format and time
+scale of those values.  The input time(s) can either be a single scalar like
+\verb|"2010-01-01 00:00:00"| or \verb|2455348.5| or an array of such values.
+The output value(s) will have the same shape (scalar or array) as the input.
+
+\begin{verbatim}
+>>> from astropy.time import Time
+>>> t = Time('2010-06-01 00:00:00',
+             format='iso', scale='utc')
+>>> t
+<Time object: scale='utc' format='iso'
+              vals=2010-06-01 00:00:00.000>
+
+\end{verbatim}
+
+The \texttt{format} argument specifies how to interpret the input values, e.g. ISO
+or JD or Unix time.  The \texttt{scale} argument specifies the time scale for the
+values, e.g. UTC or TT or UT1.  The available time scales are listed in the
+table below:
+
+\begin{center}
+\begin{tabular}{ll}
+Scale  & Description \\
+TAI    & International Atomic Time \\
+TCB    & Barycentric Coordinate Time \\
+TCG    & Geocentric Coordinate Time \\
+TDB    & Barycentric Dynamical Time \\
+TT     & Terrestrial Time \\
+UT1    & Universal Time \\
+UTC    & Coordinated Universal Time \\
+\end{tabular}
+\end{center}
+
+Getting the representation of the time in a different format such as Julian
+Date or Year:Day-of-year is straightforward:
+
+\begin{verbatim}
+>>> t.jd
+2455348.5
+>>> t.yday
+'2010:152:00:00:00.000'
+\end{verbatim}
+
+One can also convert to a different time scale, for instance from UTC to
+TT.  This uses the same attribute mechanism as above but now returns a new
+\texttt{Time} object:
+
+\begin{verbatim}
+>>> t_tt = t.tt
+>>> t_tt
+<Time object: scale='tt' format='iso'
+              vals=2010-06-01 00:01:06.184>
+>>> t_tt.jd
+2455348.5007660184
+\end{verbatim}
+
+Note that both the ISO and JD representations of \verb|t_tt| are different than for
+\verb|t| because they are expressed relative to the TT time scale.
+
+In addition to representing absolute times, the \verb|Time| class supports
+basic arithmetic to compute the duration between two times or to add or
+subtract a duration from a time.  The example below also shows that when
+creating a \verb|Time| object the time format for unambiguous inputs can be
+automatically determined:
+
+\begin{verbatim}
+>>> t2 = Time('2010:153', scale='utc')
+>>> dt = t2 - t
+>>> dt.sec
+86400.0
+>>> dt.jd
+1.0
+\end{verbatim}
 
 \subsection{Celestial Coordinates}
 
