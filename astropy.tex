@@ -466,13 +466,6 @@ The combination of all of the above ends up being rather powerful:
 %%     b. should be totally customizable
 %%     c. fast enough for “big data” (not there yet)
 %% 2. Coordinate systems overview [ET & APW]
-%% 3. Input Parsing / Creating coordinate objects [APW]
-%%     a. can all be customized
-%%     b. Angle
-%% 4. Representations/string outputs [APW]
-%% 5. Transformation infrastructure [ET]
-%%     a. can all be customized
-%% 6. Third dimension/distance added bits (incl. separations) [ET]
 
 Manipulation, parsing, and conversion of astronomical coordinates is
 an essential element of any astronomy workflow. The
@@ -512,6 +505,38 @@ common systems, including ecliptic systems, Supergalactic coordinates,
 and all necessary intermediate coordinate systems for the IAU
 2000/2006 equatorial-to-horizontal mapping \citep[e.g.,][]{soffel03,
   usnocircular179}.
+
+%% 3. Input Parsing / Creating coordinate objects [APW]
+%%     a. can all be customized
+%%     b. Angle
+
+Creating coordinate objects is done by directly initializing a
+particular coordinate system using standard Python class
+instantiation. For example, for two numerical equatorial
+coordinates (ICRS)\footnote{For a complete list of included coordinate
+  systems, see \url{http://docs.astropy.org/en/v0.2/coordinates/}.}:
+
+\begin{verbatim}
+>>> import astropy.coordinates import ICRSCoordinates
+>>> ICRSCoordinates(187.70592, 12.39112, unit=(u.degree, u.degree))
+<ICRSCoordinates RA=187.70592 deg, Dec=12.39112 deg>
+\end{verbatim}
+
+Astronomical coordinates may be expressed in a myriad of ways. For
+numerical representations -- such as the above example -- an
+additional \texttt{unit} argument is required to specify the units of
+the two coordinates. However, some coordinate representations
+inherently specify the angular units (e.g., 12h53m11.5123s). The
+coordinate classes in this sub-package accept both numeric and string
+specification of the value and the goal of the input parser is to
+determine the units and value from the input alone whenever a person
+could unambiguously determine them. In ambiguous cases, the user must
+explicitly specify the unit(s).
+
+%% 4. Representations/string outputs [APW]
+%% 5. Transformation infrastructure [ET]
+%%     a. can all be customized
+%% 6. Third dimension/distance added bits (incl. separations) [ET]
 
 
 \subsection{Tables and Gridded data}
