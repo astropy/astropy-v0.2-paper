@@ -398,6 +398,97 @@ The combination of all of the above ends up being rather powerful:
 
 % Authors: Tom A.
 
+The \texttt{astropy.time} package provides functionality for manipulating
+times and dates.  Specific emphasis is placed on supporting time scales
+(e.g. UTC, TAI, UT1) and time representations (e.g. JD, MJD, ISO 8601) that
+are used in astronomy.
+
+This package uses Cython\footnote{\url{http://www.cython.org/}} to wrap the C
+language SOFA\citep{SOFA:2010-12-01} time and calendar
+routines\footnote{\url{http://www.iausofa.org/2012_0301_C/sofa/sofa_ts_c.pdf}}.
+Leveraging the robust and well-tested
+SOFA\footnote{\url{http://www.iausofa.org}} routines ensures that the
+fundamental time scale conversions are being computed correctly.  An important
+feature of the SOFA time library is that each time is represented as a pair of
+double-precision values.  This is supported in \texttt{astropy.time} and
+provides the capability to do extremely high precision time computations.  All
+time scale conversions are done by Cython vectorized versions of the SOFA
+routines and are reasonable fast and memory efficient.
+
+The basic way to use \texttt{astropy.time} is to create a \texttt{Time} object
+by supplying one or more input time values as well as the time format and time
+scale of those values.  The input time(s) can either be a single scalar like
+\verb|"2010-01-01 00:00:00"| or \verb|2455348.5| or an array of such values.
+The output value(s) will have the same shape (scalar or array) as the input.
+
+\begin{verbatim}
+>>> from astropy.time import Time
+>>> t = Time('2010-06-01 00:00:00',
+             format='iso', scale='utc')
+>>> t
+<Time object: scale='utc' format='iso'
+              vals=2010-06-01 00:00:00.000>
+
+\end{verbatim}
+
+The \texttt{format} argument specifies how to interpret the input values, e.g. ISO
+or JD or Unix time.  The \texttt{scale} argument specifies the time scale for the
+values, e.g. UTC or TT or UT1.  The available time scales are listed in the
+table below:
+
+\begin{center}
+\begin{tabular}{ll}
+Scale  & Description \\
+TAI    & International Atomic Time \\
+TCB    & Barycentric Coordinate Time \\
+TCG    & Geocentric Coordinate Time \\
+TDB    & Barycentric Dynamical Time \\
+TT     & Terrestrial Time \\
+UT1    & Universal Time \\
+UTC    & Coordinated Universal Time \\
+\end{tabular}
+\end{center}
+
+Getting the representation of the time in a different format such as Julian
+Date or Year:Day-of-year is straightforward:
+
+\begin{verbatim}
+>>> t.jd
+2455348.5
+>>> t.yday
+'2010:152:00:00:00.000'
+\end{verbatim}
+
+One can also convert to a different time scale, for instance from UTC to
+TT.  This uses the same attribute mechanism as above but now returns a new
+\texttt{Time} object:
+
+\begin{verbatim}
+>>> t_tt = t.tt
+>>> t_tt
+<Time object: scale='tt' format='iso'
+              vals=2010-06-01 00:01:06.184>
+>>> t_tt.jd
+2455348.5007660184
+\end{verbatim}
+
+Note that both the ISO and JD representations of \verb|t_tt| are different than for
+\verb|t| because they are expressed relative to the TT time scale.
+
+In addition to representing absolute times, the \verb|Time| class supports
+basic arithmetic to compute the duration between two times or to add or
+subtract a duration from a time.  The example below also shows that when
+creating a \verb|Time| object the time format for unambiguous inputs can be
+automatically determined:
+
+\begin{verbatim}
+>>> t2 = Time('2010:153', scale='utc')
+>>> dt = t2 - t
+>>> dt.sec
+86400.0
+>>> dt.jd
+1.0
+\end{verbatim}
 
 \subsection{Celestial Coordinates}
 
@@ -443,6 +534,64 @@ The \texttt{NDData} class ...
 
 % Authors: Tom A.
 
+The \texttt{astropy.io.ascii} package (formerly the standalone project
+\texttt{asciitable}\footnote{https://asciitable.readthedocs.org}) provides the
+ability to read and write tabular data for a wide variety of ASCII-based
+formats.  In addition to generic formats like space-delimited, tab-delimited or
+comma-separated values, \texttt{astropy.io.ascii} provides classes for specialized
+table formats like
+CDS\footnote{\url{http://vizier.u-strasbg.fr/doc/catstd.htx}},
+IPAC\footnote{\url{http://irsa.ipac.caltech.edu/applications/DDGEN/Doc/ipac_tbl.html}},
+IRAF DAOphot, and LaTeX.  There is also a flexible class for handling
+a wide variety of fixed-width table formats.
+
+As a simple example, suppose the file named \verb|sources.dat| has the following
+table information:
+
+\begin{verbatim}
+obsid redshift  X      Y     object
+3102  0.32      4167  4085   Q1250+568-A
+877   0.22      4378  3892   "Source 82"
+\end{verbatim}
+
+This table can be read with the following:
+
+\begin{verbatim}
+>>> from astropy.io import ascii
+>>> data = ascii.read("sources.dat")
+>>> print data
+obsid redshift  X    Y      object
+----- -------- ---- ---- -----------
+ 3102     0.32 4167 4085 Q1250+568-A
+  877     0.22 4378 3892   Source 82
+\end{verbatim}
+
+This table can then be written out as a LaTeX table with the following:
+
+\begin{verbatim}
+>>> ascii.write(data, 'sources.tex',
+                Writer=ascii.Latex)
+>>> cat sources.tex
+\begin{table}
+\begin{tabular}{ccccc}
+obsid & redshift & X & Y & object \\
+3102 & 0.32 & 4167 & 4085 & Q1250+568-A \\
+877 & 0.22 & 4378 & 3892 & Source 82 \\
+\end{tabular}
+\end{table}
+\end{verbatim}
+
+As mentioned in Sec.~\ref{sec:table} there is an alternate way of
+reading and writing tables which is more intuitive in many cases.
+The previous example could be done with the following:
+
+\begin{verbatim}
+>>> from astropy.table import Table
+>>> data = Table.read('sources.dat',
+                      format='ascii')
+>>> data.write('sources.tex', format='ascii',
+               Writer=ascii.Latex)
+\end{verbatim}
 
 \subsubsection{Virtual Observatory tables}
 
