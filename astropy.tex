@@ -568,7 +568,22 @@ compliance with modern astronomy standards.
 
 
 %% 6. Third dimension/distance added bits (incl. separations) [ET]
-blah
+A final important piece of \texttt{astropy.coordinates} is support for 
+line-of-sight distances.  While the term ``celestial coordinates'' can be
+taken to refer to only on-sky angles, in \texttt{astropy.coordinates}, a 
+coordinate object is conceptually treated as a point in 3-dimensional space.
+Hence, users have the option of specifying a line-of-sight distance to the 
+object from the origin of the coordinate system (typically the origin is the 
+Earth or Solar System barycenter).  These distance can be given in physical
+units or as redshifts, and \texttt{astropy.coordinates} will transparently
+make use of the cosmological calculations in \texttt{astropy.cosmology} when 
+conversion from redshift to physical distances are needed. 
+The transformation system fully supports distances, preserving 
+the orientations of coordinates both for transformations that are purely 
+rotations and for those that involve translations.  Finally, when
+line-of-sight distances are provided,  direct and convinient calculation of
+3-dimensional distances are enabled via the \texttt{separation3d} method of 
+coordinate objects.
 
 
 \subsection{Tables and Gridded data}
