@@ -306,7 +306,6 @@ pattern match those parts against known units.
 \begin{verbatim}
 >>> u.Hz.decompose()
 Unit("1 / (s)")
->>> (1.0 / u.s).compose()
 >>> (u.s ** -1).compose()
 [Unit("Hz"), ...]
 \end{verbatim}
@@ -337,9 +336,9 @@ array([  2.99792458e+14,   1.49896229e+14])
 Equivalencies are also included for flux densities, and end users can
 easily implement their own equivalencies.
 
-%TODO: add a description of the original motivation for equivalencies: 
-%flux density conversions.  Also possibly a description of the on-list 
-%discussion of the complexities in this topic 
+%TODO: add a description of the original motivation for equivalencies:
+%flux density conversions.  Also possibly a description of the on-list
+%discussion of the complexities in this topic
 
 It's well known that there are multiple string representations for
 units used in the astronomy community.  The FITS Standard
@@ -357,7 +356,7 @@ and from external file formats.
 
 Also included in the \texttt{astropy.units} package is the
 \texttt{Quantity} object, which represents a numerical value with an
-associated unit.  This objects support arithmetic with other numbers
+associated unit.  These objects support arithmetic with other numbers
 and \texttt{Quantity} objects and preserve their units:
 \begin{verbatim}
 >>> x = 15.1 * u.m / (32.0 * u.s)
@@ -367,6 +366,59 @@ and \texttt{Quantity} objects and preserve their units:
 Unit("m / (s)")
 >>> x.value
 0.471875
+\end{verbatim}
+
+Using the \texttt{.to()} method, \texttt{Quantity} objects can be
+converted to different units. The units must either be dimensionally
+equivalent, or you must pass equivalencies through the
+\texttt{equivalencies} argument (see discussion of ``equivalencies''
+above):
+\begin{verbatim}
+>>> (1.15E13*u.km).to(u.pc)
+<Quantity 0.372689618289 pc>
+>>> (130.*u.GeV).to(u.Angstrom, equivalencies=u.spectral())
+<Quantity 9.53724560923e-08 Angstrom>
+\end{verbatim}
+
+\texttt{Quantity} objects support arithmetic. When adding or
+subtracting, if the units are equivalent but not equal
+(e.g. centimeter and meter), the resulting object has units of the
+object on the left:
+\begin{verbatim}
+>>> 110. * u.cm + 1.5 * u.m
+<Quantity 260.0 cm>
+>>> 1.5 * u.m  + 110. * u.cm
+<Quantity 2.6 m>
+\end{verbatim}
+
+For multiplication and division, the resulting object will retain all
+units used in the expression. The final object can then be converted
+to a specified set of units or ``decomposed'', effectively canceling
+and combining any equivalent units and returning a \texttt{Quantity}
+object in some set of base units (default is SI):
+
+\begin{verbatim}
+>>> x = 1.4E11*u.km / (0.7*u.Myr) / (4.1E11*u.s)
+>>> x
+<Quantity 0.487804878049 km / (Myr s)>
+>>> x.decompose()
+<Quantity 1.54579339587e-11 m / (s2)>
+>>> x.decompose(bases=u.cgs.bases)
+<Quantity 1.54579339587e-09 cm / (s2)>
+>>> x.decompose(bases=[u.kpc, u.Myr])
+<Quantity 0.000498873327903 kpc / (Myr2)>
+\end{verbatim}
+
+\texttt{Quantity} objects can also be created with \texttt{numpy}
+arrays:
+\begin{verbatim}
+>>> x = np.array([1,2,3])*u.km
+>>> x
+<Quantity [1 2 3] km>
+>>> x.unit
+Unit("km")
+>>> x.value
+array([1, 2, 3])
 \end{verbatim}
 
 These \texttt{Quantity} objects are used to define a number of useful
