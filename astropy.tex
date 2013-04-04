@@ -3,11 +3,15 @@
 \usepackage{xspace}
 \usepackage{natbib}
 \usepackage{url}
+\usepackage[xindy, toc, hyperfirst=false, nolist, nostyles, sanitize={name=false,description=false,symbol=false}]{glossaries}
 \bibpunct{(}{)}{;}{a}{}{,}
 
 \newcommand{\astropy}{\texttt{astropy}\xspace}
 
 \begin{document}
+
+% Reading the glossary
+\input{glossary.tex}
 
 \titlerunning{Astropy}
 \authorrunning{The Astropy Collaboration}
@@ -224,7 +228,7 @@ to bring together developers across the field of astronomy in order to
 coordinate efforts to develop a common Python library. The aim of this library
 was to cover much of the astronomy-specific functionality needed by
 researchers, complementing more general standard scientific packages such as
-NumPy \citep{oliphant2006guide,van2011numpy} and SciPy \citep{jones2001scipy},
+\gls{numpy} and \gls{scipy} ,
 which are invaluable for numerical array-based calculations, and more general
 scientific algorithms (e.g. interpolation, integration, clustering, etc.)
 respectively. To date, over 130 people are signed up to the
