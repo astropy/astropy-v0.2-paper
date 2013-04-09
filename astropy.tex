@@ -469,10 +469,10 @@ The combination of all of the above ends up being rather powerful:
 Manipulation, parsing, and conversion of astronomical coordinates is
 an essential element of any astronomy workflow. The
 \texttt{astropy.coordinates} sub-package contains classes and
-functions that provide this functionality for Astropy. The sub-package
+functions that provide this functionality in Astropy. The sub-package
 is intended to provide a complete API that will enable compatibility
 between python astronomy packages that make use of coordinates.  To
-acheive this end, it leverages important lessons learned from existing
+acheive this, it leverages important lessons learned from existing
 Python coordinates packages such as \texttt{kapteyn}, \texttt{pyast},
 \texttt{pyephem} \citep{pyephem}, and \texttt{astropysics}
 \citep{astropysics}.
@@ -490,7 +490,7 @@ guideline is that typical operations should appear in code similar to
 how they would appear if expressed in spoken or written language.
 
 %% 2. Coordinate systems overview [ET & APW]
-To achieve these goals, the \texttt{astropy.coordinates} sub-package
+The \texttt{astropy.coordinates} sub-package
 is built around a set of classes that represent coordinate systems.
 The abstract class \texttt{SphericalCoordinatesBase} is the superclass
 for all of these systems and contains much of the functionality.  The
@@ -505,8 +505,8 @@ common systems, including ecliptic systems, Supergalactic coordinates,
 and all necessary intermediate coordinate systems for the IAU
 2000/2006 equatorial-to-horizontal mapping \citep[e.g.,][]{soffel03,
   usnocircular179}.
-  
-  
+
+
 
 %% 3. Input Parsing / Creating coordinate objects [APW]
 %%     a. can all be customized
@@ -516,52 +516,52 @@ and all necessary intermediate coordinate systems for the IAU
 %% 5. Transformation infrastructure [ET]
 %%     a. can all be customized
 Another crucial feature for a coordinate system framework is a methodology for
-transforming between coordinate systems. The \texttt{astropy.coordinates} 
-transformation framework implements this, with a guiding philosophy that it
+transforming between coordinate systems. The \texttt{astropy.coordinates}
+transformation framework implements this with a guiding philosophy that it
 should be easy to add new systems without much bookeeping on the part of a
 user.  In fact, it is possible for a new contributor or user to add a new
 coordinate system with only a class definition and two transformation
 functions.  Systems added in this manner are ``first-class citizens'' of the
-package, and have all the capabilities of the systems that are included in the 
+package, and have all the capabilities of the systems that are included in the
 package.
 
 This flexibility is acheived in \texttt{astropy.coordinates} through the use
 of a transformation graph.
-All coordinate systems are represented as classes, so internally, the 
-transformation infrastructure keeps track of a graph of coordinate classes and
+All coordinate systems are represented as classes; internally, the
+transformation infrastructure keeps track of a network of coordinate classes and
 the transformations between them.  When a user asks to transform a coordinate
 object in one system into another, the package determines the shortest path on
-the transformation graph to the new coordinate, and applies the necessary 
-sequence of transformations transparently.  In practice, this means
-implementing a new coordinate system requires only implementing one 
+the transformation graph to the new coordinate, and applies the necessary
+sequence of transformations.  In practice, this means
+implementing a new coordinate system requires only implementing one
 pair of transformations to/from a system that is already connected to the
-transformation graph.  Once just one transform pair is implemented,
-\texttt{astropy.coordinates} will be able to transform from that coordinate 
-system to any other that is in the graph.  This greatly simplifies
-implementation of the system, and mirrors the way most coordinate systems are
+transformation graph.  Once this pair is specified,
+\texttt{astropy.coordinates} will be able to transform from that coordinate
+system to any other system in the graph.  This greatly simplifies
+implementation and mirrors the way most coordinate systems are
 defined.  For example, Galactic coordinates are defined only relative to FK4
-coordinates, rather than with respect to a set of other common coordinate 
+coordinates, rather than with respect to a set of other common coordinate
 systems \citep{galcoords, reid04}.
 
 The transformation system also provides a variety of helpers to make writing
 new transformations easier.  In particular, it allows transformations to be
-defined either as standard python functions (for full flexibility) or as 
+defined either as standard python functions (for full flexibility) or as
 matricies converting the cartesian coordinates of one system into those of the
 other.  These matricies can be dynamically generated for each object or be a
 single matrix for all transformations between two systems.  This allows
 designers of transformation functions to drastically improve performance for
 systems with simple linear relations, while still having the full
-customization necessary for more complicated transformations (e.g., 
+customization necessary for more complicated transformations (e.g.,
 transformations fully consistent with General Relativity).
 
 In v0.2, \texttt{astropy.coordinates} provides transformations between all
-systems that are built-in, aside for conversions from celestial coordinates to
-horizontal (altitude/azimuth) coordinates.  Transforming to horizontal 
-coordinates is obviously a crucial functionality for any astronomy package. 
-However, it requires an observer location, with additional bookeeping
-necessary.  Hence, implementing such transformation has been delayed to a
-future version.  The near-term intent (planned for v0.3) is to implement the 
-transformation architecture endorsed by the IAU 2000/2006 resolutions 
+systems that are built-in, aside from conversions from celestial coordinates to
+horizontal (altitude/azimuth) coordinates.  Transforming to horizontal
+coordinates is obviously a crucial functionality for any astronomy package.
+However, it requires an observer location and additional information.  Hence,
+implementing such transformations has been delayed to a
+future version.  The near-term intent (planned for v0.3) is to implement the
+transformation architecture endorsed by the IAU 2000/2006 resolutions
 \citep[see e.g.,][]{soffel03, usnocircular179}.  This will enable practical
 calculations such as visibility of targets over the year, while maintaining
 compliance with modern astronomy standards.
@@ -569,22 +569,22 @@ compliance with modern astronomy standards.
 
 
 %% 6. Third dimension/distance added bits (incl. separations) [ET]
-A final important piece of \texttt{astropy.coordinates} is support for 
+A final important piece of \texttt{astropy.coordinates} is support for
 line-of-sight distances.  While the term ``celestial coordinates'' can be
-taken to refer to only on-sky angles, in \texttt{astropy.coordinates}, a 
+taken to refer to only on-sky angles, in \texttt{astropy.coordinates} a
 coordinate object is conceptually treated as a point in 3-dimensional space.
-Hence, users have the option of specifying a line-of-sight distance to the 
-object from the origin of the coordinate system (typically the origin is the 
+Hence, users have the option of specifying a line-of-sight distance to the
+object from the origin of the coordinate system (typically the origin is the
 Earth or Solar System barycenter).  These distance can be given in physical
-units or as redshifts, and \texttt{astropy.coordinates} will transparently
-make use of the cosmological calculations in \texttt{astropy.cosmology} when 
-conversion from redshift to physical distances are needed. 
-The transformation system fully supports distances, preserving 
-the orientations of coordinates both for transformations that are purely 
+units or as redshifts (with which \texttt{astropy.coordinates} will transparently
+make use of the cosmological calculations in \texttt{astropy.cosmology} for
+conversion to physical distances).
+The transformation system fully supports distances, preserving
+the orientations of coordinates both for transformations that are purely
 rotations and for those that involve translations.  Finally, when
-line-of-sight distances are provided,  direct and convinient calculation of
-3-dimensional distances are enabled via the \texttt{separation3d} method of 
-coordinate objects.
+line-of-sight distances are provided, the \texttt{separation3d} method of the
+coordinate objects provides direct and convenient calculations of
+3-dimensional distances.
 
 %% 3. Input Parsing / Creating coordinate objects [APW]
 %%     a. can all be customized
@@ -613,11 +613,35 @@ determine the units and value from the input alone whenever a person
 could unambiguously determine them. In ambiguous cases, the user must
 explicitly specify the unit(s).
 
-%% 4. Representations/string outputs [APW]
-%% 5. Transformation infrastructure [ET]
-%%     a. can all be customized
-%% 6. Third dimension/distance added bits (incl. separations) [ET]
+Internally, the individual coordinates are store as \texttt{Angle}
+objects: a new class in \texttt{astropy.coordinates} for handling
+angular values. \texttt{Angle}'s can be instantiated and used on their
+own and provide a variety of features for parsing and representing
+angular data. To create an \texttt{Angle} object, you must specify a
+value and unit. Once you have the object, a number of convenient
+attributes provide access to the value in angular units such as
+radians, hours, degrees, or sexagesimal tuples of such values:
 
+\begin{verbatim}
+>>> from astropy.coordinates import Angle
+>>> a = Angle(118.439234, unit=u.degree)
+>>> a.radians
+2.067154596840014
+>>> a.hms
+(7.0, 53, 45.41616000000232)
+\end{verbatim}
+
+The \texttt{format()} method provides a variety of options for
+controlling string representations of the value. The user may specify
+separating characters (for sexagesimal representation), the output
+unit, and precision:
+
+\begin{verbatim}
+>>> a.format(sep=":", precision=8)
+u'118:26:21.24240000'
+>>> a.format(unit=u.hour, sep="hms")
+u'7h53m45.41616s'
+\end{verbatim}
 
 \subsection{Tables and Gridded data}
 
