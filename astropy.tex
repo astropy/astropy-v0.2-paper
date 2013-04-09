@@ -490,7 +490,7 @@ guideline is that typical operations should appear in code similar to
 how they would appear if expressed in spoken or written language.
 
 %% 2. Coordinate systems overview [ET & APW]
-The \texttt{astropy.coordinates} sub-package
+To achieve these goals, the \texttt{astropy.coordinates} sub-package
 is built around a set of classes that represent coordinate systems.
 The abstract class \texttt{SphericalCoordinatesBase} is the superclass
 for all of these systems and contains much of the functionality.  The
@@ -576,9 +576,9 @@ coordinate object is conceptually treated as a point in 3-dimensional space.
 Hence, users have the option of specifying a line-of-sight distance to the
 object from the origin of the coordinate system (typically the origin is the
 Earth or Solar System barycenter).  These distance can be given in physical
-units or as redshifts (with which \texttt{astropy.coordinates} will transparently
+units or as redshifts, with which \texttt{astropy.coordinates} will transparently
 make use of the cosmological calculations in \texttt{astropy.cosmology} for
-conversion to physical distances).
+conversion to physical distances.
 The transformation system fully supports distances, preserving
 the orientations of coordinates both for transformations that are purely
 rotations and for those that involve translations.  Finally, when
