@@ -592,28 +592,18 @@ coordinate objects provides direct and convenient calculations of
 
 Creating coordinate objects is done by directly initializing a
 particular coordinate system using standard Python class
-instantiation. For example, for two numerical equatorial
-coordinates (ICRS)\footnote{For a complete list of included coordinate
-  systems, see \url{http://docs.astropy.org/en/v0.2/coordinates/}.}:
-
-\begin{verbatim}
->>> import astropy.coordinates import ICRSCoordinates
->>> ICRSCoordinates(187.70592, 12.39112, unit=(u.degree, u.degree))
-<ICRSCoordinates RA=187.70592 deg, Dec=12.39112 deg>
-\end{verbatim}
-
-Astronomical coordinates may be expressed in a myriad of ways. For
-numerical representations -- such as the above example -- an
-additional \texttt{unit} argument is required to specify the units of
-the two coordinates. However, some coordinate representations
-inherently specify the angular units (e.g., 12h53m11.5123s). The
-coordinate classes in this sub-package accept both numeric and string
-specification of the value and the goal of the input parser is to
-determine the units and value from the input alone whenever a person
-could unambiguously determine them. In ambiguous cases, the user must
+instantiation. Astronomical coordinates may be expressed in a myriad
+of ways, thus the classes support both string and numeric value
+specification through a sophisticated input parser. For numerical
+representations, an additional \texttt{unit} argument is required to
+specify the units of the coordinates. However, some coordinate
+representations inherently specify the angular units (e.g.,
+12h53m11.5123s). The goal of the input parser is to determine the
+units and value from the input alone whenever a person could
+unambiguously determine them. In ambiguous cases, the user must
 explicitly specify the unit(s).
 
-Internally, the individual coordinates are store as \texttt{Angle}
+Internally, the individual coordinates are stored as \texttt{Angle}
 objects: a new class in \texttt{astropy.coordinates} for handling
 angular values. \texttt{Angle}'s can be instantiated and used on their
 own and provide a variety of features for parsing and representing
@@ -632,16 +622,11 @@ radians, hours, degrees, or sexagesimal tuples of such values:
 \end{verbatim}
 
 The \texttt{format()} method provides a variety of options for
-controlling string representations of the value. The user may specify
-separating characters (for sexagesimal representation), the output
-unit, and precision:
-
-\begin{verbatim}
->>> a.format(sep=":", precision=8)
-u'118:26:21.24240000'
->>> a.format(unit=u.hour, sep="hms")
-u'7h53m45.41616s'
-\end{verbatim}
+controlling string representations of the value. The method supports
+most commonly used output formats by specifying separating characters
+(for sexagesimal representation), the output unit, and precision of
+the value. Angles also allow setting the bounds so that numerical
+values may be easily transformed from e.g. (-180,180) to (0,360).
 
 \subsection{Tables and Gridded data}
 
