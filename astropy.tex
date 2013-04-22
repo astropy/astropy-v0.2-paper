@@ -598,10 +598,10 @@ A coordinate angle is defined as a numeric value and a unit.
 A design goal of the input parser is to be able to determine the
 angle value and unit from the input alone if a person can
 unambiguously determine them.
-For example, an astronomer seeing the input string ``12h53m11.5123s"
+For example, an astronomer seeing the input string ``12h53m11.5123s''
 would understand the units to be in hours, minutes, and seconds, so this
-value is alone sufficient to pass to the angle initializer. The value "5.43" is
-unambiguous by itself, so in this case the additional \textt{unit} argument is required to
+value is alone sufficient to pass to the angle initializer. The value ``5.43'' is
+unambiguous by itself, so in this case the additional \texttt{unit} argument is required to
 fully define the angle, e.g.
 
 \begin{verbatim}
