@@ -596,9 +596,10 @@ three dimensional distances.
 %%     a. can all be customized
 %%     b. Angle
 
-Creating coordinate objects is done by directly initializing a
-particular coordinate system using standard Python class
-instantiation. Astronomical coordinates may be expressed in a myriad
+Coordinate objects are created using standard
+Python object instantiation via a Python class named 
+after the coordinate system (e.g., \texttt{ICRSCoordinates}). 
+Astronomical coordinates may be expressed in a myriad
 of ways: the classes support string, numeric, and tuple value
 specification through a sophisticated input parser.
 A coordinate angle is defined as a numeric value and a unit.
@@ -608,7 +609,7 @@ unambiguously determine them.
 For example, an astronomer seeing the input string ``12h53m11.5123s''
 would understand the units to be in hours, minutes, and seconds, so this
 value is alone sufficient to pass to the angle initializer. The value ``5.43'' is
-unambiguous by itself, so in this case the additional \texttt{unit} argument is required to
+ambiguous by itself, so in this case the additional \texttt{unit} argument is required to
 fully define the angle, e.g.
 
 \begin{verbatim}
@@ -617,9 +618,9 @@ fully define the angle, e.g.
 >>> a = Angle(12, unit=u.degree)
 \end{verbatim}
 
-The individual coordinates are stored internally as \texttt{Angle}
-objects, a class defined in \texttt{astropy.coordinates} for handling
-angular values. \texttt{Angle} objects can be instantiated and used on their
+The individual coordinates are stored as \texttt{Angle}
+objects, a class defined in \texttt{astropy.coordinates}.
+\texttt{Angle} objects can be instantiated and used on their
 own and provide a variety of functionality for parsing and representing
 angular values. Once created, the object can provide conversions to angular units
 such radians, hours, degrees, or sexagesimal tuples through attributes:
