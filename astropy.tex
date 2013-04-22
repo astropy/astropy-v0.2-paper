@@ -464,30 +464,37 @@ The combination of all of the above ends up being rather powerful:
 %% 1. Introduction/Design goals [APW & ET]
 %%     a. need a class-based representation
 %%     b. should be totally customizable
-%%     c. fast enough for ‚Äúbig data‚Äù (not there yet)
+%%     c. fast enough for ‚"big data"‚ (not there yet)
 
 An essential element of any astronomy workflow 
 is the manipulation, parsing, and conversion of astronomical coordinates.
 This functionality is provided by the \texttt{astropy.coordinates} sub-package.
-The main element of the design philosophy is that the code should
-be easily readable, even by those new to Python. Typical operations should
-appear in code similar to
-how they would appear if expressed in spoken or written language.
-The package is designed to present a natural Python
-interface for representing coordinates in computations, simplify
-input/output formatting, and allow straightforward transformation
-between coordinate systems. It is also supports implementation of new or custom
-coordinate systems that work consistently with the built-in systems.
-A future design goal is to also seamlessly
-support arbitrarily large data sets.
-
-One aim of the package is to provide a common application programming interface (API)
+The aim of the package is to provide a common application programming interface (API)
 for Python astronomy packages that use coordinates, as well as
-relieve users from having to (re)implement what are extremely common utilities.
+relieve users from having to (re)implement extremely common utilities.
 To achieve this, it leverages important lessons learned from existing
 Python coordinates packages such as \texttt{kapteyn}, \texttt{pyast},
 \texttt{pyephem} \citep{pyephem}, and \texttt{astropysics}
 \citep{astropysics} that this package aims to supplant.
+
+The package has been designed to present a natural Python
+interface for representing coordinates in computations, simplify
+input/output formatting, and allow straightforward transformation
+between coordinate systems. 
+It also supports implementation of new or custom
+coordinate systems that work consistently with the built-in systems.
+A future design goal is to also seamlessly
+support arbitrarily large data sets.
+
+The driving interface design philosophy is that the code should
+be easily readable, even by those new to Python. Typical operations should
+appear in code similar to how they would appear if expressed in spoken or 
+written language. Such an interface results in code that is easily readable,
+enabling astronomers to focus more of their effort on their science objectives
+rather than interpreting obscure function or variable names or otherwise 
+spending time trying to understand the interface.
+
+
 
 %% 2. Coordinate systems overview [ET & APW]
 The \texttt{astropy.coordinates} sub-package
