@@ -639,12 +639,25 @@ most commonly used output formats by specifying separating characters
 (for sexagesimal representation), the output unit, and precision of
 the value.
 
-[give examples - this is a cool feature -dm]
+\begin{verbatim}
+>>> a = Angle(86.75309, unit=u.degree)
+>>> a.format()
+'86d45m11.12400s'
+>>> a.format(unit=u.hour, sep=':')
+'5:47:00.74160'
+>>> a.format(unit=u.hour, precision=2)
+'5h47m00.74s'
+\end{verbatim}
 
 Bounds can also be set on angles so that numerical
 values may be easily transformed to a given range, e.g. from (-180,180) to (0,360).
 
-[It's not really clear what you are trying to demonstrate - can you give an example? -dm]
+\begin{verbatim}
+>>> Angle(275.439234, u.degree, bounds=(-180,180))
+<Angle -84.56077 deg>
+>>> Angle(-86.75309, u.degree, bounds=(0,360))
+<Angle 273.24691 deg>
+\end{verbatim}
 
 \subsection{Tables and Gridded data}
 
