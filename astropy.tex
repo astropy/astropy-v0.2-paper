@@ -233,7 +233,7 @@ researchers, complementing more general standard scientific packages such as
 \gls{numpy} and \gls{scipy} ,
 which are invaluable for numerical array-based calculations, and more general
 scientific algorithms (e.g. interpolation, integration, clustering, etc.)
-respectively. To date, over 150 people are signed up to the
+respectively. To date, over 180 people are signed up to the
 \textit{development} mailing list for the Astropy project\footnote{
 \url{https://groups.google.com/forum/?fromgroups\#!forum/astropy-dev}}.
 
@@ -266,8 +266,7 @@ and planned functionality (\S\ref{sec:future}).
 % Authors: Perry, Mike, Adrian, Tom R.
 
 The \texttt{astropy.units} package provides support for physical units. It is
-based on the code in the \texttt{pynbody} package [reference?] written by
-Andrew Pontzen, but has since been enhanced in behavior and implementation.
+based on the code in the \texttt{pynbody} package\footnote{\url{https://code.google.com/p/pynbody/}}, but has been significantly enhanced in behavior and implementation.
 This sub-package can be used to attach units to scalars and arrays, convert
 from one set of units to another, define custom units, defining equivalencies
 for units that are not strictly the same (such as wavelength and frequency),
@@ -329,7 +328,7 @@ and then search for higher-level units that are identical:
 [Unit("Hz"), ...]
 \end{verbatim}
 
-Included is the concept of ``equivalencies'' in units, the is intended to be
+Included is the concept of ``equivalencies'' in units, which is intended to be
 used where there exists an equation that provides a relationship between two
 different physical quantities such that providing either one uniquely defines
 the other. A standard astronomical example is the relationships between the
@@ -357,7 +356,7 @@ easily implement their own equivalencies.
 %flux density conversions.  Also possibly a description of the on-list
 %discussion of the complexities in this topic
 
-It is well known that there are multiple string representations for
+There are multiple string representations for
 units used in the astronomy community.  The FITS Standard
 \cite{fits2008} defines a unit standard, as well as both the Centre de
 Donn\'ees astronomiques de Strasbourg (CDS) \citep{ochsenbein2000cds}
@@ -378,7 +377,7 @@ and from external file formats.
 While the previous section described the use of the units package to
 manipulate the units themselves, a more common use-case is to attach the units
 to quantities, and combine these. The \texttt{astropy.units} package allows
-units to be attached to Python scalars, or Numpy arrays, producing
+units to be attached to Python scalars, or \gls{numpy} arrays, producing
 \texttt{Quantity} objects. These objects support arithmetic with other numbers
 and \texttt{Quantity} objects and preserve their units:
 \begin{verbatim}
@@ -427,7 +426,7 @@ object in some set of base units (the default is SI):
 <Quantity 0.000498873327903 kpc / (Myr2)>
 \end{verbatim}
 
-\texttt{Quantity} objects can also be created with Numpy
+\texttt{Quantity} objects can also be created with \gls{numpy}
 arrays:
 \begin{verbatim}
 >>> x = np.array([1,2,3]) * u.km
@@ -476,22 +475,22 @@ times and dates.  Specific emphasis is placed on supporting time scales
 are used in astronomy.
 
 This package uses Cython\footnote{\url{http://www.cython.org/}} to wrap the C
-language SOFA\citep{SOFA:2010-12-01} time and calendar
+language SOFA\footnote{http://www.iausofa.org/} time and calendar
 routines\footnote{\url{http://www.iausofa.org/2012_0301_C/sofa/sofa_ts_c.pdf}}.
 Leveraging the robust and well-tested
-SOFA\footnote{\url{http://www.iausofa.org}} routines ensures that the
+SOFA routines ensures that the
 fundamental time scale conversions are being computed correctly.  An important
 feature of the SOFA time library is that each time is represented as a pair of
 double-precision values.  This is supported in \texttt{astropy.time} and
 provides the capability to do extremely high precision time computations.  All
-time scale conversions are done by Cython vectorized versions of the SOFA
-routines and are reasonable fast and memory efficient.
+time scale conversions are done by vectorized versions of the SOFA
+routines (using Cython\footnote{http://www.cython.org/}) and are reasonable fast and memory efficient.
 
 The basic way to use \texttt{astropy.time} is to create a \texttt{Time} object
 by supplying one or more input time values as well as the time format and time
 scale of those values.  The input time(s) can either be a single scalar like
 \verb|"2010-01-01 00:00:00"| or \verb|2455348.5| or an array of such values.
-The output value(s) will have the same shape (scalar or array) as the input.
+The output value(s) will have the same shape (scalar or array) as the input:
 
 \begin{verbatim}
 >>> from astropy.time import Time
@@ -505,12 +504,15 @@ The output value(s) will have the same shape (scalar or array) as the input.
 
 The \texttt{format} argument specifies how to interpret the input values, e.g. ISO
 or JD or Unix time.  The \texttt{scale} argument specifies the time scale for the
-values, e.g. UTC or TT or UT1.  The available time scales are listed in the
-table below:
+values, e.g. UTC or TT or UT1.  The available time scales are listed in Table \ref{tab:time_systems}.
 
-\begin{center}
+\begin{table}
+\caption{Supported time systems for \texttt{astropy.time}\label{tab:time_systems}}
+\center
 \begin{tabular}{ll}
+\hline
 Scale  & Description \\
+\hline
 TAI    & International Atomic Time \\
 TCB    & Barycentric Coordinate Time \\
 TCG    & Geocentric Coordinate Time \\
@@ -518,8 +520,9 @@ TDB    & Barycentric Dynamical Time \\
 TT     & Terrestrial Time \\
 UT1    & Universal Time \\
 UTC    & Coordinated Universal Time \\
+\hline
 \end{tabular}
-\end{center}
+\end{table}
 
 Getting the representation of the time in a different format such as Julian
 Date or Year:Day-of-year is straightforward:
@@ -611,7 +614,7 @@ formatting and representation defaults. For some classes, they also
 contain added functionality specific to a subset of systems, such as
 code to precess a coordinate to a new equinox. The implemented
 systems include a variety of equatorial coordinate systems (ICRS, FK4,
-and FK5), Galactic coordinates, and horizontal (alt/az) coordinates.
+and FK5), Galactic coordinates, and horizontal (Alt/Az) coordinates.
 Future versions of Astropy will include additional
 common systems, including ecliptic systems, supergalactic coordinates,
 and all necessary intermediate coordinate systems for the IAU
@@ -771,10 +774,9 @@ values may be easily transformed to a given range, e.g. from (-180,180) to (0,36
 
 \label{sec:table}
 
-Tables and n-dimensional data arrays are the most common forms of data encountered in astronomy. The \gls{python}-community has various solution for tables, such as \gls{numpy}\ \texttt{recarray}, \gls{pandas} \texttt{DataFrame} to name only a few. For the n-dimensional data array python brings their own \texttt{array} class, in addition to the very popular \gls{numpy} \texttt{ndarray}. 
+Tables and n-dimensional data arrays are the most common forms of data encountered in astronomy. The \gls{python}-community has various solution for tables, such as \gls{numpy}\ \texttt{recarray}, pandas\footnote{\url{http://pandas.pydata.org/}} \texttt{DataFrame} to name only a few. For the n-dimensional data array python brings their own \texttt{array} class, in addition to the very popular \gls{numpy} \texttt{ndarray}. 
 
 However, for use in astronomy all of these implementations lack some key features. The data that is stored in arrays and tables does most often contain vital metadata: the data is associated with units, and might also contain additional arrays that either mask or provide additional attributes to each cell. Furthermore, the data often has a parameter/value dataset attached with it. 
-
 Finally, the data comes in a plethora of astronomy specific formats (fits, specially formatted ascii tables, etc. ) which are not recognized by the pre-existing packages. 
 
 The \texttt{astropy.table} and \texttt{astropy.nddata} sub-packages contain
@@ -796,11 +798,11 @@ also allows the \texttt{Table} object to contain arbitrary meta-data (stored
 in \texttt{Table.meta}).
 
 
-The \texttt{NDData} class provides a way to easily store n-dimensional array data and builds upon \gls{numpy} \texttt{ndarray} s. The actual data is stored in just a simple \texttt{ndarray}, which allows for easy compatibility with other scientific packages out there. 
-In addition to parameter/value meta-data (stored in dictionaries??to technical??), the \texttt{NDData} class can store boolean masks,
-a set of flags (n-dimensional arrays that store attributes for each cell of the data array), uncertainties, units, 
-and a transformation between array-index coordinate system and other coordinate systems known as a \gls{wcs}. 
-In addition, the \texttt{NDData} class provides methods to arithmetically combine the data in a meaningful way (this is an item currently under development). 
+The \texttt{NDData} class provides a way to easily store n-dimensional array data and builds upon the \gls{numpy} \texttt{ndarray} class. The actual data is stored in just a \texttt{ndarray}, which allows for easy compatibility with other scientific packages. 
+In addition to parameter/value meta-data, the \texttt{NDData} class can store a boolean mask with the same dimensions as the data,
+several sets of flags (n-dimensional arrays that store attributes for each cell of the data array), uncertainties, units, 
+and a transformation between array-index coordinate system and other coordinate systems (c.f. \S\ref{sec:wcs}). 
+In addition, the \texttt{NDData} class intends to provide methods to arithmetically combine the data in a meaningful way. 
 \texttt{NDData} is not meant for direct user interaction but more for providing a framework for higher-level subclasses like a spectrum class or an astronomical image class. Thus it currently does not have any built-in readers and writers. 
 
 \subsection{File Formats}
@@ -902,6 +904,8 @@ Support for VOTable 1.3 is planned for the future.
 
 \subsection{World Coordinate Systems}
 
+\label{sec:wcs}
+
 % Authors: Mike D.
 
 \texttt{astropy.wcs} contains utilities for managing World Coordinate
@@ -987,7 +991,7 @@ by sub-classing one of the basic cosmology classes.
 
 All of the code in the sub-package is tested against the web-based
 cosmology calculator by \citet{Wright06} and two other widely-used
-calculators\footnote{\url{http://www.kempner.net/cosmic.php},\\ \url{http://www.icosmos.co.uk/index.html}}.
+calculators\footnote{\url{http://www.kempner.net/cosmic.php}}$^,$\footnote{\url{http://www.icosmos.co.uk/index.html}}.
 In cases when these calculators are not precise enough to enable a
 meaningful comparison, the code is tested against calculations
 performed with \textsc{Mathematica}.
@@ -1000,6 +1004,11 @@ performed with \textsc{Mathematica}.
 
 % Authors: Tom R., Erik T., Perry G.
 
+In order to co-ordinate the development of Astropy by over 30 developers worldwide, we have made use of the GitHub\footnote{\url{http://www.github.com}} code collaboration platform. The main repository for Astropy is stored in a \texttt{git}\footnote{\url{http://git-scm.com/}} repository on GitHub, and any non-trivial changes are made via \textit{pull requests}, which are a mechanism for submitting code for review by other developers prior to merging into the main code base. This workflow ensures that only high-quality, and well documented and tested code is included into Astropy. Not all contributions are necessarily accepted - community consensus is needed for incorporating major new functionality in Astropy, and any new feature has to be justified to avoid implementing features that are only useful to a minority of users, but may cause issues in future.
+
+At the time of writing, Astropy includes several thousand tests, which are small units of code that check that functions/methods/classes in Astropy are behaving as expected, both numerically, and from a usability point of view. We make use of \textit{Continuous Integration}, which is the process of running all the tests under various configurations (such as different versions of Python or Numpy, and on different platforms) in order to ensure that the package is held to the highest standard of stability. In particular, any change made via a pull request is subject to extensive testing before being merged into the core repository. For the latter, we make use of Travis\footnote{\url{https://travis-ci.org/}}, while for running more extensive tests across Linux, MacOS X, and Windows, we make use of Jenkins\footnote{\url{http://jenkins-ci.org/}}.
+
+This development workflow has worked very well so far, allowing contributions by many developers, and blurring the line between developers and users. Indeed, users who encounter bugs and who know how to fix them can submit suggested changes. We have also implemented a feature that means that anyone reading the documentation at \url{http://docs.astropy.org} can suggest improvements to the documentation without any prior knowledge of the \texttt{git} versioning system.
 
 \section{Planned functionality}
 
@@ -1007,12 +1016,33 @@ performed with \textsc{Mathematica}.
 
 % Authors: Tom R., Erik T., Perry G.
 
+Development on Astropy is very active, and we are focusing on several areas for the next (0.3) release (some of which have already been implemented in the publicly-available developer version):
+
+\begin{itemize}
+\item Seamlessly integrating the \texttt{Quantity} framework across all sub-packages
+\item Supporting more file formats for reading and writing \texttt{Table} and \texttt{NDData} objects
+\item Implementing a Virtual Observatory cone search tool
+\item Implementing a generalized model-fitting framework
+\end{itemize}
+
+In the longer term, we are already planning the following functionality:
+
+\begin{itemize}
+\item More Virtual Observatory tools
+\item A SAMP server/client (based on the SAMPy\footnote{\url{http://pythonhosted.org/sampy/}} package)
+\item Aperture and PSF photometry tools
+\item Spectroscopic analysis tools
+\end{itemize}
+
+\noindent and undoubtedly the core functionality will grow beyond this.
 
 \section{Summary}
 
 \label{sec:summary}
 
 % Authors: Tom R., Erik T., Perry G.
+
+We have presented the first public release of the Astropy package, a core Python package for Astronomers. In this paper, we have described the main functionality, which ranges from handling of common file formats in Astronomy, data structures, unit conversions, and coordinate systems. We also briefly described our development workflow and plans for the future. We encourage members of the community to join the effort by adopting Astropy for their own projects, reporting any issues, and whenever possible, developing new functionality.
 
 \bibliographystyle{apj_custom}
 \bibliography{apj-jour,references}
