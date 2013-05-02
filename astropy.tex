@@ -546,6 +546,204 @@ automatically determined:
 
 % Authors: Erik T., Adrian, Demitri
 
+%% 1. Introduction/Design goals [APW & ET]
+%%     a. need a class-based representation
+%%     b. should be totally customizable
+%%     c. fast enough for ‚"big data"‚ (not there yet)
+
+An essential element of any astronomy workflow 
+is the manipulation, parsing, and conversion of astronomical coordinates.
+This functionality is provided by the \texttt{astropy.coordinates} sub-package.
+The aim of the package is to provide a common application programming interface (API)
+for Python astronomy packages that use coordinates, as well as
+relieve users from having to (re)implement extremely common utilities.
+To achieve this, it leverages important lessons learned from existing
+Python coordinates packages such as \texttt{kapteyn}, \texttt{pyast},
+\texttt{pyephem} \citep{pyephem}, and \texttt{astropysics}
+\citep{astropysics} that this package aims to supplant.
+
+The package has been designed to present a natural Python
+interface for representing coordinates in computations, simplify
+input/output formatting, and allow straightforward transformation
+between coordinate systems. 
+It also supports implementation of new or custom
+coordinate systems that work consistently with the built-in systems.
+A future design goal is to also seamlessly
+support arbitrarily large data sets.
+
+The driving interface design philosophy is that the code should
+be easily readable, even by those new to Python. Typical operations should
+appear in code similar to how they would appear if expressed in spoken or 
+written language. Such an interface results in code that is easily readable,
+enabling astronomers to focus more of their effort on their science objectives
+rather than interpreting obscure function or variable names or otherwise 
+spending time trying to understand the interface.
+
+
+
+%% 2. Coordinate systems overview [ET & APW]
+The \texttt{astropy.coordinates} sub-package
+is built around a set of classes that represent coordinate systems.
+The abstract class \texttt{SphericalCoordinatesBase} is the superclass
+for all of these systems and contains much of the functionality. The
+individual systems provide customized initializers and appropriate
+formatting and representation defaults. For some classes, they also
+contain added functionality specific to a subset of systems, such as
+code to precess a coordinate to a new equinox. The implemented
+systems include a variety of equatorial coordinate systems (ICRS, FK4,
+and FK5), Galactic coordinates, and horizontal (alt/az) coordinates.
+Future versions of Astropy will include additional
+common systems, including ecliptic systems, supergalactic coordinates,
+and all necessary intermediate coordinate systems for the IAU
+2000/2006 equatorial-to-horizontal mapping \citep[e.g.,][]{soffel03,
+  usnocircular179}.
+
+
+%% 3. Input Parsing / Creating coordinate objects [APW]
+%%     a. can all be customized
+%%     b. Angle
+%% 4. Representations/string outputs [APW]
+
+%% 5. Transformation infrastructure [ET]
+%%     a. can all be customized
+A crucial feature for an astronomical coordinate framework is a methodology for
+transforming between coordinate systems. The \texttt{astropy.coordinates}
+package implements this with a guiding philosophy that it
+should be easy to add new systems with minimal bookkeeping by the
+user. In fact, it is possible for a new contributor or user to add a new
+coordinate system with only a class definition and two transformation
+functions. Coordinate systems added in this manner are ``first-class citizens'' of the
+package, meaning that they have all the capabilities of the systems that are included in the
+package.
+
+This flexibility is achieved in \texttt{astropy.coordinates} through the use
+of a transformation graph.
+All coordinate systems are represented as classes; internally, the
+transformation infrastructure keeps track of a network of coordinate systems
+and the transformations between them.  When a coordinate
+object is to be transformed from one system into another, the package determines the shortest path on
+the transformation graph to the new system and applies the necessary
+sequence of transformations. Thus, implementing a new coordinate system
+only requires implementing one
+pair of transformations to and from a system that is already connected to the
+transformation graph. Once this pair is specified,
+\texttt{astropy.coordinates} can transform from that coordinate
+system to any other in the graph. This greatly simplifies
+implementation and mirrors the way most coordinate systems are
+defined. For example, Galactic coordinates are defined relative to FK4
+coordinates rather than with respect to a set of other common coordinate
+systems \citep{galcoords, reid04}.
+
+The transformation system also provides a variety of helpers to make writing
+new transformations easier.  In particular, it allows transformations to be
+defined either as standard Python functions (for full flexibility) or as
+matrices converting the Cartesian coordinates of one system into those of the
+other. These matrices can be dynamically generated for each object or be a
+single matrix for all transformations between two systems. This allows
+designers of transformation functions to drastically improve performance for
+systems with simple linear relations while still having the full
+customization necessary for more complicated transformations (e.g.,
+transformations fully consistent with general relativity).
+
+Transformations are provided between all coordinate systems built into
+version 0.2 of \texttt{astropy.coordinates} with the exception of conversions from
+celestial to horizontal coordinates. Transforming to horizontal
+coordinates is an important feature for any astronomy package,
+but it requires an observer location, the time of observation,
+and potentially other details such as atmospheric conditions.
+Hence, implementing this transformation has been delayed to a
+future release. The intent for the next major release is to implement the
+transformation architecture endorsed by the IAU 2000/2006 resolutions
+\citep[see e.g.,][]{soffel03, usnocircular179}. This will enable practical
+calculations (such as the visibility of targets over the year) while maintaining
+compliance with modern astronomy standards.
+
+
+%% 6. Third dimension/distance added bits (incl. separations) [ET]
+A final important piece of \texttt{astropy.coordinates} is support for
+line of sight distances. While the term ``celestial coordinates'' can be
+taken to refer to only on-sky angles, in \texttt{astropy.coordinates} a
+coordinate object is conceptually treated as a point in three dimensional space.
+Users have the option of specifying a line of sight distance to the
+object from the origin of the coordinate system (typically the origin is the
+Earth or solar system barycenter). These distances can be given in physical
+units or as redshifts. The \texttt{astropy.coordinates} package will in the
+latter case transparently make use of the cosmological calculations in \texttt{astropy.cosmology} for
+conversion to physical distances.
+The transformation system fully supports distances, preserving
+the orientations of coordinates both for transformations that are purely
+rotations and for those that involve translations.  Finally, when
+line of sight distances are provided, the \texttt{separation3d} method of the
+coordinate objects provides direct and convenient calculations of
+three dimensional distances.
+
+%% 3. Input Parsing / Creating coordinate objects [APW]
+%%     a. can all be customized
+%%     b. Angle
+
+Coordinate objects are created using standard
+Python object instantiation via a Python class named 
+after the coordinate system (e.g., \texttt{ICRSCoordinates}). 
+Astronomical coordinates may be expressed in a myriad
+of ways: the classes support string, numeric, and tuple value
+specification through a sophisticated input parser.
+A coordinate angle is defined as a numeric value and a unit.
+A design goal of the input parser is to be able to determine the
+angle value and unit from the input alone if a person can
+unambiguously determine them.
+For example, an astronomer seeing the input string ``12h53m11.5123s''
+would understand the units to be in hours, minutes, and seconds, so this
+value is alone sufficient to pass to the angle initializer. The value ``5.43'' is
+ambiguous by itself, so in this case the additional \texttt{unit} argument is required to
+fully define the angle, e.g.
+
+\begin{verbatim}
+>>> from astropy.coordinates import Angle
+>>> import astropy.units as u
+>>> a = Angle(12, unit=u.degree)
+\end{verbatim}
+
+The individual coordinates are stored as \texttt{Angle}
+objects, a class defined in \texttt{astropy.coordinates}.
+\texttt{Angle} objects can be instantiated and used on their
+own and provide a variety of functionality for parsing and representing
+angular values. Once created, the object can provide conversions to angular units
+such radians, hours, degrees, or sexagesimal tuples through attributes:
+
+\begin{verbatim}
+>>> from astropy.coordinates import Angle
+>>> a = Angle(118.439234, unit=u.degree)
+>>> a.radians
+2.067154596840014
+>>> a.hms
+(7.0, 53, 45.41616000000232)
+\end{verbatim}
+
+The \texttt{format()} method provides a variety of options for
+controlling string representations of the value. The method supports
+most commonly used output formats by specifying separating characters
+(for sexagesimal representation), the output unit, and precision of
+the value.
+
+\begin{verbatim}
+>>> a = Angle(86.75309, unit=u.degree)
+>>> a.format()
+'86d45m11.12400s'
+>>> a.format(unit=u.hour, sep=':')
+'5:47:00.74160'
+>>> a.format(unit=u.hour, precision=2)
+'5h47m00.74s'
+\end{verbatim}
+
+Bounds can also be set on angles so that numerical
+values may be easily transformed to a given range, e.g. from (-180,180) to (0,360).
+
+\begin{verbatim}
+>>> Angle(275.439234, u.degree, bounds=(-180,180))
+<Angle -84.56077 deg>
+>>> Angle(-86.75309, u.degree, bounds=(0,360))
+<Angle 273.24691 deg>
+\end{verbatim}
 
 \subsection{Tables and Gridded data}
 
@@ -560,7 +758,7 @@ including meta-data (for example units).
 
 The \texttt{Table} class provides a high-level wrapper to Numpy structured
 arrays, which are essentially arrays that have fields (or columns) with
-heterogeneous data types, and any number of rows. Numpy structured arrays are
+heterogeneous data types, and any number of rows. Numpy structured arrays are‚àè
 however difficult to manipulate or modify, so the \texttt{Table} class makes
 it easy for users to create a table from columns, add/remove columns or rows,
 and mask values from the table. In addition, tables can be easily
