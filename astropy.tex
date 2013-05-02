@@ -824,13 +824,56 @@ and writers.
 
 % Authors: Erik B.
 
+\label{sec:fits}
+
+Support for reading and writing FITS files is provided by the
+\texttt{astropy.io.fits} sub-package which, at the time of writing, is a
+direct port of the PyFITS\footnote{\url{http://www.stsci.edu/institute/software_hardware/pyfits}} project \citep{barrett1999pyfits}.
+Users already familiar with PyFITS will feel at home with this API.  For example, to open an existing FITS file and display its primary header:
+
+\begin{verbatim}
+>>> from astropy.io import fits
+>>> hdus = fits.open('sample.fits')
+>>> hdus[0].header
+SIMPLE  =                    T / file c ...
+BITPIX  =                   16 / number ...
+NAXIS   =                    0 / number ...
+EXTEND  =                    T / FITS d ...
+...
+\end{verbatim}
+
+Because the API is exactly the same as that of PyFITS, users may directly
+replace PyFITS with Astropy in existing code by changing import statments
+like \texttt{import pyfits} to \texttt{from astropy.io import fits as pyfits}
+without any additional code changes.
+
+Although PyFITS will continue to be released as a separate product in the near
+term, the long term plan is to discontinue PyFITS releases in favor of Astropy.
+The exact timing of when PyFITS releases will be discontinued is not settled,
+but users of PyFITS should plan to make suitable changes to support the eventual
+transition to Astropy.
+
+Becoming integrated with Astropy as the \texttt{astropy.io.fits} package will
+greatly enhance future development on the existing PyFITS code base in several
+areas.  First and perhaps foremost is integration with Astropy's \texttt{Table}
+interface which is much more flexible and powerful than PyFITS' current
+table interface.
+
+We will also be able to integrate Astropy's unit support in order to attach
+units to FITS table columns as well as header values that specify units in
+their comments in accordance with the FITS standard.  Finally, as the PyWCS
+package has also been integrated into Astropy as \texttt{astropy.wcs}
+(\S\ref{sec:wcs}) tighter association between data from FITS files and their WCS
+will be possible, though the details of how that would look are still under
+development.
+
 
 \subsubsection{ASCII table formats}
 \label{sec:ascii}
 % Authors: Tom A.
 
-The \texttt{astropy.io.ascii} package (formerly the standalone project
-\texttt{asciitable}\footnote{https://asciitable.readthedocs.org}) provides the
+The \texttt{astropy.io.ascii} sub-package (formerly the standalone project
+\texttt{asciitable}\footnote{\url{https://asciitable.readthedocs.org}}) provides the
 ability to read and write tabular data for a wide variety of ASCII-based
 formats.  In addition to generic formats like space-delimited, tab-delimited or
 comma-separated values, \texttt{astropy.io.ascii} provides classes for specialized
