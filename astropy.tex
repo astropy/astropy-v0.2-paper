@@ -3,11 +3,15 @@
 \usepackage{xspace}
 \usepackage{natbib}
 \usepackage{url}
+\usepackage[xindy, toc, hyperfirst=false, nolist, nostyles, sanitize={name=false,description=false,symbol=false}]{glossaries}
 \bibpunct{(}{)}{;}{a}{}{,}
 
 \newcommand{\astropy}{\texttt{astropy}\xspace}
 
 \begin{document}
+
+% Reading the glossary
+\input{glossary.tex}
 
 \titlerunning{Astropy}
 \authorrunning{The Astropy Collaboration}
@@ -224,7 +228,7 @@ to bring together developers across the field of astronomy in order to
 coordinate efforts to develop a common Python library. The aim of this library
 was to cover much of the astronomy-specific functionality needed by
 researchers, complementing more general standard scientific packages such as
-NumPy \citep{oliphant2006guide,van2011numpy} and SciPy \citep{jones2001scipy},
+\gls{numpy} and \gls{scipy} ,
 which are invaluable for numerical array-based calculations, and more general
 scientific algorithms (e.g. interpolation, integration, clustering, etc.)
 respectively. To date, over 130 people are signed up to the
@@ -751,26 +755,37 @@ values may be easily transformed to a given range, e.g. from (-180,180) to (0,36
 
 \label{sec:table}
 
+Tables and n-dimensional data arrays are the most common forms of data encountered in astronomy. The \gls{python}-community has various solution for tables, such as \gls{numpy}\ \texttt{recarray}, \gls{pandas} \texttt{DataFrame} to name only a few. For the n-dimensional data array python brings their own \texttt{array} class, in addition to the very popular \gls{numpy} \texttt{ndarray}. 
+
+However, for use in astronomy all of these implementations lack some key features. The data that is stored in arrays and tables does most often contain vital metadata: the data is associated with units, and might also contain additional arrays that either mask or provide additional attributes to each cell. Furthermore, the data often has a parameter/value dataset attached with it. 
+
+Finally, the data comes in a plethora of astronomy specific formats (fits, specially formatted ascii tables, etc. ) which are not recognized by the pre-existing packages. 
+
 The \texttt{astropy.table} and \texttt{astropy.nddata} sub-packages contain
-classes (\texttt{Table} and \texttt{NDData}) that allow users to represent
+classes (\texttt{Table} and \texttt{NDData})  try to alleviate these problems. They allow users to represent
 astronomical data in the form of tables or n-dimensional gridded datasets,
-including meta-data (for example units).
+including all meta-data.
 
 The \texttt{Table} class provides a high-level wrapper to Numpy structured
 arrays, which are essentially arrays that have fields (or columns) with
 heterogeneous data types, and any number of rows. Numpy structured arrays are∏
 however difficult to manipulate or modify, so the \texttt{Table} class makes
 it easy for users to create a table from columns, add/remove columns or rows,
-and mask values from the table. In addition, tables can be easily
+and mask values from the table. Furthermore, tables can be easily
 read/written from/to common file formats using the \texttt{Table.read} and
-\texttt{Table.write} methods. In addition to providing easy manipulation and
+\texttt{Table.write} methods (a more detailed explanation can be found in Section~\ref{sec:ascii}). In addition to providing easy manipulation and
 input/output of table objects, the \texttt{Table} class allows units to be
 specified for each column using the \texttt{astropy.units} framework, and
 also allows the \texttt{Table} object to contain arbitrary meta-data (stored
 in \texttt{Table.meta}).
 
 
-The \texttt{NDData} class ...
+The \texttt{NDData} class provides a way to easily store n-dimensional array data and builds upon \gls{numpy} \texttt{ndarray} s. The actual data is stored in just a simple \texttt{ndarray}, which allows for easy compatibility with other scientific packages out there. 
+In addition to parameter/value meta-data (stored in dictionaries??to technical??), the \texttt{NDData} class can store boolean masks,
+a set of flags (n-dimensional arrays that store attributes for each cell of the data array), uncertainties, units, 
+and a transformation between array-index coordinate system and other coordinate systems known as a \gls{wcs}. 
+In addition, the \texttt{NDData} class provides methods to arithmetically combine the data in a meaningful way (this is an item currently under development). 
+\texttt{NDData} is not meant for direct user interaction but more for providing a framework for higher-level subclasses like a spectrum class or an astronomical image class. Thus it currently does not have any built-in readers and writers. 
 
 \subsection{File Formats}
 
@@ -781,7 +796,7 @@ The \texttt{NDData} class ...
 
 
 \subsubsection{ASCII table formats}
-
+\label{sec:ascii}
 % Authors: Tom A.
 
 The \texttt{astropy.io.ascii} package (formerly the standalone project
