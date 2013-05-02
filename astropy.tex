@@ -266,13 +266,14 @@ and planned functionality (\S\ref{sec:future}).
 % Authors: Perry, Mike, Adrian, Tom R.
 
 The \texttt{astropy.units} package provides support for physical units. It is
-based on the code in the \texttt{pynbody} package\footnote{\url{https://code.google.com/p/pynbody/}}, but has been significantly enhanced in behavior and implementation.
-This sub-package can be used to attach units to scalars and arrays, convert
-from one set of units to another, define custom units, defining equivalencies
-for units that are not strictly the same (such as wavelength and frequency),
-and decomposing units into base units. In any examples in the following
-sections, we will assume that the \texttt{astropy.units} sub-package has been
-imported with:
+based on the code in the \texttt{pynbody}
+package\footnote{\url{https://code.google.com/p/pynbody/}}, but has been
+significantly enhanced in behavior and implementation. This sub-package can be
+used to attach units to scalars and arrays, convert from one set of units to
+another, define custom units, defining equivalencies for units that are not
+strictly the same (such as wavelength and frequency), and decomposing units
+into base units. In any examples in the following sections, we will assume
+that the \texttt{astropy.units} sub-package has been imported with:
 \begin{verbatim}
 >>> from astropy import units as u
 \end{verbatim}
@@ -484,7 +485,8 @@ feature of the SOFA time library is that each time is represented as a pair of
 double-precision values.  This is supported in \texttt{astropy.time} and
 provides the capability to do extremely high precision time computations.  All
 time scale conversions are done by vectorized versions of the SOFA
-routines (using Cython\footnote{http://www.cython.org/}) and are reasonable fast and memory efficient.
+routines (using Cython\footnote{http://www.cython.org/}) and are reasonable
+fast and memory efficient.
 
 The basic way to use \texttt{astropy.time} is to create a \texttt{Time} object
 by supplying one or more input time values as well as the time format and time
@@ -502,9 +504,10 @@ The output value(s) will have the same shape (scalar or array) as the input:
 
 \end{verbatim}
 
-The \texttt{format} argument specifies how to interpret the input values, e.g. ISO
-or JD or Unix time.  The \texttt{scale} argument specifies the time scale for the
-values, e.g. UTC or TT or UT1.  The available time scales are listed in Table \ref{tab:time_systems}.
+The \texttt{format} argument specifies how to interpret the input values, e.g.
+ISO or JD or Unix time. The \texttt{scale} argument specifies the time scale
+for the values, e.g. UTC or TT or UT1. The available time scales are listed in
+Table~\ref{tab:time_systems}.
 
 \begin{table}
 \caption{Supported time systems for \texttt{astropy.time}\label{tab:time_systems}}
@@ -547,12 +550,12 @@ TT.  This uses the same attribute mechanism as above but now returns a new
 2455348.5007660184
 \end{verbatim}
 
-Note that both the ISO and JD representations of \verb|t_tt| are different than for
-\verb|t| because they are expressed relative to the TT time scale.
+Note that both the ISO and JD representations of \verb|t_tt| are different
+than for \verb|t| because they are expressed relative to the TT time scale.
 
 In addition to representing absolute times, the \verb|Time| class supports
 basic arithmetic to compute the duration between two times or to add or
-subtract a duration from a time.  The example below also shows that when
+subtract a duration from a time. The example below also shows that when
 creating a \verb|Time| object the time format for unambiguous inputs can be
 automatically determined:
 
@@ -574,52 +577,48 @@ automatically determined:
 %%     b. should be totally customizable
 %%     c. fast enough for "big data" (not there yet)
 
-An essential element of any astronomy workflow 
-is the manipulation, parsing, and conversion of astronomical coordinates.
-This functionality is provided by the \texttt{astropy.coordinates} sub-package.
-The aim of the package is to provide a common application programming interface (API)
-for Python astronomy packages that use coordinates, as well as
-relieve users from having to (re)implement extremely common utilities.
-To achieve this, it leverages important lessons learned from existing
-Python coordinates packages such as \texttt{kapteyn}, \texttt{pyast},
-\texttt{pyephem} \citep{pyephem}, and \texttt{astropysics}
-\citep{astropysics} that this package aims to supplant.
+An essential element of any astronomy workflow is the manipulation, parsing,
+and conversion of astronomical coordinates. This functionality is provided by
+the \texttt{astropy.coordinates} sub-package. The aim of the package is to
+provide a common application programming interface (API) for Python astronomy
+packages that use coordinates, as well as relieve users from having to
+(re)implement extremely common utilities. To achieve this, it leverages
+important lessons learned from existing Python coordinates packages such as
+\texttt{kapteyn}, \texttt{pyast}, \texttt{pyephem} \citep{pyephem}, and
+\texttt{astropysics} \citep{astropysics} that this package aims to supplant.
 
-The package has been designed to present a natural Python
-interface for representing coordinates in computations, simplify
-input/output formatting, and allow straightforward transformation
-between coordinate systems. 
-It also supports implementation of new or custom
-coordinate systems that work consistently with the built-in systems.
-A future design goal is to also seamlessly
-support arbitrarily large data sets.
+The package has been designed to present a natural Python interface for
+representing coordinates in computations, simplify input/output formatting,
+and allow straightforward transformation between coordinate systems. It also
+supports implementation of new or custom coordinate systems that work
+consistently with the built-in systems. A future design goal is to also
+seamlessly support arbitrarily large data sets.
 
-The driving interface design philosophy is that the code should
-be easily readable, even by those new to Python. Typical operations should
-appear in code similar to how they would appear if expressed in spoken or 
-written language. Such an interface results in code that is easily readable,
-enabling astronomers to focus more of their effort on their science objectives
-rather than interpreting obscure function or variable names or otherwise 
-spending time trying to understand the interface.
+The driving interface design philosophy is that the code should be easily
+readable, even by those new to Python. Typical operations should appear in
+code similar to how they would appear if expressed in spoken or written
+language. Such an interface results in code that is easily readable, enabling
+astronomers to focus more of their effort on their science objectives rather
+than interpreting obscure function or variable names or otherwise spending
+time trying to understand the interface.
 
 
 
 %% 2. Coordinate systems overview [ET & APW]
-The \texttt{astropy.coordinates} sub-package
-is built around a set of classes that represent coordinate systems.
-The abstract class \texttt{SphericalCoordinatesBase} is the superclass
-for all of these systems and contains much of the functionality. The
-individual systems provide customized initializers and appropriate
-formatting and representation defaults. For some classes, they also
-contain added functionality specific to a subset of systems, such as
-code to precess a coordinate to a new equinox. The implemented
-systems include a variety of equatorial coordinate systems (ICRS, FK4,
-and FK5), Galactic coordinates, and horizontal (Alt/Az) coordinates.
-Future versions of Astropy will include additional
-common systems, including ecliptic systems, supergalactic coordinates,
-and all necessary intermediate coordinate systems for the IAU
-2000/2006 equatorial-to-horizontal mapping \citep[e.g.,][]{soffel03,
-  usnocircular179}.
+
+The \texttt{astropy.coordinates} sub-package is built around a set of classes
+that represent coordinate systems. The abstract class
+\texttt{SphericalCoordinatesBase} is the superclass for all of these systems
+and contains much of the functionality. The individual systems provide
+customized initializers and appropriate formatting and representation
+defaults. For some classes, they also contain added functionality specific to
+a subset of systems, such as code to precess a coordinate to a new equinox.
+The implemented systems include a variety of equatorial coordinate systems
+(ICRS, FK4, and FK5), Galactic coordinates, and horizontal (Alt/Az)
+coordinates. Future versions of Astropy will include additional common
+systems, including ecliptic systems, supergalactic coordinates, and all
+necessary intermediate coordinate systems for the IAU 2000/2006
+equatorial-to-horizontal mapping \citep[e.g.,][]{soffel03, usnocircular179}.
 
 
 %% 3. Input Parsing / Creating coordinate objects [APW]
@@ -629,96 +628,89 @@ and all necessary intermediate coordinate systems for the IAU
 
 %% 5. Transformation infrastructure [ET]
 %%     a. can all be customized
-A crucial feature for an astronomical coordinate framework is a methodology for
-transforming between coordinate systems. The \texttt{astropy.coordinates}
-package implements this with a guiding philosophy that it
-should be easy to add new systems with minimal bookkeeping by the
-user. In fact, it is possible for a new contributor or user to add a new
-coordinate system with only a class definition and two transformation
-functions. Coordinate systems added in this manner are ``first-class citizens'' of the
-package, meaning that they have all the capabilities of the systems that are included in the
-package.
+A crucial feature for an astronomical coordinate framework is a methodology
+for transforming between coordinate systems. The \texttt{astropy.coordinates}
+package implements this with a guiding philosophy that it should be easy to
+add new systems with minimal bookkeeping by the user. In fact, it is possible
+for a new contributor or user to add a new coordinate system with only a class
+definition and two transformation functions. Coordinate systems added in this
+manner are ``first-class citizens'' of the package, meaning that they have all
+the capabilities of the systems that are included in the package.
 
 This flexibility is achieved in \texttt{astropy.coordinates} through the use
-of a transformation graph.
-All coordinate systems are represented as classes; internally, the
-transformation infrastructure keeps track of a network of coordinate systems
-and the transformations between them.  When a coordinate
-object is to be transformed from one system into another, the package determines the shortest path on
-the transformation graph to the new system and applies the necessary
-sequence of transformations. Thus, implementing a new coordinate system
-only requires implementing one
-pair of transformations to and from a system that is already connected to the
-transformation graph. Once this pair is specified,
-\texttt{astropy.coordinates} can transform from that coordinate
-system to any other in the graph. This greatly simplifies
-implementation and mirrors the way most coordinate systems are
-defined. For example, Galactic coordinates are defined relative to FK4
-coordinates rather than with respect to a set of other common coordinate
-systems \citep{galcoords, reid04}.
+of a transformation graph. All coordinate systems are represented as classes;
+internally, the transformation infrastructure keeps track of a network of
+coordinate systems and the transformations between them. When a coordinate
+object is to be transformed from one system into another, the package
+determines the shortest path on the transformation graph to the new system and
+applies the necessary sequence of transformations. Thus, implementing a new
+coordinate system only requires implementing one pair of transformations to
+and from a system that is already connected to the transformation graph. Once
+this pair is specified, \texttt{astropy.coordinates} can transform from that
+coordinate system to any other in the graph. This greatly simplifies
+implementation and mirrors the way most coordinate systems are defined. For
+example, Galactic coordinates are defined relative to FK4 coordinates rather
+than with respect to a set of other common coordinate systems
+\citep{galcoords, reid04}.
 
 The transformation system also provides a variety of helpers to make writing
-new transformations easier.  In particular, it allows transformations to be
+new transformations easier. In particular, it allows transformations to be
 defined either as standard Python functions (for full flexibility) or as
 matrices converting the Cartesian coordinates of one system into those of the
 other. These matrices can be dynamically generated for each object or be a
 single matrix for all transformations between two systems. This allows
 designers of transformation functions to drastically improve performance for
-systems with simple linear relations while still having the full
-customization necessary for more complicated transformations (e.g.,
-transformations fully consistent with general relativity).
+systems with simple linear relations while still having the full customization
+necessary for more complicated transformations (e.g., transformations fully
+consistent with general relativity).
 
-Transformations are provided between all coordinate systems built into
-version 0.2 of \texttt{astropy.coordinates} with the exception of conversions from
-celestial to horizontal coordinates. Transforming to horizontal
-coordinates is an important feature for any astronomy package,
-but it requires an observer location, the time of observation,
-and potentially other details such as atmospheric conditions.
-Hence, implementing this transformation has been delayed to a
-future release. The intent for the next major release is to implement the
-transformation architecture endorsed by the IAU 2000/2006 resolutions
-\citep[see e.g.,][]{soffel03, usnocircular179}. This will enable practical
-calculations (such as the visibility of targets over the year) while maintaining
-compliance with modern astronomy standards.
+Transformations are provided between all coordinate systems built into version
+0.2 of \texttt{astropy.coordinates} with the exception of conversions from
+celestial to horizontal coordinates. Transforming to horizontal coordinates is
+an important feature for any astronomy package, but it requires an observer
+location, the time of observation, and potentially other details such as
+atmospheric conditions. Hence, implementing this transformation has been
+delayed to a future release. The intent for the next major release is to
+implement the transformation architecture endorsed by the IAU 2000/2006
+resolutions \citep[see e.g.,][]{soffel03, usnocircular179}. This will enable
+practical calculations (such as the visibility of targets over the year) while
+maintaining compliance with modern astronomy standards.
 
 
 %% 6. Third dimension/distance added bits (incl. separations) [ET]
-A final important piece of \texttt{astropy.coordinates} is support for
-line of sight distances. While the term ``celestial coordinates'' can be
-taken to refer to only on-sky angles, in \texttt{astropy.coordinates} a
-coordinate object is conceptually treated as a point in three dimensional space.
-Users have the option of specifying a line of sight distance to the
-object from the origin of the coordinate system (typically the origin is the
-Earth or solar system barycenter). These distances can be given in physical
-units or as redshifts. The \texttt{astropy.coordinates} package will in the
-latter case transparently make use of the cosmological calculations in \texttt{astropy.cosmology} for
-conversion to physical distances.
-The transformation system fully supports distances, preserving
-the orientations of coordinates both for transformations that are purely
-rotations and for those that involve translations.  Finally, when
-line of sight distances are provided, the \texttt{separation3d} method of the
-coordinate objects provides direct and convenient calculations of
-three dimensional distances.
+
+A final important piece of \texttt{astropy.coordinates} is support for line of
+sight distances. While the term ``celestial coordinates'' can be taken to
+refer to only on-sky angles, in \texttt{astropy.coordinates} a coordinate
+object is conceptually treated as a point in three dimensional space. Users
+have the option of specifying a line of sight distance to the object from the
+origin of the coordinate system (typically the origin is the Earth or solar
+system barycenter). These distances can be given in physical units or as
+redshifts. The \texttt{astropy.coordinates} package will in the latter case
+transparently make use of the cosmological calculations in
+\texttt{astropy.cosmology} for conversion to physical distances. The
+transformation system fully supports distances, preserving the orientations of
+coordinates both for transformations that are purely rotations and for those
+that involve translations. Finally, when line of sight distances are provided,
+the \texttt{separation3d} method of the coordinate objects provides direct and
+convenient calculations of three dimensional distances.
 
 %% 3. Input Parsing / Creating coordinate objects [APW]
 %%     a. can all be customized
 %%     b. Angle
 
-Coordinate objects are created using standard
-Python object instantiation via a Python class named 
-after the coordinate system (e.g., \texttt{ICRSCoordinates}). 
-Astronomical coordinates may be expressed in a myriad
-of ways: the classes support string, numeric, and tuple value
-specification through a sophisticated input parser.
-A coordinate angle is defined as a numeric value and a unit.
-A design goal of the input parser is to be able to determine the
-angle value and unit from the input alone if a person can
-unambiguously determine them.
-For example, an astronomer seeing the input string ``12h53m11.5123s''
-would understand the units to be in hours, minutes, and seconds, so this
-value is alone sufficient to pass to the angle initializer. The value ``5.43'' is
-ambiguous by itself, so in this case the additional \texttt{unit} argument is required to
-fully define the angle, e.g.
+Coordinate objects are created using standard Python object instantiation via
+a Python class named after the coordinate system (e.g.,
+\texttt{ICRSCoordinates}). Astronomical coordinates may be expressed in a
+myriad of ways: the classes support string, numeric, and tuple value
+specification through a sophisticated input parser. A coordinate angle is
+defined as a numeric value and a unit. A design goal of the input parser is to
+be able to determine the angle value and unit from the input alone if a person
+can unambiguously determine them. For example, an astronomer seeing the input
+string ``12h53m11.5123s'' would understand the units to be in hours, minutes,
+and seconds, so this value is alone sufficient to pass to the angle
+initializer. The value ``5.43'' is ambiguous by itself, so in this case the
+additional \texttt{unit} argument is required to fully define the angle, e.g.
 
 \begin{verbatim}
 >>> from astropy.coordinates import Angle
@@ -726,12 +718,12 @@ fully define the angle, e.g.
 >>> a = Angle(12, unit=u.degree)
 \end{verbatim}
 
-The individual coordinates are stored as \texttt{Angle}
-objects, a class defined in \texttt{astropy.coordinates}.
-\texttt{Angle} objects can be instantiated and used on their
-own and provide a variety of functionality for parsing and representing
-angular values. Once created, the object can provide conversions to angular units
-such radians, hours, degrees, or sexagesimal tuples through attributes:
+The individual coordinates are stored as \texttt{Angle} objects, a class
+defined in \texttt{astropy.coordinates}. \texttt{Angle} objects can be
+instantiated and used on their own and provide a variety of functionality for
+parsing and representing angular values. Once created, the object can provide
+conversions to angular units such radians, hours, degrees, or sexagesimal
+tuples through attributes:
 
 \begin{verbatim}
 >>> from astropy.coordinates import Angle
@@ -742,11 +734,10 @@ such radians, hours, degrees, or sexagesimal tuples through attributes:
 (7.0, 53, 45.41616000000232)
 \end{verbatim}
 
-The \texttt{format()} method provides a variety of options for
-controlling string representations of the value. The method supports
-most commonly used output formats by specifying separating characters
-(for sexagesimal representation), the output unit, and precision of
-the value.
+The \texttt{format()} method provides a variety of options for controlling
+string representations of the value. The method supports most commonly used
+output formats by specifying separating characters (for sexagesimal
+representation), the output unit, and precision of the value.
 
 \begin{verbatim}
 >>> a = Angle(86.75309, unit=u.degree)
@@ -758,8 +749,8 @@ the value.
 '5h47m00.74s'
 \end{verbatim}
 
-Bounds can also be set on angles so that numerical
-values may be easily transformed to a given range, e.g. from (-180,180) to (0,360).
+Bounds can also be set on angles so that numerical values may be easily
+transformed to a given range, e.g. from (-180,180) to (0,360).
 
 \begin{verbatim}
 >>> Angle(275.439234, u.degree, bounds=(-180,180))
@@ -774,36 +765,57 @@ values may be easily transformed to a given range, e.g. from (-180,180) to (0,36
 
 \label{sec:table}
 
-Tables and n-dimensional data arrays are the most common forms of data encountered in astronomy. The \gls{python}-community has various solution for tables, such as \gls{numpy}\ \texttt{recarray}, pandas\footnote{\url{http://pandas.pydata.org/}} \texttt{DataFrame} to name only a few. For the n-dimensional data array python brings their own \texttt{array} class, in addition to the very popular \gls{numpy} \texttt{ndarray}. 
+Tables and n-dimensional data arrays are the most common forms of data
+encountered in astronomy. The \gls{python}-community has various solution for
+tables, such as \gls{numpy}\ \texttt{recarray},
+pandas\footnote{\url{http://pandas.pydata.org/}} \texttt{DataFrame} to name
+only a few. For the n-dimensional data array python brings their own
+\texttt{array} class, in addition to the very popular \gls{numpy}
+\texttt{ndarray}.
 
-However, for use in astronomy all of these implementations lack some key features. The data that is stored in arrays and tables does most often contain vital metadata: the data is associated with units, and might also contain additional arrays that either mask or provide additional attributes to each cell. Furthermore, the data often has a parameter/value dataset attached with it. 
-Finally, the data comes in a plethora of astronomy specific formats (fits, specially formatted ascii tables, etc. ) which are not recognized by the pre-existing packages. 
+However, for use in astronomy all of these implementations lack some key
+features. The data that is stored in arrays and tables does most often contain
+vital metadata: the data is associated with units, and might also contain
+additional arrays that either mask or provide additional attributes to each
+cell. Furthermore, the data often has a parameter/value dataset attached with
+it. Finally, the data comes in a plethora of astronomy specific formats (fits,
+specially formatted ascii tables, etc. ) which are not recognized by the
+pre-existing packages.
 
 The \texttt{astropy.table} and \texttt{astropy.nddata} sub-packages contain
-classes (\texttt{Table} and \texttt{NDData})  try to alleviate these problems. They allow users to represent
-astronomical data in the form of tables or n-dimensional gridded datasets,
-including all meta-data.
+classes (\texttt{Table} and \texttt{NDData}) try to alleviate these problems.
+They allow users to represent astronomical data in the form of tables or
+n-dimensional gridded datasets, including all meta-data.
 
 The \texttt{Table} class provides a high-level wrapper to Numpy structured
 arrays, which are essentially arrays that have fields (or columns) with
 heterogeneous data types, and any number of rows. Numpy structured arrays are
 however difficult to manipulate or modify, so the \texttt{Table} class makes
 it easy for users to create a table from columns, add/remove columns or rows,
-and mask values from the table. Furthermore, tables can be easily
-read/written from/to common file formats using the \texttt{Table.read} and
-\texttt{Table.write} methods (a more detailed explanation can be found in Section~\ref{sec:ascii}). In addition to providing easy manipulation and
+and mask values from the table. Furthermore, tables can be easily read/written
+from/to common file formats using the \texttt{Table.read} and
+\texttt{Table.write} methods (a more detailed explanation can be found in
+Section~\ref{sec:ascii}). In addition to providing easy manipulation and
 input/output of table objects, the \texttt{Table} class allows units to be
-specified for each column using the \texttt{astropy.units} framework, and
-also allows the \texttt{Table} object to contain arbitrary meta-data (stored
-in \texttt{Table.meta}).
+specified for each column using the \texttt{astropy.units} framework, and also
+allows the \texttt{Table} object to contain arbitrary meta-data (stored in
+\texttt{Table.meta}).
 
 
-The \texttt{NDData} class provides a way to easily store n-dimensional array data and builds upon the \gls{numpy} \texttt{ndarray} class. The actual data is stored in just a \texttt{ndarray}, which allows for easy compatibility with other scientific packages. 
-In addition to parameter/value meta-data, the \texttt{NDData} class can store a boolean mask with the same dimensions as the data,
-several sets of flags (n-dimensional arrays that store attributes for each cell of the data array), uncertainties, units, 
-and a transformation between array-index coordinate system and other coordinate systems (c.f. \S\ref{sec:wcs}). 
-In addition, the \texttt{NDData} class intends to provide methods to arithmetically combine the data in a meaningful way. 
-\texttt{NDData} is not meant for direct user interaction but more for providing a framework for higher-level subclasses like a spectrum class or an astronomical image class. Thus it currently does not have any built-in readers and writers. 
+The \texttt{NDData} class provides a way to easily store n-dimensional array
+data and builds upon the \gls{numpy} \texttt{ndarray} class. The actual data
+is stored in just a \texttt{ndarray}, which allows for easy compatibility with
+other scientific packages. In addition to parameter/value meta-data, the
+\texttt{NDData} class can store a boolean mask with the same dimensions as the
+data, several sets of flags (n-dimensional arrays that store attributes for
+each cell of the data array), uncertainties, units, and a transformation
+between array-index coordinate system and other coordinate systems (c.f.
+\S\ref{sec:wcs}). In addition, the \texttt{NDData} class intends to provide
+methods to arithmetically combine the data in a meaningful way.
+\texttt{NDData} is not meant for direct user interaction but more for
+providing a framework for higher-level subclasses like a spectrum class or an
+astronomical image class. Thus it currently does not have any built-in readers
+and writers.
 
 \subsection{File Formats}
 
@@ -1004,11 +1016,40 @@ performed with \textsc{Mathematica}.
 
 % Authors: Tom R., Erik T., Perry G.
 
-In order to co-ordinate the development of Astropy by over 30 developers worldwide, we have made use of the GitHub\footnote{\url{http://www.github.com}} code collaboration platform. The main repository for Astropy is stored in a \texttt{git}\footnote{\url{http://git-scm.com/}} repository on GitHub, and any non-trivial changes are made via \textit{pull requests}, which are a mechanism for submitting code for review by other developers prior to merging into the main code base. This workflow ensures that only high-quality, and well documented and tested code is included into Astropy. Not all contributions are necessarily accepted - community consensus is needed for incorporating major new functionality in Astropy, and any new feature has to be justified to avoid implementing features that are only useful to a minority of users, but may cause issues in future.
+In order to co-ordinate the development of Astropy by over 30 developers
+worldwide, we have made use of the
+GitHub\footnote{\url{http://www.github.com}} code collaboration platform. The
+main repository for Astropy is stored in a
+\texttt{git}\footnote{\url{http://git-scm.com/}} repository on GitHub, and any
+non-trivial changes are made via \textit{pull requests}, which are a mechanism
+for submitting code for review by other developers prior to merging into the
+main code base. This workflow ensures that only high-quality, and well
+documented and tested code is included into Astropy. Not all contributions are
+necessarily accepted - community consensus is needed for incorporating major
+new functionality in Astropy, and any new feature has to be justified to avoid
+implementing features that are only useful to a minority of users, but may
+cause issues in future.
 
-At the time of writing, Astropy includes several thousand tests, which are small units of code that check that functions/methods/classes in Astropy are behaving as expected, both numerically, and from a usability point of view. We make use of \textit{Continuous Integration}, which is the process of running all the tests under various configurations (such as different versions of Python or Numpy, and on different platforms) in order to ensure that the package is held to the highest standard of stability. In particular, any change made via a pull request is subject to extensive testing before being merged into the core repository. For the latter, we make use of Travis\footnote{\url{https://travis-ci.org/}}, while for running more extensive tests across Linux, MacOS X, and Windows, we make use of Jenkins\footnote{\url{http://jenkins-ci.org/}}.
+At the time of writing, Astropy includes several thousand tests, which are
+small units of code that check that functions/methods/classes in Astropy are
+behaving as expected, both numerically, and from a usability point of view. We
+make use of \textit{Continuous Integration}, which is the process of running
+all the tests under various configurations (such as different versions of
+Python or Numpy, and on different platforms) in order to ensure that the
+package is held to the highest standard of stability. In particular, any
+change made via a pull request is subject to extensive testing before being
+merged into the core repository. For the latter, we make use of
+Travis\footnote{\url{https://travis-ci.org/}}, while for running more
+extensive tests across Linux, MacOS X, and Windows, we make use of
+Jenkins\footnote{\url{http://jenkins-ci.org/}}.
 
-This development workflow has worked very well so far, allowing contributions by many developers, and blurring the line between developers and users. Indeed, users who encounter bugs and who know how to fix them can submit suggested changes. We have also implemented a feature that means that anyone reading the documentation at \url{http://docs.astropy.org} can suggest improvements to the documentation without any prior knowledge of the \texttt{git} versioning system.
+This development workflow has worked very well so far, allowing contributions
+by many developers, and blurring the line between developers and users.
+Indeed, users who encounter bugs and who know how to fix them can submit
+suggested changes. We have also implemented a feature that means that anyone
+reading the documentation at \url{http://docs.astropy.org} can suggest
+improvements to the documentation without any prior knowledge of the
+\texttt{git} versioning system.
 
 \section{Planned functionality}
 
@@ -1016,7 +1057,9 @@ This development workflow has worked very well so far, allowing contributions by
 
 % Authors: Tom R., Erik T., Perry G.
 
-Development on Astropy is very active, and we are focusing on several areas for the next (0.3) release (some of which have already been implemented in the publicly-available developer version):
+Development on Astropy is very active, and we are focusing on several areas
+for the next (0.3) release (some of which have already been implemented in the
+publicly-available developer version):
 
 \begin{itemize}
 \item Seamlessly integrating the \texttt{Quantity} framework across all sub-packages
@@ -1042,7 +1085,14 @@ In the longer term, we are already planning the following functionality:
 
 % Authors: Tom R., Erik T., Perry G.
 
-We have presented the first public release of the Astropy package, a core Python package for Astronomers. In this paper, we have described the main functionality, which ranges from handling of common file formats in Astronomy, data structures, unit conversions, and coordinate systems. We also briefly described our development workflow and plans for the future. We encourage members of the community to join the effort by adopting Astropy for their own projects, reporting any issues, and whenever possible, developing new functionality.
+We have presented the first public release of the Astropy package, a core
+Python package for Astronomers. In this paper, we have described the main
+functionality, which ranges from handling of common file formats in Astronomy,
+data structures, unit conversions, and coordinate systems. We also briefly
+described our development workflow and plans for the future. We encourage
+members of the community to join the effort by adopting Astropy for their own
+projects, reporting any issues, and whenever possible, developing new
+functionality.
 
 \bibliographystyle{apj_custom}
 \bibliography{apj-jour,references}
