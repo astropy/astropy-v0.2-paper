@@ -199,7 +199,6 @@ Significant functionality is under active development, such as a model fitting
 framework, VO client and server tools, and aperture and point spread function
 (PSF) photometry tools. Participation in development is open to anyone
 interested in joining the project.
-
 }
 
 \maketitle
@@ -526,6 +525,10 @@ resolutions \citep[see e.g.,][]{soffel03, usnocircular179}. This will enable
 practical calculations (such as the visibility of targets over the year) while
 maintaining compliance with modern astronomy standards.
 
+\begin{figure}
+\caption{Celestial coordinate representation and conversion.\label{code:coords}}
+\fbox{\includegraphics[scale=0.82,clip]{examples/code_coordinates.pdf}}
+\end{figure}
 
 %% 6. Third dimension/distance added bits (incl. separations) [ET]
 
@@ -560,54 +563,49 @@ can unambiguously determine them. For example, an astronomer seeing the input
 string ``12h53m11.5123s'' would understand the units to be in hours, minutes,
 and seconds, so this value is alone sufficient to pass to the angle
 initializer. The value ``5.43'' is ambiguous by itself, so in this case the
-additional \texttt{unit} argument is required to fully define the angle, e.g.
+unit should also be specified.
 
-\begin{verbatim}
->>> from astropy.coordinates import Angle
->>> import astropy.units as u
->>> a = Angle(12, unit=u.degree)
-\end{verbatim}
-
-The individual coordinates are stored as \texttt{Angle} objects, a class
-defined in \texttt{astropy.coordinates}. \texttt{Angle} objects can be
-instantiated and used on their own and provide a variety of functionality for
-parsing and representing angular values. Once created, the object can provide
-conversions to angular units such radians, hours, degrees, or sexagesimal
-tuples through attributes:
-
-\begin{verbatim}
->>> from astropy.coordinates import Angle
->>> a = Angle(118.439234, unit=u.degree)
->>> a.radians
-2.067154596840014
->>> a.hms
-(7.0, 53, 45.41616000000232)
-\end{verbatim}
-
-The \texttt{format()} method provides a variety of options for controlling
-string representations of the value. The method supports most commonly used
-output formats by specifying separating characters (for sexagesimal
-representation), the output unit, and precision of the value.
-
-\begin{verbatim}
->>> a = Angle(86.75309, unit=u.degree)
->>> a.format()
-'86d45m11.12400s'
->>> a.format(unit=u.hour, sep=':')
-'5:47:00.74160'
->>> a.format(unit=u.hour, precision=2)
-'5h47m00.74s'
-\end{verbatim}
-
+In the celestial coordinate classes, the individual coordinates are stored as
+\texttt{Angle} objects. \texttt{Angle} objects can be instantiated and used on
+their own and provide a variety of functionality for parsing and representing
+angular values. Once created, the object can provide conversions to angular
+units such radians, hours, degrees, or sexagesimal tuples through attributes.
 Bounds can also be set on angles so that numerical values may be easily
 transformed to a given range, e.g. from (-180,180) to (0,360).
 
-\begin{verbatim}
->>> Angle(275.439234, u.degree, bounds=(-180,180))
-<Angle -84.56077 deg>
->>> Angle(-86.75309, u.degree, bounds=(0,360))
-<Angle 273.24691 deg>
-\end{verbatim}
+
+%\begin{verbatim}
+%>>> from astropy.coordinates import Angle
+%>>> a = Angle(118.439234, unit=u.degree)
+%>>> a.radians
+%2.067154596840014
+%>>> a.hms
+%(7.0, 53, 45.41616000000232)
+%\end{verbatim}
+
+Finally, \texttt{Angle} objects have a \texttt{format} method that provides a
+variety of options for controlling string representations of the value. The
+method supports most commonly used output formats by specifying separating
+characters (for sexagesimal representation), the output unit, and precision of
+the value.
+
+%\begin{verbatim}
+%>>> a = Angle(86.75309, unit=u.degree)
+%>>> a.format()
+%'86d45m11.12400s'
+%>>> a.format(unit=u.hour, sep=':')
+%'5:47:00.74160'
+%>>> a.format(unit=u.hour, precision=2)
+%'5h47m00.74s'
+%\end{verbatim}
+
+%
+%\begin{verbatim}
+%>>> Angle(275.439234, u.degree, bounds=(-180,180))
+%<Angle -84.56077 deg>
+%>>> Angle(-86.75309, u.degree, bounds=(0,360))
+%<Angle 273.24691 deg>
+%\end{verbatim}
 
 \subsection{Tables and Gridded data}
 
@@ -644,13 +642,11 @@ however difficult to manipulate or modify, so the \texttt{Table} class makes
 it easy for users to create a table from columns, add/remove columns or rows,
 and mask values from the table. Furthermore, tables can be easily read/written
 from/to common file formats using the \texttt{Table.read} and
-\texttt{Table.write} methods (a more detailed explanation can be found in
-Section~\ref{sec:ascii}). In addition to providing easy manipulation and
+\texttt{Table.write} methods. In addition to providing easy manipulation and
 input/output of table objects, the \texttt{Table} class allows units to be
 specified for each column using the \texttt{astropy.units} framework, and also
 allows the \texttt{Table} object to contain arbitrary meta-data (stored in
 \texttt{Table.meta}).
-
 
 The \texttt{NDData} class provides a way to easily store n-dimensional array
 data and builds upon the \gls{numpy} \texttt{ndarray} class. The actual data
@@ -678,22 +674,19 @@ and writers.
 
 Support for reading and writing FITS files is provided by the
 \texttt{astropy.io.fits} sub-package which, at the time of writing, is a
-direct port of the PyFITS\footnote{\url{http://www.stsci.edu/institute/software_hardware/pyfits}} project \citep{barrett1999pyfits}.
-Users already familiar with PyFITS will feel at home with this API.  For example, to open an existing FITS file and display its primary header:
+direct port of the
+PyFITS\footnote{\url{http://www.stsci.edu/institute/software_hardware/pyfits}}
+project \citep{barrett1999pyfits}. Users already familiar with PyFITS will
+feel at home with this API. Figure~\ref{code:fits} shows and example of how to
+open an existing FITS file and display its primary header.
 
-\begin{verbatim}
->>> from astropy.io import fits
->>> hdus = fits.open('sample.fits')
->>> hdus[0].header
-SIMPLE  =                    T / file c ...
-BITPIX  =                   16 / number ...
-NAXIS   =                    0 / number ...
-EXTEND  =                    T / FITS d ...
-...
-\end{verbatim}
+\begin{figure}
+\caption{Simple FITS file reading (TODO: needs expanding).\label{code:fits}}
+\fbox{\includegraphics[scale=0.82,clip]{examples/code_fits.pdf}}
+\end{figure}
 
 Because the API is exactly the same as that of PyFITS, users may directly
-replace PyFITS with Astropy in existing code by changing import statments
+replace PyFITS with Astropy in existing code by changing import statements
 like \texttt{import pyfits} to \texttt{from astropy.io import fits as pyfits}
 without any additional code changes.
 
@@ -733,53 +726,55 @@ IPAC\footnote{\url{http://irsa.ipac.caltech.edu/applications/DDGEN/Doc/ipac_tbl.
 IRAF DAOphot, and LaTeX.  There is also a flexible class for handling
 a wide variety of fixed-width table formats.
 
-As a simple example, suppose the file named \verb|sources.dat| has the following
-table information:
+% TODO: since these examples can be done with the high-level table interface, shall we showcase that instead and include examples of VO and ASCII?
 
-\begin{verbatim}
-obsid redshift  X      Y     object
-3102  0.32      4167  4085   Q1250+568-A
-877   0.22      4378  3892   "Source 82"
-\end{verbatim}
-
-This table can be read with the following:
-
-\begin{verbatim}
->>> from astropy.io import ascii
->>> data = ascii.read("sources.dat")
->>> print data
-obsid redshift  X    Y      object
------ -------- ---- ---- -----------
- 3102     0.32 4167 4085 Q1250+568-A
-  877     0.22 4378 3892   Source 82
-\end{verbatim}
-
-This table can then be written out as a LaTeX table with the following:
-
-\begin{verbatim}
->>> ascii.write(data, 'sources.tex',
-                Writer=ascii.Latex)
->>> cat sources.tex
-\begin{table}
-\begin{tabular}{ccccc}
-obsid & redshift & X & Y & object \\
-3102 & 0.32 & 4167 & 4085 & Q1250+568-A \\
-877 & 0.22 & 4378 & 3892 & Source 82 \\
-\end{tabular}
-\end{table}
-\end{verbatim}
-
-As mentioned in Sec.~\ref{sec:table} there is an alternate way of
-reading and writing tables which is more intuitive in many cases.
-The previous example could be done with the following:
-
-\begin{verbatim}
->>> from astropy.table import Table
->>> data = Table.read('sources.dat',
-                      format='ascii')
->>> data.write('sources.tex', format='ascii',
-               Writer=ascii.Latex)
-\end{verbatim}
+%As a simple example, suppose the file named \verb|sources.dat| has the following
+%table information:
+%
+%\begin{verbatim}
+%obsid redshift  X      Y     object
+%3102  0.32      4167  4085   Q1250+568-A
+%877   0.22      4378  3892   "Source 82"
+%\end{verbatim}
+%
+%This table can be read with the following:
+%
+%\begin{verbatim}
+%>>> from astropy.io import ascii
+%>>> data = ascii.read("sources.dat")
+%>>> print data
+%obsid redshift  X    Y      object
+%----- -------- ---- ---- -----------
+% 3102     0.32 4167 4085 Q1250+568-A
+%  877     0.22 4378 3892   Source 82
+%\end{verbatim}
+%
+%This table can then be written out as a LaTeX table with the following:
+%
+%\begin{verbatim}
+%>>> ascii.write(data, 'sources.tex',
+%                Writer=ascii.Latex)
+%>>> cat sources.tex
+%\begin{table}
+%\begin{tabular}{ccccc}
+%obsid & redshift & X & Y & object \\
+%3102 & 0.32 & 4167 & 4085 & Q1250+568-A \\
+%877 & 0.22 & 4378 & 3892 & Source 82 \\
+%\end{tabular}
+%\end{table}
+%\end{verbatim}
+%
+%As mentioned in Sec.~\ref{sec:table} there is an alternate way of
+%reading and writing tables which is more intuitive in many cases.
+%The previous example could be done with the following:
+%
+%\begin{verbatim}
+%>>> from astropy.table import Table
+%>>> data = Table.read('sources.dat',
+%                      format='ascii')
+%>>> data.write('sources.tex', format='ascii',
+%               Writer=ascii.Latex)
+%\end{verbatim}
 
 \subsubsection{Virtual Observatory tables}
 
@@ -851,6 +846,11 @@ are the angular diameter distance, comoving distance, critical
 density, distance modulus, lookback time, luminosity distance, and
 Hubble parameter as a function of redshift.
 
+\begin{figure}
+\caption{Cosmology utilities.\label{code:cosmology}}
+\fbox{\includegraphics[scale=0.82,clip]{examples/code_cosmology.pdf}}
+\end{figure}
+
 The fundamental model for this sub-package is that any given cosmology
 is represented by a class. An instance of this class has attributes
 giving all the parameters required to uniquely specify the cosmology,
@@ -858,30 +858,14 @@ such as the Hubble parameter, CMB temperature and the baryonic, cold
 dark matter, and dark energy densities at $z=0$. One can then use
 methods of this class to perform calculations using these parameters.
 
-For example, the \texttt{FlatLambdaCDM} class represents a flat
-cosmology with a cosmological constant. To create an object
-representing a flat cosmology \texttt{cosmo} with a Hubble parameter
-$H_{z=0} = 70$~km\,s$^{-1}$\,Mpc and $\Omega_{M,z=0} = 0.3$, one would
-use:
-
-\begin{verbatim}
->>> from astropy.cosmology import FlatLambdaCDM
->>> cosmo = FlatLambdaCDM(H0=70, Om0=0.3)
-\end{verbatim}
-
-\noindent Then the comoving volume (for example) can be calculated at
-redshift $6.5$ using the \texttt{comoving\_volume} method:
-
-\begin{verbatim}
->>> cosmo.comoving_volume(6.5)
-1074707289417.6837
-\end{verbatim}
-
-\noindent Further calculations can be performed using the many methods
-of \texttt{cosmo}, such as \texttt{cosmo.lookback\_time} and
-\texttt{cosmo.comoving\_distance}.  For users who are more comfortable
-using a procedural coding style, these methods are also available as
-functions that take a cosmology class instance as a keyword argument.
+Figure~\ref{code:cosmology} shows an example of how to create an object
+representing a flat cosmology with a Hubble parameter $H_{z=0} =
+70$~km\,s$^{-1}$\,Mpc and $\Omega_{M,z=0} = 0.3$, and how to compute the
+comoving volume (for example) at redshift $6.5$. Further calculations can be
+performed using the many methods of the cosmology object. For users who are
+more comfortable using a procedural coding style, these methods are also
+available as functions that take a cosmology class instance as a keyword
+argument.
 
 The sub-package provides several pre-defined cosmology instances
 corresponding to commonly used cosmological parameter sets. Currently
