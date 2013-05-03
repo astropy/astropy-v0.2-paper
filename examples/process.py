@@ -22,6 +22,7 @@ def process(filename):
     """.format(base=base)
     fout.close()
     subprocess.call(script, shell=True)
+    os.remove('{base}-tmp.tex'.format(base=base))
     os.remove('{base}-tmp-2.tex'.format(base=base))
     os.remove('{base}-tmp-2.log'.format(base=base))
     os.remove('{base}-tmp-2.aux'.format(base=base))
