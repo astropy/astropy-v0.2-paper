@@ -2,6 +2,7 @@
 
 \documentclass[traditabstract]{aa}
 
+\usepackage{graphicx}
 \usepackage{xspace}
 \usepackage{natbib}
 \usepackage{url}
@@ -265,113 +266,63 @@ and planned functionality (\S\ref{sec:future}).
 
 % Authors: Perry, Mike, Adrian, Tom R.
 
-The \texttt{astropy.units} package provides support for physical units. It is
-based on the code in the \texttt{pynbody}
+The \texttt{astropy.units} package provides support for physical units. It
+originates from code in the \texttt{pynbody}
 package\footnote{\url{https://code.google.com/p/pynbody/}}, but has been
 significantly enhanced in behavior and implementation. This sub-package can be
 used to attach units to scalars and arrays, convert from one set of units to
 another, define custom units, defining equivalencies for units that are not
 strictly the same (such as wavelength and frequency), and decomposing units
-into base units. In any examples in the following sections, we will assume
-that the \texttt{astropy.units} sub-package has been imported with:
-\begin{verbatim}
->>> from astropy import units as u
-\end{verbatim}
+into base units. Unit definitions are included in both the International
+System of Units (SI) and the Centimeter-Gram-Second (cgs) systems, as well as
+a number of astronomy- and astrophysics-specific units. An example of the
+functionality covered by the \texttt{astropy.units} sub-package is shown in
+Figure~\ref{code:units}.
+\begin{figure}
+\caption{Unit conversion using the \texttt{astropy.units} sub-package.\label{code:units}}
+\fbox{\includegraphics[scale=0.82,clip]{examples/code_units.pdf}}
+\end{figure}
 
 \subsubsection{Units}
 
 \label{sec:units}
 
 One way to use the \texttt{astropy.units} package is to manipulate units
-without attaching them to values. For example, one can easily determine the
-conversion factor from one set of units to another. The following example will
-determine the conversion factor from parsecs to meters:
-\begin{verbatim}
->>> u.pc.to(u.m)
-3.0856776e+16
-\end{verbatim}
-The user can also define their own units, either as standalone base
-units or by composing other units together.  This is done using simple
-mathematical operators. The following example shows how to define two units of
-speed, and determine the conversion factor from one to the other:
-\begin{verbatim}
->>> cms = u.cm / u.s
->>> mph = u.mile / u.hour
->>> cms.to(mph)
-0.02236936292054402
-\end{verbatim}
+without attaching them to values, for example to determine the conversion
+factor from one set of units to another. Users can also define their own
+units, either as standalone base units or by composing other units together.
+It is also possible to decompose units into their base units, or alternatively
+search for higher-level units that are identical. As an example,
+Figure~\ref{code:units} shows how to determine the conversion factor from pc
+to m and from km/s to pc/Myr, and how to decompose Newtons into base units and
+find higher-level units equivalent to kg\,m$/$s$^2$.
 
-The package knows about certain physical ``concepts'' and is able to
-deduce the purpose of a unit, even if it is user-defined.  Using the
-example of mile-per-hour (\texttt{mph}) from above:
-\begin{verbatim}
->>> mph = u.mile / u.hour
->>> mph.physical_type
-u'speed'
-\end{verbatim}
+This sub-package includes the concept of ``equivalencies'' in units, which is
+intended to be used where there exists an equation that provides a
+relationship between two different physical quantities such that providing
+either one uniquely defines the other. A standard astronomical example is the
+relationships between the frequency, wavelength and energy of a photon - it is
+common practice to treat such units as equivalent even though they are not
+strictly comparable. This unit package supports defining such relationships,
+and it is one of the areas that distinguish itself from most other units
+handling software. For example, wavelength and frequency are not normally
+convertible, but by passing an equivalency list, the conversion is supported
+(see Figure~\ref{code:units}). Equivalencies are also included for flux
+densities, and users can easily implement their own equivalencies.
 
-Unit definitions are included in both the
-International System of Units (SI) and the Centimeter-Gram-Second
-(CGS) systems, as well as a number of astronomy- and
-astrophysics-specific units.  Converting between systems can easily be done:
-\begin{verbatim}
->>> u.Pa.to_system(u.cgs)
-[Unit("1.000000e+01 Ba")]
-\end{verbatim}
-It is also possible to decompose units into their base units:
-\begin{verbatim}
->>> u.Hz.decompose()
-Unit("1 / (s)")
-\end{verbatim}
-and then search for higher-level units that are identical:
-\begin{verbatim}
->>> (u.s ** -1).compose()
-[Unit("Hz"), ...]
-\end{verbatim}
+There are multiple string representations for units used in the astronomy
+community. The FITS Standard \cite{fits2008} defines a unit standard, as well
+as both the Centre de Donn\'ees astronomiques de Strasbourg (CDS)
+\citep{ochsenbein2000cds} and NASA/Goddard's Office of Guest Investigator
+Programs (OGIP) \citep{george1995ogip}. In additional, the International
+Virtual Observatory Alliance (IVOA) has a forthcoming VOUnit standard
+\citep{derriere2012vounit} in an attempt to resolve some of these differences.
+Rather than choose one of these, \texttt{astropy.units} supports all of these
+standards\footnote{OGIP support is forthcoming at the time of this writing.},
+and allows the user to select the appropriate one when reading and writing
+unit string definitions to and from external file formats.
 
-Included is the concept of ``equivalencies'' in units, which is intended to be
-used where there exists an equation that provides a relationship between two
-different physical quantities such that providing either one uniquely defines
-the other. A standard astronomical example is the relationships between the
-frequency, wavelength and energy of a photon. It is common practice to treat
-the units as equivalent even though they aren't strictly comparable. This unit
-package supports defining such relationships, and it is one of the areas that
-distinguish itself from most other units handling software. For example,
-wavelength and frequency are not normally convertible:
-\begin{verbatim}
->>> u.nm.to(u.Hz, [1000, 2000])
-UnitsException: 'nm' (length) and 'Hz'
-(frequency) are not convertible
-\end{verbatim}
-However, by passing an equivalency list (\texttt{u.spectral()}), it
-does:
-\begin{verbatim}
->>> u.nm.to(u.Hz, [1000, 2000],
-            equivalencies=u.spectral())
-array([  2.99792458e+14,   1.49896229e+14])
-\end{verbatim}
-Equivalencies are also included for flux densities, and end users can
-easily implement their own equivalencies.
-
-%TODO: add a description of the original motivation for equivalencies:
-%flux density conversions.  Also possibly a description of the on-list
-%discussion of the complexities in this topic
-
-There are multiple string representations for
-units used in the astronomy community.  The FITS Standard
-\cite{fits2008} defines a unit standard, as well as both the Centre de
-Donn\'ees astronomiques de Strasbourg (CDS) \citep{ochsenbein2000cds}
-and NASA/Goddard's Office of Guest Investigator Programs (OGIP)
-\citep{george1995ogip}.  In additional, the International Virtual
-Observatory Alliance (IVOA) has a forthcoming VOUnit standard
-\citep{derriere2012vounit} in an attempt to resolve some of these
-differences.  Rather than choose one of these, \texttt{astropy.units}
-supports all of these standards\footnote{OGIP support is forthcoming
-  at the time of this writing.}, and allows the user to select the
-appropriate one when reading and writing unit string definitions to
-and from external file formats.
-
-\subsubsection{Quantities}
+\subsubsection{Quantities and Constants}
 
 \label{sec:quantities}
 
@@ -380,91 +331,26 @@ manipulate the units themselves, a more common use-case is to attach the units
 to quantities, and combine these. The \texttt{astropy.units} package allows
 units to be attached to Python scalars, or \gls{numpy} arrays, producing
 \texttt{Quantity} objects. These objects support arithmetic with other numbers
-and \texttt{Quantity} objects and preserve their units:
-\begin{verbatim}
->>> x = 15.1 * u.m / (32.0 * u.s)
->>> x
-<Quantity 0.471875 m / (s)>
->>> x.unit
-Unit("m / (s)")
->>> x.value
-0.471875
-\end{verbatim}
+and \texttt{Quantity} objects and preserve their units. For multiplication and
+division, the resulting object will retain all units used in the expression.
+The final object can then be converted to a specified set of units or
+decomposed, effectively canceling and combining any equivalent units and
+returning a \texttt{Quantity} object in some set of base units (the default is
+SI). This is demonstrated in Figure~\ref{code:units}.
 
-Using the \texttt{.to()} method, \texttt{Quantity} objects can be
+Using the \texttt{.to()} method, \texttt{Quantity} objects can easily be
 converted to different units. The units must either be dimensionally
 equivalent, or users should pass equivalencies through the
-\texttt{equivalencies} argument (c.f. \S\ref{sec:units}):
-\begin{verbatim}
->>> (1.15E13*u.km).to(u.pc)
-<Quantity 0.372689618289 pc>
->>> (130.*u.eV).to(u.Angstrom,
-                   equivalencies=u.spectral())
-<Quantity 95.37245609234003 Angstrom>
-\end{verbatim}
-
-\texttt{Quantity} objects also support arithmetic:
-\begin{verbatim}
->>> 110. * u.cm + 1.5 * u.m
-<Quantity 260.0 cm>
-\end{verbatim}
-
-For multiplication and division, the resulting object will retain all
-units used in the expression. The final object can then be converted
-to a specified set of units or decomposed, effectively canceling
-and combining any equivalent units and returning a \texttt{Quantity}
-object in some set of base units (the default is SI):
-
-\begin{verbatim}
->>> x = 1.4E11*u.km / (0.7*u.Myr) / (4.1E11*u.s)
->>> x
-<Quantity 0.487804878049 km / (Myr s)>
->>> x.decompose()
-<Quantity 1.54579339587e-11 m / (s2)>
->>> x.decompose(bases=u.cgs.bases)
-<Quantity 1.54579339587e-09 cm / (s2)>
->>> x.decompose(bases=[u.kpc, u.Myr])
-<Quantity 0.000498873327903 kpc / (Myr2)>
-\end{verbatim}
-
-\texttt{Quantity} objects can also be created with \gls{numpy}
-arrays:
-\begin{verbatim}
->>> x = np.array([1,2,3]) * u.km
->>> x
-<Quantity [1 2 3] km>
->>> x.unit
-Unit("km")
->>> x.value
-array([1, 2, 3])
-\end{verbatim}
-
-\subsubsection{Constants}
+\texttt{equivalencies} argument (c.f. \S\ref{sec:units}).
 
 \texttt{Quantity} objects (c.f. \S\ref{sec:quantities}) are used to define a
 number of useful astronomical constants included with Astropy, each with an
 associated unit (where applicable) and additional metadata describing their
-provenance and uncertainties.
-\begin{verbatim}
->>> from astropy.constants import si
->>> print si.c
-  Name   = Speed of light in vacuum
-  Value  = 299792458.0
-  Error  = 0.0
-  Units = m / (s)
-  Reference = CODATA 2010
->>> print si.c.to('km/s')
-299792.458 km / (s)
-\end{verbatim}
-And these can be used along with \texttt{Quantity} objects to provide a
-convenient framework for computing any quantity in Astronomy:
-\begin{verbatim}
->>> from astropy.constants import G, M_sun
->>> F = G * (3. * M_sun) *
-        (2. * u.kg) / (1.5 * u.au)**2
->>> F.to(u.N)
-<Quantity 0.01581795428812989 N>
-\end{verbatim}
+provenance and uncertainties. These can be used along with \texttt{Quantity}
+objects to provide a convenient framework for computing any quantity in
+Astronomy. Figure~\ref{code:units} includes a simple example that shows how
+the graviational force between two bodies can be calculated in Newtons using
+physical quantities and user-specified quantities.
 
 \subsection{Time}
 

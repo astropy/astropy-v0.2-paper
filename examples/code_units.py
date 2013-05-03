@@ -3,23 +3,21 @@ Conversion factor from parsecs to meters:
 >>> u.pc.to(u.m)
 3.0856776e+16
 
-Conversion factor from cm/s to miles/hour:
->>> cms = u.cm / u.s
->>> mph = u.mile / u.hour
->>> cms.to(mph)
-0.02236936292054402
+Conversion factor from km/s to pc/yr
+>>> (u.km / u.s).to(u.pc / u.Myr)
+1.0227121650537077
 
-Convert Pascals to the c.g.s system:
->>> u.Pa.to_system(u.cgs)
-[Unit("1.000000e+01 Ba")]
+Convert SI units for density to the c.g.s system:
+>>> (u.kg / u.m**3).to_system(u.cgs)
+[Unit("0.001 g / cm3")]
 
-Decompose Hz into its base S.I. units:
->>> u.Hz.decompose()
-Unit("1 / (s)")
+Decompose Newtons into base SI units:
+>>> u.N.decompose()
+Unit("kg m / s2")
 
-Find higher-level units equivalent to 1/s:
->>> (u.s ** -1).compose()
-[Unit("Hz"), ...]
+Find higher-level units equivalent to kg.m/s^2:
+>>> (u.kg * u.m / u.s ** 2).compose()
+[Unit("N"), Unit("100000 dyn")]
 
 Convert wavelength to frequency:
 >>> u.nm.to(u.GHz, 1000., equivalencies=u.spectral())
@@ -43,7 +41,7 @@ Combine quantities:
 >>> x = 1.4E11*u.km / (0.7*u.Myr) / (4.1E11*u.s)
 <Quantity 0.487804878049 km / (Myr s)>
 
-Convert to S.I. units:
+Convert to SI units:
 >>> x.decompose()
 <Quantity 1.54579339587e-11 m / (s2)>
 
