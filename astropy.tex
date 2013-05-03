@@ -322,7 +322,7 @@ standards\footnote{OGIP support is forthcoming at the time of this writing.},
 and allows the user to select the appropriate one when reading and writing
 unit string definitions to and from external file formats.
 
-\subsubsection{Quantities and Constants}
+\subsubsection{Quantities and Physical Constants}
 
 \label{sec:quantities}
 
@@ -356,44 +356,34 @@ physical quantities and user-specified quantities.
 
 % Authors: Tom A.
 
+\begin{figure}
+\caption{Time representation and conversion using the \texttt{astropy.time} sub-package.\label{code:time}}
+\fbox{\includegraphics[scale=0.82,clip]{examples/code_time.pdf}}
+\end{figure}
+
 The \texttt{astropy.time} package provides functionality for manipulating
 times and dates.  Specific emphasis is placed on supporting time scales
 (e.g. UTC, TAI, UT1) and time representations (e.g. JD, MJD, ISO 8601) that
 are used in astronomy.
 
-This package uses Cython\footnote{\url{http://www.cython.org/}} to wrap the C
-language SOFA\footnote{http://www.iausofa.org/} time and calendar
-routines\footnote{\url{http://www.iausofa.org/2012_0301_C/sofa/sofa_ts_c.pdf}}.
-Leveraging the robust and well-tested
-SOFA routines ensures that the
-fundamental time scale conversions are being computed correctly.  An important
-feature of the SOFA time library is that each time is represented as a pair of
-double-precision values.  This is supported in \texttt{astropy.time} and
-provides the capability to do extremely high precision time computations.  All
-time scale conversions are done by vectorized versions of the SOFA
-routines (using Cython\footnote{http://www.cython.org/}) and are reasonable
-fast and memory efficient.
+This package makes use of the Standards of Fundamental Astronomy (SOFA) time
+and calendar library\footnote{\url{http://www.iausofa.org/}}. Leveraging the
+robust and well-tested SOFA routines ensures that the fundamental time scale
+conversions are being computed correctly. An important feature of the SOFA
+time library is that each time is represented as a pair of double-precision
+values. This is supported in \texttt{astropy.time} and provides the capability
+to do extremely high precision time computations. All time scale conversions
+are done by vectorized versions of the SOFA routines\footnote{using Cython
+(\url{http://www.cython.org/})} and are reasonable fast and memory efficient.
 
 The basic way to use \texttt{astropy.time} is to create a \texttt{Time} object
-by supplying one or more input time values as well as the time format and time
-scale of those values.  The input time(s) can either be a single scalar like
-\verb|"2010-01-01 00:00:00"| or \verb|2455348.5| or an array of such values.
-The output value(s) will have the same shape (scalar or array) as the input:
-
-\begin{verbatim}
->>> from astropy.time import Time
->>> t = Time('2010-06-01 00:00:00',
-             format='iso', scale='utc')
->>> t
-<Time object: scale='utc' format='iso'
-              vals=2010-06-01 00:00:00.000>
-
-\end{verbatim}
-
-The \texttt{format} argument specifies how to interpret the input values, e.g.
-ISO or JD or Unix time. The \texttt{scale} argument specifies the time scale
-for the values, e.g. UTC or TT or UT1. The available time scales are listed in
-Table~\ref{tab:time_systems}.
+by supplying one or more input time values as well as the \textit{time format}
+and \textit{time scale} of those values. The input time(s) can either be a
+single scalar like \verb|"2010-01-01 00:00:00"| or \verb|2455348.5| or a
+sequence of such values; the format specifies how to interpret the input
+values, e.g. ISO or JD or Unix time; and the scale specifies the time standard
+used for the values, e.g. UTC or TT or UT1. The available time scales are
+listed in Table~\ref{tab:time_systems}.
 
 \begin{table}
 \caption{Supported time systems for \texttt{astropy.time}\label{tab:time_systems}}
@@ -413,46 +403,20 @@ UTC    & Coordinated Universal Time \\
 \end{tabular}
 \end{table}
 
-Getting the representation of the time in a different format such as Julian
-Date or Year:Day-of-year is straightforward:
+Getting the representation of a \texttt{Time} object in a different format
+such as Julian Date is straightforward, as is converting to a different time
+scale, for instance from UTC to TT (see Figure \ref{code:time}).
 
-\begin{verbatim}
->>> t.jd
-2455348.5
->>> t.yday
-'2010:152:00:00:00.000'
-\end{verbatim}
-
-One can also convert to a different time scale, for instance from UTC to
-TT.  This uses the same attribute mechanism as above but now returns a new
-\texttt{Time} object:
-
-\begin{verbatim}
->>> t_tt = t.tt
->>> t_tt
-<Time object: scale='tt' format='iso'
-              vals=2010-06-01 00:01:06.184>
->>> t_tt.jd
-2455348.5007660184
-\end{verbatim}
-
-Note that both the ISO and JD representations of \verb|t_tt| are different
-than for \verb|t| because they are expressed relative to the TT time scale.
+%Note that both the ISO and JD representations of \verb|t_tt| are different
+%than for \verb|t| because they are expressed relative to the TT time scale.
 
 In addition to representing absolute times, the \verb|Time| class supports
 basic arithmetic to compute the duration between two times or to add or
-subtract a duration from a time. The example below also shows that when
-creating a \verb|Time| object the time format for unambiguous inputs can be
-automatically determined:
+subtract a duration from a time.
 
-\begin{verbatim}
->>> t2 = Time('2010:153', scale='utc')
->>> dt = t2 - t
->>> dt.sec
-86400.0
->>> dt.jd
-1.0
-\end{verbatim}
+% Example that shows The example below also shows that when creating a
+% \verb|Time| object the time format for unambiguous inputs can be
+% automatically determined.
 
 \subsection{Celestial Coordinates}
 
