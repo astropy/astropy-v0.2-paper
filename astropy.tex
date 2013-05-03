@@ -613,7 +613,7 @@ the value.
 
 \label{sec:table}
 
-\textbf{[TODO: examples of the simple I/O?]}
+\textbf{[TODO: examples of table creation and simple I/O]}\\
 
 Tables and n-dimensional data arrays are the most common forms of data
 encountered in astronomy. The \gls{python}-community has various solution for
@@ -679,10 +679,10 @@ direct port of the
 PyFITS\footnote{\url{http://www.stsci.edu/institute/software_hardware/pyfits}}
 project \citep{barrett1999pyfits}. Users already familiar with PyFITS will
 therefore feel at home with this package. Figure~\ref{code:fits} shows an example of how to
-open an existing FITS file and display its primary header.
+open an existing FITS file, access and modify the header and data, and write a new file back to disk.
 
 \begin{figure}
-\caption{Simple FITS file reading.\label{code:fits}}
+\caption{Accessing data in FITS format.\label{code:fits}}
 \fbox{\includegraphics[scale=0.82,clip]{examples/code_fits.pdf}}
 \end{figure}
 
