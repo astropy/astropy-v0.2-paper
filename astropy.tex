@@ -282,14 +282,8 @@ used to attach units to scalars and arrays, convert from one set of units to
 another, define custom units, define equivalencies for units that are not
 strictly the same (such as wavelength and frequency), and decompose units
 into base units. Unit definitions are included in both the International
-System of Units (SI) and the Centimeter-gram-second (cgs) systems, as well as
-a number of astronomy- and astrophysics-specific units. An example of the
-functionality covered by the \texttt{astropy.units} sub-package is shown in
-Figure~\ref{code:units}.
-\begin{figure}
-\caption{Unit conversion using the \texttt{astropy.units} sub-package.\label{code:units}}
-\fbox{\includegraphics[scale=0.82,clip]{examples/code_units.pdf}}
-\end{figure}
+System of Units (SI) and the Centimeter-gram-second (CGS) systems, as well as
+a number of astronomy- and astrophysics-specific units.
 
 \subsubsection{Units}
 
@@ -300,10 +294,7 @@ without attaching them to values, for example to determine the conversion
 factor from one set of units to another. Users can also define their own
 units, either as standalone base units or by composing other units together.
 It is also possible to decompose units into their base units, or alternatively
-search for higher-level units that are identical. As an example,
-Figure~\ref{code:units} shows how to determine the conversion factor from pc
-to m and from km/s to pc/Myr, and how to decompose Newtons into base units and
-find higher-level units equivalent to kg\,m$/$s$^2$.
+search for higher-level units that are identical.
 
 This sub-package includes the concept of ``equivalencies'' in units, which is
 intended to be used where there exists an equation that provides a
@@ -312,10 +303,10 @@ either one uniquely defines the other. A standard astronomical example is the
 relationships between the frequency, wavelength and energy of a photon - it is
 common practice to treat such units as equivalent even though they are not
 strictly comparable. This sub-package supports defining such relationships,
-and it is one of the areas in which it distinguishes itself from most other units
+and it is one of the areas in which it distinguishes itself from most other unit
 handling software. For example, wavelength and frequency are not normally
 convertible, but by passing an equivalency list, the conversion is supported
-(see Figure~\ref{code:units}). Equivalencies are also included for flux
+(see Figure~\ref{code:quantities}:11). Equivalencies are also included for flux
 densities, and users can easily implement their own equivalencies.
 
 There are multiple string representations for units used in the astronomy
@@ -330,35 +321,47 @@ standards\footnote{OGIP support is forthcoming at the time of this writing.},
 and allows the user to select the appropriate one when reading and writing
 unit string definitions to and from external file formats.
 
+\begin{figure}
+\caption{Quantity conversion using the \texttt{astropy.units} sub-package.\label{code:quantities}}
+\fbox{\includegraphics[scale=0.82,clip]{examples/code_quantities.pdf}}
+\end{figure}
+
 \subsubsection{Quantities and Physical Constants}
 
 \label{sec:quantities}
 
 While the previous section described the use of the units package to
-manipulate the units themselves, a more common use-case is to attach the units
-to quantities, and combine these. The \texttt{astropy.units} package allows
-units to be attached to Python scalars, or \gls{numpy} arrays, producing
-\texttt{Quantity} objects. These objects support arithmetic with other numbers
-and \texttt{Quantity} objects and preserve their units. For multiplication and
-division, the resulting object will retain all units used in the expression.
-The final object can then be converted to a specified set of units or
-decomposed, effectively canceling and combining any equivalent units and
-returning a \texttt{Quantity} object in some set of base units (the default is
-SI). This is demonstrated in Figure~\ref{code:units}.
+manipulate the units themselves, a more common use-case is to attach
+the units to quantities, and combine these. The \texttt{astropy.units}
+package allows units to be attached to Python scalars, or \gls{numpy}
+arrays, producing \texttt{Quantity} objects. These objects support
+arithmetic with other numbers and \texttt{Quantity} objects and
+preserve their units. For multiplication and division, the resulting
+object will retain all units used in the expression.  The final object
+can then be converted to a specified set of units or decomposed,
+effectively canceling and combining any equivalent units and returning
+a \texttt{Quantity} object in some set of base units. This is
+demonstrated in Figure~\ref{code:quantities}:19.
 
 Using the \texttt{.to()} method, \texttt{Quantity} objects can easily be
 converted to different units. The units must either be dimensionally
 equivalent, or users should pass equivalencies through the
 \texttt{equivalencies} argument (c.f. \S\ref{sec:units}).
 
-\texttt{Quantity} objects (c.f. \S\ref{sec:quantities}) are used to define a
-number of useful astronomical constants included with Astropy, each with an
-associated unit (where applicable) and additional metadata describing their
-provenance and uncertainties. These can be used along with \texttt{Quantity}
-objects to provide a convenient framework for computing any quantity in
-Astronomy. Figure~\ref{code:units} includes a simple example that shows how
-the graviational force between two bodies can be calculated in Newtons using
-physical quantities and user-specified quantities.
+\begin{figure}
+\caption{Using the \texttt{astropy.constants} sub-package.\label{code:constants}}
+\fbox{\includegraphics[scale=0.82,clip]{examples/code_constants.pdf}}
+\end{figure}
+
+\texttt{Quantity} objects (c.f. \S\ref{sec:quantities}) are used to
+define a number of useful astronomical constants included with
+Astropy, each with an associated unit (where applicable) and
+additional metadata describing their provenance and
+uncertainties. These can be used along with \texttt{Quantity} objects
+to provide a convenient framework for computing any quantity in
+Astronomy. Figure~\ref{code:constants} includes a simple example that
+shows how the graviational force between two bodies can be calculated
+in Newtons using physical quantities and user-specified quantities.
 
 \subsection{Time}
 
