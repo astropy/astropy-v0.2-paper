@@ -858,25 +858,28 @@ such as the Hubble parameter, CMB temperature and the baryonic, cold
 dark matter, and dark energy densities at $z=0$. One can then use
 methods of this class to perform calculations using these parameters.
 
-Figure~\ref{code:cosmology} shows an example of how to create an object
-representing a flat cosmology with a Hubble parameter $H_{z=0} =
-70$~km\,s$^{-1}$\,Mpc and $\Omega_{M,z=0} = 0.3$, and how to compute the
-comoving volume (for example) at redshift $6.5$. Further calculations can be
-performed using the many methods of the cosmology object. For users who are
-more comfortable using a procedural coding style, these methods are also
-available as functions that take a cosmology class instance as a keyword
-argument.
+Figure~\ref{code:cosmology} shows how \texttt{FlatLambdaCDM} can be
+used to create an object representing a flat cosmology, and how the
+methods of this object can be called to calculate the comoving volume,
+age and transverse at a given redshift. Further calculations can be
+performed using the many methods of the cosmology object as described
+in the Astropy documentation. For users who are more comfortable using
+a procedural coding style, these methods are also available as
+functions that take a cosmology class instance as a keyword argument.
 
 The sub-package provides several pre-defined cosmology instances
 corresponding to commonly used cosmological parameter sets. Currently
 parameters from the WMAP 5-year \citep{Komatsu09}, 7-year
 \citep{Komatsu11} and 9-year results \citep{Hinshaw13} are included
-(\texttt{WMAP5}, \texttt{WMAP7} and \texttt{WMAP9}). There are several
-classes corresponding to non-flat cosmologies, and the most common
-dark energy models are supported: a cosmological constant, constant
-$w$, and $w(a) = w_0 + w_a (1-a)$ (e.g. \citealt{Linder03}, here $a$
-is the scale factor). Any other arbitrary cosmology can be represented
-by sub-classing one of the basic cosmology classes.
+(\texttt{WMAP5}, \texttt{WMAP7} and \texttt{WMAP9}).  There are
+several classes corresponding to non-flat cosmologies, and the most
+common dark energy models are supported: a cosmological constant,
+constant $w$, and $w(a) = w_0 + w_a (1-a)$ (e.g. \citealt{Linder03},
+here $a$ is the scale factor). Figure~\ref{code:cosmology} gives
+examples showing how to use the pre-defined cosmologies, and how to
+define a new cosmology with a time-varying dark energy $w(a)$. Any
+other arbitrary cosmology can be represented by sub-classing one of
+the basic cosmology classes.
 
 All of the code in the sub-package is tested against the web-based
 cosmology calculator by \citet{Wright06} and two other widely-used
