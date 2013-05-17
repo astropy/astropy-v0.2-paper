@@ -6,7 +6,7 @@ import subprocess
 def process(filename):
     base = filename.replace('.py', '')
     script = """
-    pygmentize-2.7 -l pycon -f latex -O style=default -O full -o {base}-tmp.tex  {base}.py
+    pygmentize -l pycon -f latex -O style=default -O full -o {base}-tmp.tex  {base}.py
     """.format(base=base)
     subprocess.call(script, shell=True)
     fout = open('{base}-tmp-2.tex'.format(base=base), 'w')
