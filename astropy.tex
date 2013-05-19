@@ -433,16 +433,12 @@ subtract a duration from a time.
 
 % Authors: Erik T., Adrian, Demitri
 
-%% 1. Introduction/Design goals [APW & ET]
-%%     a. need a class-based representation
-%%     b. should be totally customizable
-%%     c. fast enough for "big data" (not there yet)
-
 An essential element of any astronomy workflow is the manipulation, parsing,
-and conversion of astronomical coordinates. This functionality is provided by
-the \texttt{astropy.coordinates} sub-package. The aim of the package is to
+and conversion of astronomical coordinates. This functionality is provided
+in Astropy by
+the \texttt{astropy.coordinates} sub-package. The aim of this package is to
 provide a common application programming interface (API) for Python astronomy
-packages that use coordinates, as well as relieve users from having to
+packages that use coordinates, and to relieve users from having to
 (re)implement extremely common utilities. To achieve this, it leverages
 important lessons learned from existing Python coordinates packages such as
 \texttt{kapteyn}, \texttt{pyast}, \texttt{pyephem} \citep{pyephem}, and
@@ -455,13 +451,32 @@ supports implementation of new or custom coordinate systems that work
 consistently with the built-in systems. A future design goal is to also
 seamlessly support arbitrarily large data sets.
 
+To that end, Figure \ref{fig:code_coordinates} shows some typical usage
+examples for \texttt{astropy.coordinates}. Coordinate objects are 
+created using standard Python object instantiation via
+a Python class named after the coordinate system (e.g.,
+\texttt{ICRSCoordinates}). Astronomical coordinates may be expressed in a
+myriad of ways: the classes support string, numeric, and tuple value
+specification through a sophisticated input parser. A design goal of the input 
+parser is to be able to determine the angle value and unit from the input 
+alone if a person can unambiguously determine them. For example, an
+astronomer seeing the input string ``12h53m11.5123s'' would understand 
+the units to be in hours, minutes, and seconds, so this value is alone 
+sufficient to pass to the angle initializer. This functionality is build around
+the \texttt{Angle} object, which can be instantiated and used on
+its own. It provides additional functionality like string formatting and
+mechanisms to specify the valid bounds of an angle.
 
-%% 2. Coordinate systems overview [ET & APW]
 
-The \texttt{astropy.coordinates} sub-package is built around a set of classes
-that represent coordinate systems. The abstract class
-\texttt{SphericalCoordinatesBase} is the superclass for all of these systems
-and contains much of the functionality. The individual systems provide
+\begin{figure}
+\caption{Celestial coordinate representation and conversion.\label{code:coords}}
+\fbox{\includegraphics[scale=0.82,clip]{examples/code_coordinates.pdf}}
+\label{fig:code_coordinates}
+\end{figure}
+
+The different coordinate classes represent different coordinate 
+systems, and provide most of the user-facing
+functionality for \texttt{astropy.coordinates}. The systems provide
 customized initializers and appropriate formatting and representation
 defaults. For some classes, they also contain added functionality specific to
 a subset of systems, such as code to precess a coordinate to a new equinox.
@@ -473,21 +488,43 @@ necessary intermediate coordinate systems for the IAU 2000/2006
 equatorial-to-horizontal mapping \citep[e.g.,][]{soffel03, usnocircular179}.
 
 
-%% 3. Input Parsing / Creating coordinate objects [APW]
-%%     a. can all be customized
-%%     b. Angle
-%% 4. Representations/string outputs [APW]
+Another major feature of \texttt{astropy.coordinates} is the methodology
+for transforming between coordinate systems. Figure \ref{fig:code_coordinates} 
+illustrates the most basic use of this functionality to convert from ICRS to 
+Galactic coordinates.
+Transformations are provided between all coordinate systems built into 
+version 0.2 of Astropy, with the exception of conversions from
+celestial to horizontal coordinates. This is planned for the next major
+release, using  the transformation architecture endorsed by the IAU 
+2000/2006 resolutions \citep[see e.g.,][]{soffel03, usnocircular179}. 
 
-%% 5. Transformation infrastructure [ET]
-%%     a. can all be customized
-A crucial feature for an astronomical coordinate framework is a methodology
-for transforming between coordinate systems. The \texttt{astropy.coordinates}
-package implements this with a guiding philosophy that it should be easy to
-add new systems with minimal bookkeeping by the user. In fact, it is possible
+A final significant feature of \texttt{astropy.coordinates} is support for
+line-of-sight distances. While the term ``celestial coordinates'' can be taken
+to refer to only on-sky angles, in \texttt{astropy.coordinates} a coordinate
+object is conceptually treated as a point in three dimensional space. Users
+have the option of specifying a line of sight distance to the object from the
+origin of the coordinate system (typically the origin is the Earth or solar
+system barycenter). These distances can be given in physical units or as
+redshifts. The \texttt{astropy.coordinates} package will in the latter case
+transparently make use of the cosmological calculations in
+\texttt{astropy.cosmology} (c.f. \S\ref{sec:cosmology}) for conversion to 
+physical distances.  Figure \ref{fig:code_coordinates}  illustrates an
+application of this information in the form of computing three-dimensional
+distances between two objects.
+
+
+These features are made more useful by the design philosophy of 
+\texttt{astropy.coordinates} that it should be easy for a user to add 
+new systems with minimal bookkeeping. In fact, it is possible
 for a new contributor or user to add a new coordinate system with only a class
 definition and two transformation functions. Coordinate systems added in this
 manner are ``first-class citizens'' of the package, meaning that they have all
-the capabilities of the systems that are included in the package.
+the capabilities of the systems that are included in the package. An 
+example of such a user-defined system is provided in the 
+documentation\footnote{\url{http://docs.astropy.org/en/v0.2/coordinates/sgr-example.html#complete-code-for-example}},
+illustrating the definition of a coordinate system useful for a specific
+scientific task (Johnston \& Price-Whelan 2013, in prep).
+
 
 This flexibility is achieved in \texttt{astropy.coordinates} through the use
 of a transformation graph. All coordinate systems are represented as classes;
@@ -505,76 +542,8 @@ example, Galactic coordinates are defined relative to FK4 coordinates rather
 than with respect to a set of other common coordinate systems
 \citep{galcoords, reid04}.
 
-The transformation system also provides a variety of helpers to make writing
-new transformations easier. In particular, it allows transformations to be
-defined either as standard Python functions (for full flexibility) or as
-matrices converting the Cartesian coordinates of one system into those of the
-other. These matrices can be dynamically generated for each object or be a
-single matrix for all transformations between two systems. This allows
-designers of transformation functions to drastically improve performance for
-systems with simple linear relations while still having the full customization
-necessary for more complicated transformations (e.g., transformations fully
-consistent with general relativity).
 
-Transformations are provided between all coordinate systems built into version
-0.2 of Astropy, with the exception of conversions from
-celestial to horizontal coordinates. Transforming to horizontal coordinates is
-an important feature for any astronomy package, but it requires an observer
-location, the time of observation, and potentially other details such as
-atmospheric conditions. Hence, implementing this transformation has been
-delayed to a future release. The intent for the next major release is to
-implement the transformation architecture endorsed by the IAU 2000/2006
-resolutions \citep[see e.g.,][]{soffel03, usnocircular179}. This will enable
-practical calculations (such as the visibility of targets over the year) while
-maintaining compliance with modern astronomy standards.
 
-\begin{figure}
-\caption{Celestial coordinate representation and conversion.\label{code:coords}}
-\fbox{\includegraphics[scale=0.82,clip]{examples/code_coordinates.pdf}}
-\end{figure}
-
-%% 6. Third dimension/distance added bits (incl. separations) [ET]
-
-A final important piece of \texttt{astropy.coordinates} is support for line of
-sight distances. While the term ``celestial coordinates'' can be taken to
-refer to only on-sky angles, in \texttt{astropy.coordinates} a coordinate
-object is conceptually treated as a point in three dimensional space. Users
-have the option of specifying a line of sight distance to the object from the
-origin of the coordinate system (typically the origin is the Earth or solar
-system barycenter). These distances can be given in physical units or as
-redshifts. The \texttt{astropy.coordinates} package will in the latter case
-transparently make use of the cosmological calculations in
-\texttt{astropy.cosmology} (c.f. \S\ref{sec:cosmology}) for conversion to physical distances. The
-transformation system fully supports distances, preserving the orientations of
-coordinates both for transformations that are purely rotations and for those
-that involve translations. Finally, when line of sight distances are provided,
-the \texttt{separation3d} method of the coordinate objects provides direct and
-convenient calculations of three dimensional distances.
-
-%% 3. Input Parsing / Creating coordinate objects [APW]
-%%     a. can all be customized
-%%     b. Angle
-
-Coordinate objects are created using standard Python object instantiation via
-a Python class named after the coordinate system (e.g.,
-\texttt{ICRSCoordinates}). Astronomical coordinates may be expressed in a
-myriad of ways: the classes support string, numeric, and tuple value
-specification through a sophisticated input parser. A coordinate angle is
-defined as a numeric value and a unit. A design goal of the input parser is to
-be able to determine the angle value and unit from the input alone if a person
-can unambiguously determine them. For example, an astronomer seeing the input
-string ``12h53m11.5123s'' would understand the units to be in hours, minutes,
-and seconds, so this value is alone sufficient to pass to the angle
-initializer. The value ``5.43'' is ambiguous by itself, so in this case the
-unit should also be specified.
-
-In the celestial coordinate classes, the individual coordinates are stored as
-\texttt{Angle} objects. \texttt{Angle} objects can be instantiated and used on
-their own and provide a variety of functionality for parsing and representing
-angular values. Once created, the object can provide conversions to angular
-units such radians, hours, degrees, or sexagesimal tuples through attributes.
-Bounds can also be set on angles so that numerical values may be easily
-transformed to a given range, e.g. from (-180,180) to (0,360).
 
 
 %\begin{verbatim}
@@ -586,11 +555,6 @@ transformed to a given range, e.g. from (-180,180) to (0,360).
 %(7.0, 53, 45.41616000000232)
 %\end{verbatim}
 
-Finally, \texttt{Angle} objects have a \texttt{format} method that provides a
-variety of options for controlling string representations of the value. The
-method supports most commonly used output formats by specifying separating
-characters (for sexagesimal representation), the output unit, and precision of
-the value.
 
 %\begin{verbatim}
 %>>> a = Angle(86.75309, unit=u.degree)

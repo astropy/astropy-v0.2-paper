@@ -1,6 +1,6 @@
 Parse coordinate string
->>> import astropy.coordinates as coord
->>> c = coord.ICRSCoordinates('00h42m44.3s +41d16m9s')
+>>> import astropy.coordinates as coords
+>>> c = coords.ICRSCoordinates('00h42m44.3s +41d16m9s')
 
 Access the RA/Dec values
 >>> c.ra
@@ -13,15 +13,19 @@ Access the RA/Dec values
 (0.0, 42, 44.299999999999784)
 
 Convert to Galactic coordinates
->>> g = c.transform_to(coord.GalacticCoordinates)
->>> g.l
+>>> c.galactic.l
 <Angle 121.17431 deg>
->>> g.b
+>>> c.galactic.b
 <Angle -21.57280 deg>
+
+Create a separate object in Galactic coordinates
+>>> g = c.transform_to(coords.GalacticCoordinates)
+>>> g.l.format('degree', sep=':', precision=3)
+'121:10:27.499'
 
 Set the distance and view the cartesian coordinates
 >>> from astropy import units as u
->>> c.distance = coord.Distance(770., u.kpc)
+>>> c.distance = coords.Distance(770., u.kpc)
 >>> c.x
 568.7128882165681
 >>> c.y
@@ -29,7 +33,12 @@ Set the distance and view the cartesian coordinates
 >>> c.z
 507.8899092486349
 
-Query the SIMBAD database
->>> m = coord.ICRSCoordinates.from_name("M42")
+Query SIMBAD to get coordinates from object names
+>>> m = coords.ICRSCoordinates.from_name("M32")
 >>> m
-<ICRSCoordinates RA=83.82208 deg, Dec=-5.39111 deg>
+<ICRSCoordinates RA=10.67446 deg, Dec=40.86589 deg>
+
+Two coordinates can be used to get distances
+>>> m.distance = coords.Distance(765., u.kpc)
+>>> m.separation_3d(c)
+<Distance 7.36155 kpc>
