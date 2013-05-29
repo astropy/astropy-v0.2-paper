@@ -1,4 +1,5 @@
 Define a quantity from scalars and units:
+>>> from astropy import units as u
 >>> 15.1 * u.m / u.s
 <Quantity 15.1 m / s>
 
@@ -12,7 +13,7 @@ Make use of the unit equivalencies:
 <Quantity 95.37245609234003 Angstrom>
 
 Combine quantities:
->>> x = 1.4E11*u.km / (0.7*u.Myr) / (4.1E11*u.s)
+>>> x = 1.4e11*u.km / (0.7*u.Myr) / (4.1e11*u.s)
 <Quantity 0.487804878049 km / (Myr s)>
 
 Convert to SI units:

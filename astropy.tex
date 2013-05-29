@@ -356,7 +356,7 @@ equivalent, or users should pass equivalencies through the
 \fbox{\includegraphics[scale=0.82,clip]{examples/code_constants.pdf}}
 \end{figure}
 
-\texttt{Quantity} objects (c.f. \S\ref{sec:quantities}) are used to
+The \texttt{Quantity} objects (c.f. \S\ref{sec:quantities}) are used to
 define a number of useful astronomical constants included with
 Astropy, each with an associated unit (where applicable) and
 additional metadata describing their provenance and
@@ -587,7 +587,12 @@ than with respect to a set of other common coordinate systems
 
 \label{sec:table}
 
-\textbf{[TODO: examples of table creation and simple I/O]}\\
+\begin{figure}
+\center
+\caption{Table input/output and manipulation using the \texttt{astropy.table} sub-package.\label{code:tables}}
+\vspace{0.1in}
+\fbox{\includegraphics[scale=0.82,clip]{examples/code_tables.pdf}}
+\end{figure}
 
 Tables and n-dimensional data arrays are the most common forms of data
 encountered in astronomy. The \gls{python}-community has various solution for
@@ -608,7 +613,8 @@ pre-existing packages.
 The \texttt{astropy.table} and \texttt{astropy.nddata} sub-packages contain
 classes (\texttt{Table} and \texttt{NDData}) that try to alleviate these problems.
 They allow users to represent astronomical data in the form of tables or
-n-dimensional gridded datasets, including all meta-data.
+n-dimensional gridded datasets, including all meta-data. Examples of usage of
+\texttt{astropy.table} are shown in Figure~\ref{code:tables}.
 
 The \texttt{Table} class provides a high-level wrapper to Numpy structured
 arrays, which are essentially arrays that have fields (or columns) with
@@ -944,7 +950,7 @@ In the longer term, we are already planning the following functionality:
 % Authors: Tom R., Erik T., Perry G.
 
 We have presented the first public release of the Astropy package, a core
-Python package for Astronomers. In this paper, we have described the main
+Python package for astronomers. In this paper, we have described the main
 functionality, which ranges from handling of common file formats in Astronomy,
 data structures, unit conversions, and coordinate systems. We also briefly
 described our development workflow and plans for the future. We encourage
