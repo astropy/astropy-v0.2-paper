@@ -26,7 +26,7 @@
 % Additional authors may be added based on non-commit-based contributions to
 % the project.
 
-% Please wrap text to 78 characters.
+% Please wrap text to 79 characters.
 
 % I have indicated authors who have acknowledged authorsip by '%confirmed' next
 % to their name.
@@ -191,8 +191,8 @@ We present the first public version of the open-source and community-developed
 Python package, Astropy. This package aims to provide core astronomy-related
 functionality to the community, including for example support for
 domain-specific file formats such as Flexible Image Transport System (FITS)
-files, Virtual Observatory (VO) tables, and common ASCII table formats, unit and
-physical quantity conversions, physical constants specific to astronomy,
+files, Virtual Observatory (VO) tables, and common ASCII table formats, unit
+and physical quantity conversions, physical constants specific to astronomy,
 celestial coordinate and time transformations, world coordinate system (WCS)
 support, generalized containers for representing gridded as well as tabular
 data, and a framework for cosmological transformations and conversions.
@@ -200,12 +200,12 @@ Significant functionality is under active development, such as a model fitting
 framework, VO client and server tools, and aperture and point spread function
 (PSF) photometry tools. Participation in development is open to anyone
 interested in joining the project.
+
 }
 
 \maketitle
 
 %\tableofcontents
-
 
 \section{Introduction}
 
@@ -218,24 +218,24 @@ packages for astronomy-specific functionality, these efforts have been
 fragmented, and several dozens of packages have been developed across the
 community with little or no coordination, leading to duplication and a lack of
 homogeneity across packages. This in turn has made it difficult for users to
-set themselves up with all the required packages needed in an astronomer's toolkit.
-Since a number of these packages depend on individual or small groups of
-developers, packages are sometimes no longer maintained, or simply become
+set themselves up with all the required packages needed in an astronomer's
+toolkit. Since a number of these packages depend on individual or small groups
+of developers, packages are sometimes no longer maintained, or simply become
 unavailable, which is detrimental to long-term research and research
 reproducibility.
 
-The Astropy project was started\footnote{Following discussions on
-the \texttt{astropy} mailing list at
+The Astropy project was started\footnote{Following discussions on the
+\texttt{astropy} mailing list at
 \url{http://mail.scipy.org/mailman/listinfo/astropy}} in 2011 out of a desire
 to bring together developers across the field of astronomy in order to
 coordinate efforts to develop a common Python library. The aim of this library
 is to cover much of the astronomy-specific functionality needed by
 researchers, complementing more general standard scientific packages such as
-\gls{numpy} and \gls{scipy},
-which are invaluable for numerical array-based calculations and more general
-scientific algorithms (e.g. interpolation, integration, clustering, etc.)
-respectively. To date, over 180 people are signed up to the
-\textit{development} mailing list for the Astropy project\footnote{
+\gls{numpy} and \gls{scipy}, which are invaluable for numerical array-based
+calculations and more general scientific algorithms (e.g. interpolation,
+integration, clustering, etc.) respectively. To date, over 180 people are
+signed up to the \textit{development} mailing list for the Astropy
+project\footnote{
 \url{https://groups.google.com/forum/?fromgroups#!forum/astropy-dev}}.
 
 Most efforts in the Astropy project to date have gone towards developing the
@@ -252,19 +252,18 @@ development and is not robust; or the license is not compatible with Astropy;
 the package includes large files; or the functionality is mature, but too
 domain-specific to be included in a core package.
 
-The driving interface design philosophy behind the core package is that code using Astropy should be easily
-readable, even by those new to Python. Typical operations should appear in
-code similar to how they would appear if expressed in spoken or written
-language. Such an interface results in code that is easily readable, enabling
-astronomers to focus more of their effort on their science objectives rather
-than interpreting obscure function or variable names or otherwise spending
-time trying to understand the interface.
+The driving interface design philosophy behind the core package is that code
+using Astropy should be easily readable, even by those new to Python. Typical
+operations should appear in code similar to how they would appear if expressed
+in spoken or written language. Such an interface results in code that is
+easily readable, enabling astronomers to focus more of their effort on their
+science objectives rather than interpreting obscure function or variable names
+or otherwise spending time trying to understand the interface.
 
 In this paper, we present the first public release (v0.2) of the \astropy
 package. We provide an overview of the current capabilities
 (\S\ref{sec:capabilities}), our development workflow (\S\ref{sec:workflow}),
 and planned functionality (\S\ref{sec:future}).
-
 
 \section{Capabilities}
 
@@ -280,10 +279,10 @@ package\footnote{\url{https://code.google.com/p/pynbody/}}, but has been
 significantly enhanced in behavior and implementation. This sub-package can be
 used to attach units to scalars and arrays, convert from one set of units to
 another, define custom units, define equivalencies for units that are not
-strictly the same (such as wavelength and frequency), and decompose units
-into base units. Unit definitions are included in both the International
-System of Units (SI) and the Centimeter-gram-second (CGS) systems, as well as
-a number of astronomy- and astrophysics-specific units.
+strictly the same (such as wavelength and frequency), and decompose units into
+base units. Unit definitions are included in both the International System of
+Units (SI) and the Centimeter-gram-second (CGS) systems, as well as a number
+of astronomy- and astrophysics-specific units.
 
 \subsubsection{Units}
 
@@ -309,8 +308,8 @@ either one uniquely defines the other. A standard astronomical example is the
 relationships between the frequency, wavelength and energy of a photon - it is
 common practice to treat such units as equivalent even though they are not
 strictly comparable. This sub-package supports defining such relationships,
-and it is one of the areas in which it distinguishes itself from most other unit
-handling software. For example, wavelength and frequency are not normally
+and it is one of the areas in which it distinguishes itself from most other
+unit handling software. For example, wavelength and frequency are not normally
 convertible, but by passing an equivalency list, the conversion is supported
 (see Figure~\ref{code:quantities}). Equivalencies are also included for flux
 densities, and users can easily implement their own equivalencies.
@@ -332,16 +331,15 @@ unit string definitions to and from external file formats.
 \label{sec:quantities}
 
 While the previous section described the use of the units package to
-manipulate the units themselves, a more common use-case is to attach
-the units to quantities, and combine these. The \texttt{astropy.units}
-package allows units to be attached to Python scalars, or \gls{numpy}
-arrays, producing \texttt{Quantity} objects. These objects support
-arithmetic with other numbers and \texttt{Quantity} objects and
-preserve their units. For multiplication and division, the resulting
-object will retain all units used in the expression.  The final object
-can then be converted to a specified set of units or decomposed,
-effectively canceling and combining any equivalent units and returning
-a \texttt{Quantity} object in some set of base units. This is
+manipulate the units themselves, a more common use-case is to attach the units
+to quantities, and combine these. The \texttt{astropy.units} package allows
+units to be attached to Python scalars, or \gls{numpy} arrays, producing
+\texttt{Quantity} objects. These objects support arithmetic with other numbers
+and \texttt{Quantity} objects and preserve their units. For multiplication and
+division, the resulting object will retain all units used in the expression.
+The final object can then be converted to a specified set of units or
+decomposed, effectively canceling and combining any equivalent units and
+returning a \texttt{Quantity} object in some set of base units. This is
 demonstrated in Figure~\ref{code:quantities}.
 
 Using the \texttt{.to()} method, \texttt{Quantity} objects can easily be
@@ -356,23 +354,22 @@ equivalent, or users should pass equivalencies through the
 \fbox{\includegraphics[scale=0.82,clip]{examples/code_constants.pdf}}
 \end{figure}
 
-The \texttt{Quantity} objects (c.f. \S\ref{sec:quantities}) are used to
-define a number of useful astronomical constants included with
-Astropy, each with an associated unit (where applicable) and
-additional metadata describing their provenance and
-uncertainties. These can be used along with \texttt{Quantity} objects
-to provide a convenient framework for computing any quantity in
-astronomy. Figure~\ref{code:constants} includes a simple example that
-shows how the graviational force between two bodies can be calculated
-in Newtons using physical quantities and user-specified quantities.
+The \texttt{Quantity} objects (c.f. \S\ref{sec:quantities}) are used to define
+a number of useful astronomical constants included with Astropy, each with an
+associated unit (where applicable) and additional metadata describing their
+provenance and uncertainties. These can be used along with \texttt{Quantity}
+objects to provide a convenient framework for computing any quantity in
+astronomy. Figure~\ref{code:constants} includes a simple example that shows
+how the graviational force between two bodies can be calculated in Newtons
+using physical quantities and user-specified quantities.
 
 \subsection{Time}
 
 % Authors: Tom A.
 
 The \texttt{astropy.time} package provides functionality for manipulating
-times and dates.  Specific emphasis is placed on supporting time scales
-(e.g. UTC, TAI, UT1) and time formats/representations (e.g. JD, MJD, ISO 8601) that
+times and dates. Specific emphasis is placed on supporting time scales (e.g.
+UTC, TAI, UT1) and time formats/representations (e.g. JD, MJD, ISO 8601) that
 are used in astronomy.
 
 This package makes use of the Standards of Fundamental Astronomy (SOFA) time
@@ -385,14 +382,14 @@ to do extremely high precision time computations. All time scale conversions
 are done by vectorized versions of the SOFA routines\footnote{using Cython
 (\url{http://www.cython.org/})} and are reasonable fast and memory efficient.
 
-The most common way to use \texttt{astropy.time} is to create a \texttt{Time} object
-by supplying one or more input time values as well as the time format/representation
-and time scale of those values. The input time(s) can either be a
-single scalar like \verb|"2010-01-01 00:00:00"| or \verb|2455348.5| or a
-sequence of such values; the format/representation specifies how to interpret the input
-values, e.g. ISO or JD or Unix time; and the scale specifies the time standard
-used for the values, e.g. UTC or TT or UT1. The available time scales are
-listed in Table~\ref{tab:time_systems}.
+The most common way to use \texttt{astropy.time} is to create a \texttt{Time}
+object by supplying one or more input time values as well as the time
+format/representation and time scale of those values. The input time(s) can
+either be a single scalar like \verb|"2010-01-01 00:00:00"| or
+\verb|2455348.5| or a sequence of such values; the format/representation
+specifies how to interpret the input values, e.g. ISO or JD or Unix time; and
+the scale specifies the time standard used for the values, e.g. UTC or TT or
+UT1. The available time scales are listed in Table~\ref{tab:time_systems}.
 
 \begin{table}
 \caption{Supported time systems for \texttt{astropy.time}\label{tab:time_systems}}
@@ -419,9 +416,9 @@ scale, for instance from UTC to TT (see Figure \ref{code:time}).
 %Note that both the ISO and JD representations of \verb|t_tt| are different
 %than for \verb|t| because they are expressed relative to the TT time scale.
 
-Finally, in addition to representing absolute times, the \verb|Time| class supports
-basic arithmetic to compute the duration between two times or to add or
-subtract a duration from a time.
+Finally, in addition to representing absolute times, the \verb|Time| class
+supports basic arithmetic to compute the duration between two times or to add
+or subtract a duration from a time.
 
 % Example that shows The example below also shows that when creating a
 % \verb|Time| object the time format for unambiguous inputs can be
@@ -439,15 +436,15 @@ subtract a duration from a time.
 % Authors: Erik T., Adrian, Demitri
 
 An essential element of any astronomy workflow is the manipulation, parsing,
-and conversion of astronomical coordinates. This functionality is provided
-in Astropy by
-the \texttt{astropy.coordinates} sub-package. The aim of this package is to
-provide a common application programming interface (API) for Python astronomy
-packages that use coordinates, and to relieve users from having to
-(re)implement extremely common utilities. To achieve this, it leverages
-important lessons learned from existing Python coordinates packages such as
-\texttt{kapteyn}, \texttt{pyast}, \texttt{pyephem} \citep{pyephem}, and
-\texttt{astropysics} \citep{astropysics} that this package aims to supplant.
+and conversion of astronomical coordinates. This functionality is provided in
+Astropy by the \texttt{astropy.coordinates} sub-package. The aim of this
+package is to provide a common application programming interface (API) for
+Python astronomy packages that use coordinates, and to relieve users from
+having to (re)implement extremely common utilities. To achieve this, it
+leverages important lessons learned from existing Python coordinates packages
+such as \texttt{kapteyn}, \texttt{pyast}, \texttt{pyephem} \citep{pyephem},
+and \texttt{astropysics} \citep{astropysics} that this package aims to
+supplant.
 
 The package has been designed to present a natural Python interface for
 representing coordinates in computations, simplify input/output formatting,
@@ -457,21 +454,19 @@ consistently with the built-in systems. A future design goal is to also
 seamlessly support arbitrarily large data sets.
 
 To that end, Figure \ref{fig:code_coordinates} shows some typical usage
-examples for \texttt{astropy.coordinates}. Coordinate objects are 
-created using standard Python object instantiation via
-a Python class named after the coordinate system (e.g.,
-\texttt{ICRSCoordinates}). Astronomical coordinates may be expressed in a
-myriad of ways: the classes support string, numeric, and tuple value
-specification through a sophisticated input parser. A design goal of the input 
-parser is to be able to determine the angle value and unit from the input 
-alone if a person can unambiguously determine them. For example, an
-astronomer seeing the input string ``12h53m11.5123s'' would understand 
-the units to be in hours, minutes, and seconds, so this value is alone 
-sufficient to pass to the angle initializer. This functionality is build around
-the \texttt{Angle} object, which can be instantiated and used on
-its own. It provides additional functionality like string formatting and
-mechanisms to specify the valid bounds of an angle.
-
+examples for \texttt{astropy.coordinates}. Coordinate objects are created
+using standard Python object instantiation via a Python class named after the
+coordinate system (e.g., \texttt{ICRSCoordinates}). Astronomical coordinates
+may be expressed in a myriad of ways: the classes support string, numeric, and
+tuple value specification through a sophisticated input parser. A design goal
+of the input parser is to be able to determine the angle value and unit from
+the input alone if a person can unambiguously determine them. For example, an
+astronomer seeing the input string ``12h53m11.5123s'' would understand the
+units to be in hours, minutes, and seconds, so this value is alone sufficient
+to pass to the angle initializer. This functionality is build around the
+\texttt{Angle} object, which can be instantiated and used on its own. It
+provides additional functionality like string formatting and mechanisms to
+specify the valid bounds of an angle.
 
 \begin{figure}
 \center
@@ -481,29 +476,27 @@ mechanisms to specify the valid bounds of an angle.
 \label{fig:code_coordinates}
 \end{figure}
 
-The different coordinate classes represent different coordinate 
-systems, and provide most of the user-facing
-functionality for \texttt{astropy.coordinates}. The systems provide
-customized initializers and appropriate formatting and representation
-defaults. For some classes, they also contain added functionality specific to
-a subset of systems, such as code to precess a coordinate to a new equinox.
-The implemented systems include a variety of equatorial coordinate systems
-(ICRS, FK4, and FK5), Galactic coordinates, and horizontal (Alt/Az)
-coordinates. Future versions of Astropy will include additional common
-systems, including ecliptic systems, supergalactic coordinates, and all
-necessary intermediate coordinate systems for the IAU 2000/2006
-equatorial-to-horizontal mapping \citep[e.g.,][]{soffel03, usnocircular179}.
+The different coordinate classes represent different coordinate systems, and
+provide most of the user-facing functionality for
+\texttt{astropy.coordinates}. The systems provide customized initializers and
+appropriate formatting and representation defaults. For some classes, they
+also contain added functionality specific to a subset of systems, such as code
+to precess a coordinate to a new equinox. The implemented systems include a
+variety of equatorial coordinate systems (ICRS, FK4, and FK5), Galactic
+coordinates, and horizontal (Alt/Az) coordinates. Future versions of Astropy
+will include additional common systems, including ecliptic systems,
+supergalactic coordinates, and all necessary intermediate coordinate systems
+for the IAU 2000/2006 equatorial-to-horizontal mapping
+\citep[e.g.,][]{soffel03, usnocircular179}.
 
-
-Another major feature of \texttt{astropy.coordinates} is the methodology
-for transforming between coordinate systems. Figure \ref{fig:code_coordinates} 
-illustrates the most basic use of this functionality to convert from ICRS to 
-Galactic coordinates.
-Transformations are provided between all coordinate systems built into 
-version 0.2 of Astropy, with the exception of conversions from
-celestial to horizontal coordinates. This is planned for the next major
-release, using  the transformation architecture endorsed by the IAU 
-2000/2006 resolutions \citep[see e.g.,][]{soffel03, usnocircular179}. 
+Another major feature of \texttt{astropy.coordinates} is the methodology for
+transforming between coordinate systems. Figure \ref{fig:code_coordinates}
+illustrates the most basic use of this functionality to convert from ICRS to
+Galactic coordinates. Transformations are provided between all coordinate
+systems built into version 0.2 of Astropy, with the exception of conversions
+from celestial to horizontal coordinates. This is planned for the next major
+release, using the transformation architecture endorsed by the IAU 2000/2006
+resolutions \citep[see e.g.,][]{soffel03, usnocircular179}.
 
 A final significant feature of \texttt{astropy.coordinates} is support for
 line-of-sight distances. While the term ``celestial coordinates'' can be taken
@@ -514,24 +507,22 @@ origin of the coordinate system (typically the origin is the Earth or solar
 system barycenter). These distances can be given in physical units or as
 redshifts. The \texttt{astropy.coordinates} package will in the latter case
 transparently make use of the cosmological calculations in
-\texttt{astropy.cosmology} (c.f. \S\ref{sec:cosmology}) for conversion to 
-physical distances.  Figure \ref{fig:code_coordinates}  illustrates an
+\texttt{astropy.cosmology} (c.f. \S\ref{sec:cosmology}) for conversion to
+physical distances. Figure \ref{fig:code_coordinates} illustrates an
 application of this information in the form of computing three-dimensional
 distances between two objects.
 
-
-These features are made more useful by the design philosophy of 
-\texttt{astropy.coordinates} that it should be easy for a user to add 
-new systems with minimal bookkeeping. In fact, it is possible
-for a new contributor or user to add a new coordinate system with only a class
+These features are made more useful by the design philosophy of
+\texttt{astropy.coordinates} that it should be easy for a user to add new
+systems with minimal bookkeeping. In fact, it is possible for a new
+contributor or user to add a new coordinate system with only a class
 definition and two transformation functions. Coordinate systems added in this
 manner are ``first-class citizens'' of the package, meaning that they have all
-the capabilities of the systems that are included in the package. An 
-example of such a user-defined system is provided in the 
+the capabilities of the systems that are included in the package. An example
+of such a user-defined system is provided in the
 documentation\footnote{\url{http://docs.astropy.org/en/v0.2/coordinates/sgr-example.html#complete-code-for-example}},
 illustrating the definition of a coordinate system useful for a specific
 scientific task (Johnston \& Price-Whelan 2013, in prep).
-
 
 This flexibility is achieved in \texttt{astropy.coordinates} through the use
 of a transformation graph. All coordinate systems are represented as classes;
@@ -549,38 +540,6 @@ example, Galactic coordinates are defined relative to FK4 coordinates rather
 than with respect to a set of other common coordinate systems
 \citep{galcoords, reid04}.
 
-
-
-
-
-%\begin{verbatim}
-%>>> from astropy.coordinates import Angle
-%>>> a = Angle(118.439234, unit=u.degree)
-%>>> a.radians
-%2.067154596840014
-%>>> a.hms
-%(7.0, 53, 45.41616000000232)
-%\end{verbatim}
-
-
-%\begin{verbatim}
-%>>> a = Angle(86.75309, unit=u.degree)
-%>>> a.format()
-%'86d45m11.12400s'
-%>>> a.format(unit=u.hour, sep=':')
-%'5:47:00.74160'
-%>>> a.format(unit=u.hour, precision=2)
-%'5h47m00.74s'
-%\end{verbatim}
-
-%
-%\begin{verbatim}
-%>>> Angle(275.439234, u.degree, bounds=(-180,180))
-%<Angle -84.56077 deg>
-%>>> Angle(-86.75309, u.degree, bounds=(0,360))
-%<Angle 273.24691 deg>
-%\end{verbatim}
-
 \subsection{Tables and Gridded data}
 
 % Authors: Tom A., Tom R., Wolfgang K., Erik T.
@@ -596,10 +555,10 @@ than with respect to a set of other common coordinate systems
 
 Tables and n-dimensional data arrays are the most common forms of data
 encountered in astronomy. The \gls{python}-community has various solution for
-tables, such as \gls{numpy} structured arrays or \texttt{DataFrame} objects in Pandas\footnote{\url{http://pandas.pydata.org}} to name
-only a couple. For the n-dimensional data array Python brings their own
-\texttt{array} class, in addition to the very popular \gls{numpy}
-\texttt{ndarray}.
+tables, such as \gls{numpy} structured arrays or \texttt{DataFrame} objects in
+Pandas\footnote{\url{http://pandas.pydata.org}} to name only a couple. For the
+n-dimensional data array Python brings their own \texttt{array} class, in
+addition to the very popular \gls{numpy} \texttt{ndarray}.
 
 However, for use in astronomy all of these implementations lack some key
 features. The data that is stored in arrays and tables does most often contain
@@ -611,10 +570,10 @@ specially formatted ascii tables, etc. ) which are not recognized by the
 pre-existing packages.
 
 The \texttt{astropy.table} and \texttt{astropy.nddata} sub-packages contain
-classes (\texttt{Table} and \texttt{NDData}) that try to alleviate these problems.
-They allow users to represent astronomical data in the form of tables or
-n-dimensional gridded datasets, including all meta-data. Examples of usage of
-\texttt{astropy.table} are shown in Figure~\ref{code:tables}.
+classes (\texttt{Table} and \texttt{NDData}) that try to alleviate these
+problems. They allow users to represent astronomical data in the form of
+tables or n-dimensional gridded datasets, including all meta-data. Examples of
+usage of \texttt{astropy.table} are shown in Figure~\ref{code:tables}.
 
 The \texttt{Table} class provides a high-level wrapper to Numpy structured
 arrays, which are essentially arrays that have fields (or columns) with
@@ -641,11 +600,10 @@ between array-index coordinate system and other coordinate systems (c.f.
 methods to arithmetically combine the data in a meaningful way.
 \texttt{NDData} is not meant for direct user interaction but more for
 providing a framework for higher-level subclasses like a spectrum class or an
-astronomical image class. The \texttt{NDData} class currently does not have any built-in readers
-and writers.
+astronomical image class. The \texttt{NDData} class currently does not have
+any built-in readers and writers.
 
 \subsection{File Formats}
-
 
 \subsubsection{FITS}
 
@@ -665,121 +623,70 @@ Support for reading and writing FITS files is provided by the
 direct port of the
 PyFITS\footnote{\url{http://www.stsci.edu/institute/software_hardware/pyfits}}
 project \citep{barrett1999pyfits}. Users already familiar with PyFITS will
-therefore feel at home with this package. Figure~\ref{code:fits} shows an example of how to
-open an existing FITS file, access and modify the header and data, and write a new file back to disk.
+therefore feel at home with this package. Figure~\ref{code:fits} shows an
+example of how to open an existing FITS file, access and modify the header and
+data, and write a new file back to disk.
 
-Because the interface is exactly the same as that of PyFITS, users may directly
-replace PyFITS with Astropy in existing code by changing import statements
-like \texttt{import pyfits} to \texttt{from astropy.io import fits as pyfits}
-without any additional code changes.
+Because the interface is exactly the same as that of PyFITS, users may
+directly replace PyFITS with Astropy in existing code by changing import
+statements like \texttt{import pyfits} to \texttt{from astropy.io import fits
+as pyfits} without any additional code changes.
 
 Although PyFITS will continue to be released as a separate product in the near
-term, the long term plan is to discontinue PyFITS releases in favor of Astropy.
-The exact timing of when PyFITS releases will be discontinued is not settled,
-but users of PyFITS should plan to make suitable changes to support the eventual
-transition to Astropy.
+term, the long term plan is to discontinue PyFITS releases in favor of
+Astropy. The exact timing of when PyFITS releases will be discontinued is not
+settled, but users of PyFITS should plan to make suitable changes to support
+the eventual transition to Astropy.
 
 Becoming integrated with Astropy as the \texttt{astropy.io.fits} package will
 greatly enhance future development on the existing PyFITS code base in several
-areas.  First and perhaps foremost is integration with Astropy's \texttt{Table}
-interface which is much more flexible and powerful than PyFITS' current
-table interface.
-We will also be able to integrate Astropy's unit support in order to attach
-units to FITS table columns as well as header values that specify units in
-their comments in accordance with the FITS standard.  Finally, as the PyWCS
-package has also been integrated into Astropy as \texttt{astropy.wcs}
-(c.f. \S\ref{sec:wcs}) tighter association between data from FITS files and their world coordinate system (WCS)
-will be possible.
-
+areas. First and perhaps foremost is integration with Astropy's \texttt{Table}
+interface which is much more flexible and powerful than PyFITS' current table
+interface. We will also be able to integrate Astropy's unit support in order
+to attach units to FITS table columns as well as header values that specify
+units in their comments in accordance with the FITS standard. Finally, as the
+PyWCS package has also been integrated into Astropy as \texttt{astropy.wcs}
+(c.f. \S\ref{sec:wcs}) tighter association between data from FITS files and
+their world coordinate system (WCS) will be possible.
 
 \subsubsection{ASCII table formats}
 \label{sec:ascii}
 % Authors: Tom A.
 
 The \texttt{astropy.io.ascii} sub-package (formerly the standalone project
-\texttt{asciitable}\footnote{\url{https://asciitable.readthedocs.org}}) provides the
-ability to read and write tabular data for a wide variety of ASCII-based
-formats.  In addition to generic formats such as space-delimited, tab-delimited or
-comma-separated values, \texttt{astropy.io.ascii} provides classes for specialized
-table formats like
+\texttt{asciitable}\footnote{\url{https://asciitable.readthedocs.org}})
+provides the ability to read and write tabular data for a wide variety of
+ASCII-based formats. In addition to generic formats such as space-delimited,
+tab-delimited or comma-separated values, \texttt{astropy.io.ascii} provides
+classes for specialized table formats like
 CDS\footnote{\url{http://vizier.u-strasbg.fr/doc/catstd.htx}},
 IPAC\footnote{\url{http://irsa.ipac.caltech.edu/applications/DDGEN/Doc/ipac_tbl.html}},
-IRAF DAOphot, and LaTeX.  There is also a flexible class for handling
-a wide variety of fixed-width table formats. Finally, this package is designed to be extensible, making it easy for users to define their own readers/writers for any other ASCII formats.
-
-% TODO: since these examples can be done with the high-level table interface, shall we showcase that instead and include examples of VO and ASCII?
-
-%As a simple example, suppose the file named \verb|sources.dat| has the following
-%table information:
-%
-%\begin{verbatim}
-%obsid redshift  X      Y     object
-%3102  0.32      4167  4085   Q1250+568-A
-%877   0.22      4378  3892   "Source 82"
-%\end{verbatim}
-%
-%This table can be read with the following:
-%
-%\begin{verbatim}
-%>>> from astropy.io import ascii
-%>>> data = ascii.read("sources.dat")
-%>>> print data
-%obsid redshift  X    Y      object
-%----- -------- ---- ---- -----------
-% 3102     0.32 4167 4085 Q1250+568-A
-%  877     0.22 4378 3892   Source 82
-%\end{verbatim}
-%
-%This table can then be written out as a LaTeX table with the following:
-%
-%\begin{verbatim}
-%>>> ascii.write(data, 'sources.tex',
-%                Writer=ascii.Latex)
-%>>> cat sources.tex
-%\begin{table}
-%\begin{tabular}{ccccc}
-%obsid & redshift & X & Y & object \\
-%3102 & 0.32 & 4167 & 4085 & Q1250+568-A \\
-%877 & 0.22 & 4378 & 3892 & Source 82 \\
-%\end{tabular}
-%\end{table}
-%\end{verbatim}
-%
-%As mentioned in Sec.~\ref{sec:table} there is an alternate way of
-%reading and writing tables which is more intuitive in many cases.
-%The previous example could be done with the following:
-%
-%\begin{verbatim}
-%>>> from astropy.table import Table
-%>>> data = Table.read('sources.dat',
-%                      format='ascii')
-%>>> data.write('sources.tex', format='ascii',
-%               Writer=ascii.Latex)
-%\end{verbatim}
+IRAF DAOphot, and LaTeX. There is also a flexible class for handling
+a wide variety of fixed-width table formats. Finally, this package is designed
+to be extensible, making it easy for users to define their own readers/writers
+for any other ASCII formats.
 
 \subsubsection{Virtual Observatory tables}
 
 % Authors: Mike D.
 The \texttt{astropy.io.votable} package (formerly the standalone project
-\texttt{vo.table}) provides full support for reading and writing
-VOTable format files versions 1.1 and 1.2
-\citep{ochsenbein2004votable,ochsenbein2009votable}.  It efficently
-stores the tables in memory as Numpy structured arrays.  The file is
-read using streaming to avoid reading in the entire file at once and
-greatly reducing the memory footprint.
+\texttt{vo.table}) provides full support for reading and writing VOTable
+format files versions 1.1 and 1.2
+\citep{ochsenbein2004votable,ochsenbein2009votable}. It efficently stores the
+tables in memory as Numpy structured arrays. The file is read using streaming
+to avoid reading in the entire file at once and greatly reducing the memory
+footprint.
 
-It is possible to convert any one of the tables in a VOTable file to
-a \texttt{Table} object (\S\ref{sec:table}), where it
-can be edited and then written back to a VOTable file without any loss
-of data.
+It is possible to convert any one of the tables in a VOTable file to a
+\texttt{Table} object (\S\ref{sec:table}), where it can be edited and then
+written back to a VOTable file without any loss of data.
 
-The VOTable standard is not strictly adhered to by all VOTable file
-writers in the wild.  Therefore, \texttt{astropy.io.votable} provides
-a number of tricks and workarounds to support as many VOTable sources
-as possible, whenever the result would not be ambiguous.  A validation
-tool (\texttt{volint}) is also provided that outputs recommendations
-to improve the standard compliance of a given file, as well as
-validate it against the official VOTable schema.
+The VOTable standard is not strictly adhered to by all VOTable file writers in
+the wild. Therefore, \texttt{astropy.io.votable} provides a number of tricks
+and workarounds to support as many VOTable sources as possible, whenever the
+result would not be ambiguous. A validation tool (\texttt{volint}) is also
+provided that outputs recommendations to improve the standard compliance of a
+given file, as well as validate it against the official VOTable schema.
 Support for VOTable 1.3 is planned for the future.
 
 \subsection{World Coordinate Systems}
@@ -788,27 +695,26 @@ Support for VOTable 1.3 is planned for the future.
 
 % Authors: Mike D.
 
-The \texttt{astropy.wcs} package contains utilities for managing World Coordinate
-System (WCS) transformations in FITS files.  These transformations map
-the pixel locations in an image to their real-world units, such as
-their position on the celestial sphere.  This library is specific to
-WCS as it relates to FITS as described in the FITS WCS papers
-\citep{greisen2002wcs,calabretta2002wcs,greisen2006wcs} and is
-distinct from a planned Astropy package that will handle WCS
-transformations in general, regardless of their representation.
+The \texttt{astropy.wcs} package contains utilities for managing World
+Coordinate System (WCS) transformations in FITS files. These transformations
+map the pixel locations in an image to their real-world units, such as their
+position on the celestial sphere. This library is specific to WCS as it
+relates to FITS as described in the FITS WCS papers
+\citep{greisen2002wcs,calabretta2002wcs,greisen2006wcs} and is distinct from a
+planned Astropy package that will handle WCS transformations in general,
+regardless of their representation.
 
-This package is a wrapper around Mark Calabretta's
-\texttt{wcslib} \citep{calabretta2013wcslib}.  Since all of the FITS
-header parsing is done using \texttt{wcslib}, it is assured the same
-behavior as the many other tools that use \texttt{wcslib}.  On top of
-the basic FITS WCS support, it adds support for the Simple Imaging
-Polynomial (SIP) convention and table lookup distortions as defined in
-the draft WCS ``Paper IV'' \citep{calabretta2004wcs}.  Each of these
-transformations can be used independently or together in a fixed
-pipeline.
+This package is a wrapper around Mark Calabretta's \texttt{wcslib}
+\citep{calabretta2013wcslib}. Since all of the FITS header parsing is done
+using \texttt{wcslib}, it is assured the same behavior as the many other tools
+that use \texttt{wcslib}. On top of the basic FITS WCS support, it adds
+support for the Simple Imaging Polynomial (SIP) convention and table lookup
+distortions as defined in the draft WCS ``Paper IV''
+\citep{calabretta2004wcs}. Each of these transformations can be used
+independently or together in a fixed pipeline.
 
-The \texttt{astropy.wcs} package also serves as a useful FITS WCS validation tool,
-as it is able to report on many common mistakes or deviations from the
+The \texttt{astropy.wcs} package also serves as a useful FITS WCS validation
+tool, as it is able to report on many common mistakes or deviations from the
 standard in a given FITS file.
 
 \subsection{Cosmology}
@@ -817,16 +723,15 @@ standard in a given FITS file.
 
 % Authors: Neil Crighton, Alex Conley
 
-The \texttt{astropy.cosmology} sub-package contains classes for
-representing widely used cosmologies, and functions for calculating
-quantities that depend on a cosmological model. It also contains a
-framework for working with less frequently employed cosmologies that
-may be not be flat, or have a time-varying pressure to density ratio,
-$w$, for dark energy. The quantities that can be calculated are
-generally taken from those described by \citet{Hogg99}. Some examples
-are the angular diameter distance, comoving distance, critical
-density, distance modulus, lookback time, luminosity distance, and
-Hubble parameter as a function of redshift.
+The \texttt{astropy.cosmology} sub-package contains classes for representing
+widely used cosmologies, and functions for calculating quantities that depend
+on a cosmological model. It also contains a framework for working with less
+frequently employed cosmologies that may be not be flat, or have a
+time-varying pressure to density ratio, $w$, for dark energy. The quantities
+that can be calculated are generally taken from those described by
+\citet{Hogg99}. Some examples are the angular diameter distance, comoving
+distance, critical density, distance modulus, lookback time, luminosity
+distance, and Hubble parameter as a function of redshift.
 
 \begin{figure}
 \center
@@ -835,42 +740,41 @@ Hubble parameter as a function of redshift.
 \fbox{\includegraphics[scale=0.82,clip]{examples/code_cosmology.pdf}}
 \end{figure}
 
-The fundamental model for this sub-package is that any given cosmology
-is represented by a class. An instance of this class has attributes
-giving all the parameters required to uniquely specify the cosmology,
-such as the Hubble parameter, CMB temperature and the baryonic, cold
-dark matter, and dark energy densities at $z=0$. One can then use
-methods of this class to perform calculations using these parameters.
+The fundamental model for this sub-package is that any given cosmology is
+represented by a class. An instance of this class has attributes giving all
+the parameters required to uniquely specify the cosmology, such as the Hubble
+parameter, CMB temperature and the baryonic, cold dark matter, and dark energy
+densities at $z=0$. One can then use methods of this class to perform
+calculations using these parameters.
 
-Figure~\ref{code:cosmology} shows how \texttt{FlatLambdaCDM} can be
-used to create an object representing a flat cosmology, and how the
-methods of this object can be called to calculate the comoving volume,
-age and transverse at a given redshift. Further calculations can be
-performed using the many methods of the cosmology object as described
-in the Astropy documentation. For users who are more comfortable using
-a procedural coding style, these methods are also available as
-functions that take a cosmology class instance as a keyword argument.
+Figure~\ref{code:cosmology} shows how \texttt{FlatLambdaCDM} can be used to
+create an object representing a flat cosmology, and how the methods of this
+object can be called to calculate the comoving volume, age and transverse at a
+given redshift. Further calculations can be performed using the many methods
+of the cosmology object as described in the Astropy documentation. For users
+who are more comfortable using a procedural coding style, these methods are
+also available as functions that take a cosmology class instance as a keyword
+argument.
 
-The sub-package provides several pre-defined cosmology instances
-corresponding to commonly used cosmological parameter sets. Currently
-parameters from the WMAP 5-year \citep{Komatsu09}, 7-year
-\citep{Komatsu11} and 9-year results \citep{Hinshaw13} are included
-(\texttt{WMAP5}, \texttt{WMAP7} and \texttt{WMAP9}).  There are
-several classes corresponding to non-flat cosmologies, and the most
-common dark energy models are supported: a cosmological constant,
-constant $w$, and $w(a) = w_0 + w_a (1-a)$ (e.g. \citealt{Linder03},
-here $a$ is the scale factor). Figure~\ref{code:cosmology} gives
-examples showing how to use the pre-defined cosmologies, and how to
-define a new cosmology with a time-varying dark energy $w(a)$. Any
-other arbitrary cosmology can be represented by sub-classing one of
-the basic cosmology classes.
+The sub-package provides several pre-defined cosmology instances corresponding
+to commonly used cosmological parameter sets. Currently parameters from the
+WMAP 5-year \citep{Komatsu09}, 7-year \citep{Komatsu11} and 9-year results
+\citep{Hinshaw13} are included (\texttt{WMAP5}, \texttt{WMAP7} and
+\texttt{WMAP9}). There are several classes corresponding to non-flat
+cosmologies, and the most common dark energy models are supported: a
+cosmological constant, constant $w$, and $w(a) = w_0 + w_a (1-a)$ (e.g.
+\citealt{Linder03}, here $a$ is the scale factor). Figure~\ref{code:cosmology}
+gives examples showing how to use the pre-defined cosmologies, and how to
+define a new cosmology with a time-varying dark energy $w(a)$. Any other
+arbitrary cosmology can be represented by sub-classing one of the basic
+cosmology classes.
 
-All of the code in the sub-package is tested against the web-based
-cosmology calculator by \citet{Wright06} and two other widely-used
-calculators\footnote{\url{http://www.kempner.net/cosmic.php}}$^,$\footnote{\url{http://www.icosmos.co.uk/index.html}}.
-In cases when these calculators are not precise enough to enable a
-meaningful comparison, the code is tested against calculations
-performed with \textsc{Mathematica}.
+All of the code in the sub-package is tested against the web-based cosmology
+calculator by \citet{Wright06} and two other widely-used
+calculators\footnote{\url{http://www.kempner.net/cosmic.php}}$^,$\footnote{\url
+{http://www.icosmos.co.uk/index.html}}. In cases when these calculators are
+not precise enough to enable a meaningful comparison, the code is tested
+against calculations performed with \textsc{Mathematica}.
 
 \section{Development workflow}
 
@@ -905,15 +809,16 @@ change made via a pull request is subject to extensive testing before being
 merged into the core repository. For the latter, we make use of
 Travis\footnote{\url{https://travis-ci.org/}}, while for running more
 extensive tests across Linux, MacOS X, and Windows, we make use of
-Jenkins\footnote{\url{http://jenkins-ci.org/}} (both are examples of Continuous Integration systems).
+Jenkins\footnote{\url{http://jenkins-ci.org/}} (both are examples of
+Continuous Integration systems).
 
 This development workflow has worked very well so far, allowing contributions
 by many developers, and blurring the line between developers and users.
 Indeed, users who encounter bugs and who know how to fix them can submit
 suggested changes. We have also implemented a feature that means that anyone
 reading the documentation at \url{http://docs.astropy.org} can suggest
-improvements to the documentation without any prior knowledge of the
-git version control system.
+improvements to the documentation without any prior knowledge of the git
+version control system.
 
 \section{Planned functionality}
 
