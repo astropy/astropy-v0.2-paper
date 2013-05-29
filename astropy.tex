@@ -287,6 +287,12 @@ a number of astronomy- and astrophysics-specific units.
 
 \subsubsection{Units}
 
+\begin{figure}
+\center
+\caption{Quantity conversion using the \texttt{astropy.units} sub-package.\label{code:quantities}}
+\vspace{0.1in}
+\fbox{\includegraphics[scale=0.82,clip]{examples/code_quantities.pdf}}
+\end{figure}
 \label{sec:units}
 
 One way to use the \texttt{astropy.units} sub-package is to manipulate units
@@ -321,11 +327,6 @@ standards\footnote{OGIP support is forthcoming at the time of this writing.},
 and allows the user to select the appropriate one when reading and writing
 unit string definitions to and from external file formats.
 
-\begin{figure}
-\caption{Quantity conversion using the \texttt{astropy.units} sub-package.\label{code:quantities}}
-\fbox{\includegraphics[scale=0.82,clip]{examples/code_quantities.pdf}}
-\end{figure}
-
 \subsubsection{Quantities and Physical Constants}
 
 \label{sec:quantities}
@@ -349,7 +350,9 @@ equivalent, or users should pass equivalencies through the
 \texttt{equivalencies} argument (c.f. \S\ref{sec:units}).
 
 \begin{figure}
+\center
 \caption{Using the \texttt{astropy.constants} sub-package.\label{code:constants}}
+\vspace{0.1in}
 \fbox{\includegraphics[scale=0.82,clip]{examples/code_constants.pdf}}
 \end{figure}
 
@@ -366,11 +369,6 @@ in Newtons using physical quantities and user-specified quantities.
 \subsection{Time}
 
 % Authors: Tom A.
-
-\begin{figure}
-\caption{Time representation and conversion using the \texttt{astropy.time} sub-package.\label{code:time}}
-\fbox{\includegraphics[scale=0.82,clip]{examples/code_time.pdf}}
-\end{figure}
 
 The \texttt{astropy.time} package provides functionality for manipulating
 times and dates.  Specific emphasis is placed on supporting time scales
@@ -429,6 +427,13 @@ subtract a duration from a time.
 % \verb|Time| object the time format for unambiguous inputs can be
 % automatically determined.
 
+\begin{figure}
+\center
+\caption{Time representation and conversion using the \texttt{astropy.time} sub-package.\label{code:time}}
+\vspace{0.1in}
+\fbox{\includegraphics[scale=0.82,clip]{examples/code_time.pdf}}
+\end{figure}
+
 \subsection{Celestial Coordinates}
 
 % Authors: Erik T., Adrian, Demitri
@@ -469,7 +474,9 @@ mechanisms to specify the valid bounds of an angle.
 
 
 \begin{figure}
+\center
 \caption{Celestial coordinate representation and conversion.\label{code:coords}}
+\vspace{0.1in}
 \fbox{\includegraphics[scale=0.82,clip]{examples/code_coordinates.pdf}}
 \label{fig:code_coordinates}
 \end{figure}
@@ -640,6 +647,13 @@ and writers.
 
 \label{sec:fits}
 
+\begin{figure}
+\center
+\caption{Accessing data in FITS format.\label{code:fits}}
+\vspace{0.1in}
+\fbox{\includegraphics[scale=0.82,clip]{examples/code_fits.pdf}}
+\end{figure}
+
 Support for reading and writing FITS files is provided by the
 \texttt{astropy.io.fits} sub-package which, at the time of writing, is a
 direct port of the
@@ -647,11 +661,6 @@ PyFITS\footnote{\url{http://www.stsci.edu/institute/software_hardware/pyfits}}
 project \citep{barrett1999pyfits}. Users already familiar with PyFITS will
 therefore feel at home with this package. Figure~\ref{code:fits} shows an example of how to
 open an existing FITS file, access and modify the header and data, and write a new file back to disk.
-
-\begin{figure}
-\caption{Accessing data in FITS format.\label{code:fits}}
-\fbox{\includegraphics[scale=0.82,clip]{examples/code_fits.pdf}}
-\end{figure}
 
 Because the interface is exactly the same as that of PyFITS, users may directly
 replace PyFITS with Astropy in existing code by changing import statements
@@ -814,7 +823,9 @@ density, distance modulus, lookback time, luminosity distance, and
 Hubble parameter as a function of redshift.
 
 \begin{figure}
+\center
 \caption{Cosmology utilities.\label{code:cosmology}}
+\vspace{0.1in}
 \fbox{\includegraphics[scale=0.82,clip]{examples/code_cosmology.pdf}}
 \end{figure}
 

@@ -18,7 +18,7 @@ def process(filename):
     script = """
     pdflatex {base}-tmp-2.tex
     pdfcrop --bbox "0 100 1000 10000"  {base}-tmp-2.pdf {base}-tmp-3.pdf
-    pdfcrop -margins "2 10 2 2" {base}-tmp-3.pdf {base}.pdf
+    pdfcrop -margins "2 2 2 2" {base}-tmp-3.pdf {base}.pdf
     """.format(base=base)
     fout.close()
     subprocess.call(script, shell=True)
