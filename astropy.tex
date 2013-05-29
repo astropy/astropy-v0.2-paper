@@ -312,7 +312,7 @@ strictly comparable. This sub-package supports defining such relationships,
 and it is one of the areas in which it distinguishes itself from most other unit
 handling software. For example, wavelength and frequency are not normally
 convertible, but by passing an equivalency list, the conversion is supported
-(see Figure~\ref{code:quantities}:11). Equivalencies are also included for flux
+(see Figure~\ref{code:quantities}). Equivalencies are also included for flux
 densities, and users can easily implement their own equivalencies.
 
 There are multiple string representations for units used in the astronomy
@@ -342,7 +342,7 @@ object will retain all units used in the expression.  The final object
 can then be converted to a specified set of units or decomposed,
 effectively canceling and combining any equivalent units and returning
 a \texttt{Quantity} object in some set of base units. This is
-demonstrated in Figure~\ref{code:quantities}:19.
+demonstrated in Figure~\ref{code:quantities}.
 
 Using the \texttt{.to()} method, \texttt{Quantity} objects can easily be
 converted to different units. The units must either be dimensionally
