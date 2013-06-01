@@ -17,7 +17,8 @@ Read a table from a file
 >>> t1 = Table.read('catalog.tbl', format='ipac')
 >>> t1 = Table.read('catalog.cds', format='cds')
 
-Extract subsets of tables
+Select all rows from t1 where the flux column
+is greater than 5
 >>> t2 = t1[t1['flux'] > 5.0]
 
 Manipulate columns

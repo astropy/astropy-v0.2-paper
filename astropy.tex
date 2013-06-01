@@ -1,5 +1,7 @@
 % David Shiga and Victor Zabalza
 % package vs sub-package
+% TODO: ask if anyone needs to acknowledge funding for development
+
 
 \documentclass[traditabstract]{aa}
 
@@ -521,6 +523,8 @@ documentation\footnote{\url{http://docs.astropy.org/en/v0.2/coordinates/sgr-exam
 illustrating the definition of a coordinate system useful for a specific
 scientific task (Johnston \& Price-Whelan 2013, in prep).
 
+% The start of the following paragraph can be shortened if needed.
+
 This flexibility is achieved in \texttt{astropy.coordinates} through the use
 of a transformation graph. All coordinate systems are represented as classes;
 internally, the transformation infrastructure keeps track of a network of
@@ -553,9 +557,8 @@ than with respect to a set of other common coordinate systems
 Tables and n-dimensional data arrays are the most common forms of data
 encountered in astronomy. The \gls{python}-community has various solution for
 tables, such as \gls{numpy} structured arrays or \texttt{DataFrame} objects in
-Pandas\footnote{\url{http://pandas.pydata.org}} to name only a couple. For the
-n-dimensional data array Python brings their own \texttt{array} class, in
-addition to the very popular \gls{numpy} \texttt{ndarray}.
+Pandas\footnote{\url{http://pandas.pydata.org}} to name only a couple. For
+n-dimensional data the \gls{numpy} \texttt{ndarray} is the most popular.
 
 However, for use in astronomy all of these implementations lack some key
 features. The data that is stored in arrays and tables often contains
