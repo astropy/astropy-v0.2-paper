@@ -390,9 +390,9 @@ used in astronomy. Examples of using this sub-package are provided in Figure
 
 The most common way to use \texttt{astropy.time} is to create a \texttt{Time}
 object by supplying one or more input time values as well as the time
-format/representation and time scale of those values. The input time(s) can
+format or representation and time scale of those values. The input time(s) can
 either be a single scalar like \verb|"2010-01-01 00:00:00"| or \verb|2455348.5|
-or a sequence of such values; the format/representation specifies how to
+or a sequence of such values; the format or representation specifies how to
 interpret the input values, such as ISO or JD or Unix time; and the scale
 specifies the time standard used for the values, such as Coordinated Universal
 Time (UTC), Terrestial Time (TT), or International Atomic Time (TAI). The full
@@ -459,7 +459,7 @@ such as \texttt{kapteyn}, \texttt{pyast}, \texttt{pyephem} \citep{pyephem}, and
 \texttt{astropysics} \citep{astropysics} that this package aims to supplant.
 
 The package has been designed to present a natural Python interface for
-representing coordinates in computations, simplify input/output formatting, and
+representing coordinates in computations, simplify input and output formatting, and
 allow straightforward transformation between coordinate systems. It also
 supports implementation of new or custom coordinate systems that work
 consistently with the built-in systems. A future design goal is to also
@@ -599,15 +599,15 @@ written to common file formats using the \texttt{Table.read} and
 \texttt{astropy.io.votable} (\S\ref{sec:votable}), which allow ASCII and VO
 tables to be seamlessly read or written respectively.
 
-In addition to providing easy manipulation and input/output of table objects,
+In addition to providing easy manipulation and input or output of table objects,
 the \texttt{Table} class allows units to be specified for each column using the
 \texttt{astropy.units} framework, and also allows the \texttt{Table} object to
 contain arbitrary meta-data (stored in \texttt{Table.meta}).
 
 The \texttt{NDData} class provides a way to easily store n-dimensional array
 data and builds upon the \gls{numpy} \texttt{ndarray} class. The actual data is
-stored in just a \texttt{ndarray}, which allows for easy compatibility with
-other scientific packages. In addition to parameter/value meta-data, the
+stored in an \texttt{ndarray}, which allows for easy compatibility with
+other scientific packages. In addition to keyword-value meta-data, the
 \texttt{NDData} class can store a boolean mask with the same dimensions as the
 data, several sets of flags (n-dimensional arrays that store attributes for
 each cell of the data array), uncertainties, units, and a transformation
@@ -681,7 +681,7 @@ CDS\footnote{\url{http://vizier.u-strasbg.fr/doc/catstd.htx}},
 IPAC\footnote{\url{http://irsa.ipac.caltech.edu/applications/DDGEN/Doc/ipac_tbl.html}},
 IRAF DAOphot, and LaTeX. There is also a flexible class for handling a wide
 variety of fixed-width table formats. Finally, this package is designed to be
-extensible, making it easy for users to define their own readers/writers for
+extensible, making it easy for users to define their own readers and writers for
 any other ASCII formats.
 
 \subsubsection{Virtual Observatory tables}
@@ -806,7 +806,7 @@ calculations performed with \textsc{Mathematica}.
 
 % Authors: Tom R., Erik T., Perry G.
 
-In order to co-ordinate the development of Astropy by over 30 developers
+In order to co-ordinate the development of Astropy by over 30 active developers
 worldwide, we have made use of the GitHub\footnote{\url{http://www.github.com}}
 code collaboration platform. The main repository for Astropy is stored in a
 git\footnote{\url{http://git-scm.com/}} repository on GitHub, and any
@@ -896,7 +896,9 @@ We also briefly described our development workflow (\S\ref{sec:workflow}),
 which has enabled an international collaboration of scientists and software
 developers to create and contribute to the package. We outlined our plans for
 the future (\S\ref{sec:future}) which includes more interoperability of
-sub-packages, as well as new functionality. We invite members of the community
+sub-packages, as well as new functionality.
+
+We invite members of the community
 to join the effort by adopting Astropy for their own projects, reporting any
 issues, and whenever possible, developing new functionality.
 
