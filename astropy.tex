@@ -188,8 +188,8 @@ Marseille, France
 
 \abstract{
 We present the first public version of the open-source and community-developed
-Python package, Astropy. This package aims to provide core astronomy-related
-functionality to the community, including for example support for
+Python package, Astropy. This package provides core astronomy-related
+functionality to the community, including support for
 domain-specific file formats such as Flexible Image Transport System (FITS)
 files, Virtual Observatory (VO) tables, and common ASCII table formats, unit
 and physical quantity conversions, physical constants specific to astronomy,
@@ -198,8 +198,9 @@ support, generalized containers for representing gridded as well as tabular
 data, and a framework for cosmological transformations and conversions.
 Significant functionality is under active development, such as a model fitting
 framework, VO client and server tools, and aperture and point spread function
-(PSF) photometry tools. Participation in development is open to anyone
-interested in joining the project.
+(PSF) photometry tools. The core development team is actively making additions
+and enhancements to the current code base, and we encourage anyone interested
+to participate in the development of future Astropy versions.
 
 }
 
@@ -212,13 +213,13 @@ interested in joining the project.
 % Authors: Tom R., Erik T., Perry G.
 
 The Python programming language\footnote{\url{http://www.python.org}} has been
-one of the fastest-growing programming languages in the astronomy community in
+one of the fastest-growing programming language in the astronomy community in
 the last decade. While there have been a number of efforts to develop Python
 packages for astronomy-specific functionality, these efforts have been
 fragmented, and several dozens of packages have been developed across the
 community with little or no coordination, leading to duplication and a lack of
-homogeneity across packages. This in turn has made it difficult for users to
-set themselves up with all the required packages needed in an astronomer's
+homogeneity across packages. This has made it difficult for users to
+install all the required packages needed in an astronomer's
 toolkit. Since a number of these packages depend on individual or small groups
 of developers, packages are sometimes no longer maintained, or simply become
 unavailable, which is detrimental to long-term research and research
@@ -233,37 +234,40 @@ is to cover much of the astronomy-specific functionality needed by
 researchers, complementing more general standard scientific packages such as
 \gls{numpy} and \gls{scipy}, which are invaluable for numerical array-based
 calculations and more general scientific algorithms (e.g. interpolation,
-integration, clustering, etc.) respectively. To date, over 180 people are
-signed up to the \textit{development} mailing list for the Astropy
+integration, clustering). To date, over 180 people are
+signed up to the development mailing list for the Astropy
 project\footnote{
 \url{https://groups.google.com/forum/?fromgroups#!forum/astropy-dev}}.
 
-Most efforts in the Astropy project to date have gone towards developing the
-core \astropy package. However, we note the scope of the Astropy project is
+The initial aim of the Astropy project was to create a core \astropy package,
+and thus most development efforts have gone towards the first public release presented here.
+However, the scope of the Astropy project is
 not simply to create a core package, but more generally to bring together
 authors of existing packages to work together and agree on including a common
-set of functionality in the core package (and in some cases deprecating their
-packages if all functionality ends up in \astropy), since the aim is
+set of functionality in the core package, since the aim is
 ultimately to simplify the landscape of packages available to users. In
 addition, the Astropy project includes more specialized Python packages (which
 we call \textit{affiliated} packages) that are not included in the core
 package for various reasons: for some the functionality is in early stages of
-development and is not robust; or the license is not compatible with Astropy;
+development and is not robust; the license is not compatible with Astropy;
 the package includes large files; or the functionality is mature, but too
 domain-specific to be included in a core package.
 
 The driving interface design philosophy behind the core package is that code
-using Astropy should be easily readable, even by those new to Python. Typical
+using Astropy should be both concise and easily readable, even by those new to Python. Typical
 operations should appear in code similar to how they would appear if expressed
 in spoken or written language. Such an interface results in code that is
-easily readable, enabling astronomers to focus more of their effort on their
+less likely to contain errors and is easily readable, enabling astronomers to focus more of their effort on their
 science objectives rather than interpreting obscure function or variable names
 or otherwise spending time trying to understand the interface.
 
 In this paper, we present the first public release (v0.2) of the \astropy
 package. We provide an overview of the current capabilities
 (\S\ref{sec:capabilities}), our development workflow (\S\ref{sec:workflow}),
-and planned functionality (\S\ref{sec:future}).
+and planned functionality (\S\ref{sec:future}). This paper is not intended to
+provide a detailed documentation for the package (which is available
+online\footnote{\url{http://docs.astropy.org}), but is rather intended to
+give an overview of the functionality and design.
 
 \section{Capabilities}
 
@@ -318,7 +322,7 @@ There are multiple string representations for units used in the astronomy
 community. The FITS Standard \cite{fits2008} defines a unit standard, as well
 as both the Centre de Donn\'ees astronomiques de Strasbourg (CDS)
 \citep{ochsenbein2000cds} and NASA/Goddard's Office of Guest Investigator
-Programs (OGIP) \citep{george1995ogip}. In additional, the International
+Programs (OGIP) \citep{george1995ogip}. In addition, the International
 Virtual Observatory Alliance (IVOA) has a forthcoming VOUnit standard
 \citep{derriere2012vounit} in an attempt to resolve some of these differences.
 Rather than choose one of these, \texttt{astropy.units} supports all of these
@@ -332,7 +336,7 @@ unit string definitions to and from external file formats.
 
 While the previous section described the use of the units package to
 manipulate the units themselves, a more common use-case is to attach the units
-to quantities, and combine these. The \texttt{astropy.units} package allows
+to quantities, and use them together in expressions. The \texttt{astropy.units} package allows
 units to be attached to Python scalars, or \gls{numpy} arrays, producing
 \texttt{Quantity} objects. These objects support arithmetic with other numbers
 and \texttt{Quantity} objects and preserve their units. For multiplication and
@@ -372,7 +376,7 @@ times and dates. Specific emphasis is placed on supporting time scales (e.g.
 UTC, TAI, UT1) and time formats/representations (e.g. JD, MJD, ISO 8601) that
 are used in astronomy.
 
-This package makes use of the Standards of Fundamental Astronomy (SOFA) time
+This package is based on the Standards of Fundamental Astronomy (SOFA) time
 and calendar library\footnote{\url{http://www.iausofa.org/}}. Leveraging the
 robust and well-tested SOFA routines ensures that the fundamental time scale
 conversions are being computed correctly. An important feature of the SOFA
@@ -380,7 +384,9 @@ time library is that each time is represented as a pair of double-precision
 values. This is supported in \texttt{astropy.time} and provides the capability
 to do extremely high precision time computations. All time scale conversions
 are done by vectorized versions of the SOFA routines\footnote{using Cython
-(\url{http://www.cython.org/})} and are reasonable fast and memory efficient.
+(\url{http://www.cython.org/})} and are reasonably fast and memory efficient.
+
+% TODO: quantify the speed
 
 The most common way to use \texttt{astropy.time} is to create a \texttt{Time}
 object by supplying one or more input time values as well as the time
@@ -476,7 +482,7 @@ specify the valid bounds of an angle.
 \label{fig:code_coordinates}
 \end{figure}
 
-The different coordinate classes represent different coordinate systems, and
+The coordinate classes represent different coordinate systems, and
 provide most of the user-facing functionality for
 \texttt{astropy.coordinates}. The systems provide customized initializers and
 appropriate formatting and representation defaults. For some classes, they
@@ -565,8 +571,8 @@ features. The data that is stored in arrays and tables does most often contain
 vital metadata: the data is associated with units, and might also contain
 additional arrays that either mask or provide additional attributes to each
 cell. Furthermore, the data often has a parameter/value dataset attached with
-it. Finally, the data comes in a plethora of astronomy specific formats (fits,
-specially formatted ascii tables, etc. ) which are not recognized by the
+it. Finally, the data comes in a plethora of astronomy specific formats (FITS,
+specially formatted ASCII tables, etc. ) which are not recognized by the
 pre-existing packages.
 
 The \texttt{astropy.table} and \texttt{astropy.nddata} sub-packages contain
@@ -579,9 +585,9 @@ The \texttt{Table} class provides a high-level wrapper to Numpy structured
 arrays, which are essentially arrays that have fields (or columns) with
 heterogeneous data types, and any number of rows. Numpy structured arrays are
 however difficult to manipulate or modify, so the \texttt{Table} class makes
-it easy for users to create a table from columns, add/remove columns or rows,
-and mask values from the table. Furthermore, tables can be easily read/written
-from/to common file formats using the \texttt{Table.read} and
+it easy for users to create a table from columns, add and remove columns or rows,
+and mask values from the table. Furthermore, tables can be easily read from and written to
+common file formats using the \texttt{Table.read} and
 \texttt{Table.write} methods. In addition to providing easy manipulation and
 input/output of table objects, the \texttt{Table} class allows units to be
 specified for each column using the \texttt{astropy.units} framework, and also
@@ -619,7 +625,7 @@ any built-in readers and writers.
 \end{figure}
 
 Support for reading and writing FITS files is provided by the
-\texttt{astropy.io.fits} sub-package which, at the time of writing, is a
+\texttt{astropy.io.fits} sub-package, which at the time of writing is a
 direct port of the
 PyFITS\footnote{\url{http://www.stsci.edu/institute/software_hardware/pyfits}}
 project \citep{barrett1999pyfits}. Users already familiar with PyFITS will
@@ -634,8 +640,7 @@ as pyfits} without any additional code changes.
 
 Although PyFITS will continue to be released as a separate product in the near
 term, the long term plan is to discontinue PyFITS releases in favor of
-Astropy. The exact timing of when PyFITS releases will be discontinued is not
-settled, but users of PyFITS should plan to make suitable changes to support
+Astropy. It is expected that direct support of PyFITS will end mid-2014, so users of PyFITS should plan to make suitable changes to support
 the eventual transition to Astropy.
 
 Becoming integrated with Astropy as the \texttt{astropy.io.fits} package will
@@ -671,7 +676,7 @@ for any other ASCII formats.
 % Authors: Mike D.
 The \texttt{astropy.io.votable} package (formerly the standalone project
 \texttt{vo.table}) provides full support for reading and writing VOTable
-format files versions 1.1 and 1.2
+format files versions 1.1, 1.2, and the proposed 1.3
 \citep{ochsenbein2004votable,ochsenbein2009votable}. It efficently stores the
 tables in memory as Numpy structured arrays. The file is read using streaming
 to avoid reading in the entire file at once and greatly reducing the memory
@@ -687,7 +692,6 @@ and workarounds to support as many VOTable sources as possible, whenever the
 result would not be ambiguous. A validation tool (\texttt{volint}) is also
 provided that outputs recommendations to improve the standard compliance of a
 given file, as well as validate it against the official VOTable schema.
-Support for VOTable 1.3 is planned for the future.
 
 \subsection{World Coordinate Systems}
 
@@ -791,17 +795,17 @@ main repository for Astropy is stored in a
 git\footnote{\url{http://git-scm.com/}} repository on GitHub, and any
 non-trivial changes are made via \textit{pull requests}, which are a mechanism
 for submitting code for review by other developers prior to merging into the
-main code base. This workflow ensures that only high-quality, and well
-documented and tested code is included into Astropy. Not all contributions are
+main code base. This workflow aids in increasing the quality, documentation and
+testing of the code to be included in Astropy. Not all contributions are
 necessarily accepted - community consensus is needed for incorporating major
 new functionality in Astropy, and any new feature has to be justified to avoid
 implementing features that are only useful to a minority of users, but may
-cause issues in future.
+cause issues in the future.
 
 At the time of writing, Astropy includes several thousand tests, which are
-small units of code that check that functions/methods/classes in Astropy are
+small units of code that check that functions, methods, and classes in Astropy are
 behaving as expected, both numerically, and from a usability point of view. We
-make use of \textit{Continuous Integration}, which is the process of running
+make use of \textit{continuous integration}, which is the process of running
 all the tests under various configurations (such as different versions of
 Python or Numpy, and on different platforms) in order to ensure that the
 package is held to the highest standard of stability. In particular, any
@@ -810,7 +814,7 @@ merged into the core repository. For the latter, we make use of
 Travis\footnote{\url{https://travis-ci.org/}}, while for running more
 extensive tests across Linux, MacOS X, and Windows, we make use of
 Jenkins\footnote{\url{http://jenkins-ci.org/}} (both are examples of
-Continuous Integration systems).
+continuous integration systems).
 
 This development workflow has worked very well so far, allowing contributions
 by many developers, and blurring the line between developers and users.
@@ -855,7 +859,7 @@ In the longer term, we are already planning the following functionality:
 % Authors: Tom R., Erik T., Perry G.
 
 We have presented the first public release of the Astropy package, a core
-Python package for astronomers. In this paper, we have described the main
+Python package for astronomers. In this paper we have described the main
 functionality, which ranges from handling of common file formats in astronomy,
 data structures, unit conversions, and coordinate systems. We also briefly
 described our development workflow and plans for the future. We encourage
