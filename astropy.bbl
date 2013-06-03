@@ -1,10 +1,15 @@
-\begin{thebibliography}{27}
+\begin{thebibliography}{29}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Barrett} \& {Bridgman}(1999)}]{barrett1999pyfits}
 {Barrett}, P.~E., \& {Bridgman}, W.~T. 1999, in Astronomical Society of the
   Pacific Conference Series, Vol. 172, Astronomical Data Analysis Software and
   Systems VIII, 483
+
+\bibitem[{Behnel {et~al.}(2011)Behnel, Bradshaw, Citro, Dalcin, Seljebotn, \&
+  Smith}]{cython}
+Behnel, S., Bradshaw, R., Citro, C., Dalcin, L., Seljebotn, D., \& Smith, K.
+  2011, Computing in Science Engineering, 13, 31
 
 \bibitem[{{Blaauw} {et~al.}(1960){Blaauw}, {Gum}, {Pawsey}, \&
   {Westerhout}}]{galcoords}
@@ -113,6 +118,11 @@ Oschenbein, F. {et~al.} 2004, VOTable Format Definition, Version 1.1,
   Varoquaux}]{van2011numpy}
 Van Der~Walt, S., Colbert, S., \& Varoquaux, G. 2011, Computing in Science \&
   Engineering, 13, 22
+
+\bibitem[{{Wallace}(1996)}]{sofa_wallace}
+{Wallace}, P.~T. 1996, in Astronomical Society of the Pacific Conference
+  Series, Vol. 101, Astronomical Data Analysis Software and Systems V, ed.
+  G.~H. {Jacoby} \& J.~{Barnes}, 207
 
 \bibitem[{{Wright}(2006)}]{Wright06}
 {Wright}, E.~L. 2006, \pasp, 118, 1711, arXiv:astro-ph/0609593
