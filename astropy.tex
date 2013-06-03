@@ -820,7 +820,7 @@ calculators\footnote{\url{http://www.kempner.net/cosmic.php}}$^,$\footnote{\url
 precise enough to enable a meaningful comparison, the code is tested against
 calculations performed with \textsc{Mathematica}.
 
-\section{Development workflow}
+\section{Development Approach}
 
 \label{sec:workflow}
 
@@ -830,9 +830,20 @@ calculations performed with \textsc{Mathematica}.
 
 % Authors: Tom R., Erik T., Perry G.
 
-In order to co-ordinate the development of Astropy by over 30 active developers
-worldwide, we have made use of the GitHub\footnote{\url{http://www.github.com}}
-code collaboration platform. The main repository for Astropy is stored in a
+A primary guiding philosophy of Astropy is that it is developed for and (at least in part)
+\emph{by} the astronomy user community.  This ensures the interface is 
+designed with the workflow of working astronomers in mind.  At the same time, it aims
+to make use of the expertise of software developers to design code that encourages
+good software practices such as a consistent and clean API, thorough documentation,
+and integrated testing.  It is also dedicated to remaining open source, allowing input from
+all users and assisting wider adoption. Achieving these aims requires code collaboration
+between over 30 geographically-distributed developers, and here we describe
+our development workflow with the hope that it may be replicated by other astronomy
+software projects that are likely to have similar needs. 
+
+To enable this collaboration, we have made use of the 
+GitHub\footnote{\url{http://www.github.com}} open source code hosting and
+development  platform. The main repository for Astropy is stored in a
 git\footnote{\url{http://git-scm.com/}} repository on GitHub, and any
 non-trivial changes are made via \textit{pull requests}, which are a mechanism
 for submitting code for review by other developers prior to merging into the
