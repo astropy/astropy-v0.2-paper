@@ -278,7 +278,7 @@ The driving interface design philosophy behind the core package is that code
 using \astropy should result in concise and easily readable code, even by those new to
 Python. Typical operations should appear in code similar to how they would
 appear if expressed in spoken or written language. Such an interface results in
-code that is less likely to contain errors and is easily readable, enabling
+code that is less likely to contain errors and is easily understood, enabling
 astronomers to focus more of their effort on their science objectives rather
 than interpreting obscure function or variable names or otherwise spending time
 trying to understand the interface.
@@ -346,9 +346,9 @@ between two different physical quantities such that providing either one
 uniquely defines the other. A standard astronomical example is the
 relationships between the frequency, wavelength and energy of a photon - it is
 common practice to treat such units as equivalent even though they are not
-strictly comparable. This sub-package supports defining such relationships, and
-it is one of the areas in which it distinguishes itself from most other unit
-handling software. For example, wavelength and frequency are not normally
+strictly comparable. The inclusion of these equivalencies is an important
+improvement over existing unit-handling software, which typically does not
+have this functionality. For example, wavelength and frequency are not normally
 convertible, but by passing an equivalency list, the conversion is supported
 (see Figure~\ref{code:quantities}). Equivalencies are also included for flux
 densities, and users can easily implement their own equivalencies.
