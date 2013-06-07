@@ -1,6 +1,6 @@
 Parse coordinate string
 >>> import astropy.coordinates as coords
->>> c = coords.ICRSCoordinates('00h42m44.3s +41d16m9s')
+>>> c = coords.ICRSCoordinates("00h42m44.3s +41d16m9s")
 
 Access the RA/Dec values
 >>> c.ra
@@ -20,7 +20,7 @@ Convert to Galactic coordinates
 
 Create a separate object in Galactic coordinates
 >>> g = c.transform_to(coords.GalacticCoordinates)
->>> g.l.format('degree', sep=':', precision=3)
+>>> g.l.format("degree", sep=":", precision=3)
 '121:10:27.499'
 
 Set the distance and view the cartesian coordinates

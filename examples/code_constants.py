@@ -1,4 +1,5 @@
 Access physical constants:
+>>> from astropy import units as u
 >>> from astropy import constants as c
 >>> print c.G
   Name   = Gravitational constant
