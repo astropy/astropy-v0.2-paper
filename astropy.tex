@@ -479,6 +479,8 @@ sub-package.\label{code:time}}
 
 % Authors: Erik T., Adrian, Demitri
 
+%TODO: Comment from @mservillat: In general, this section is longer and more difficult to follow. Maybe it could be shortened? maybe some details are not strictly needed, e.g. how transformation graphs work in the last paragraph.
+
 An essential element of any astronomy workflow is the manipulation, parsing,
 and conversion of astronomical coordinates. This functionality is provided in
 Astropy by the \texttt{astropy.coordinates} sub-package. The aim of this
@@ -488,6 +490,8 @@ having to (re)implement extremely common utilities. To achieve this, it
 leverages important lessons learned from existing Python coordinates packages
 such as \texttt{kapteyn} \citep{kapteyn}, \texttt{pyast} \citep{pyast}, \texttt{pyephem} \citep{pyephem}, \texttt{palpy} \citep{palpy}, and
 \texttt{astropysics} \citep{astropysics}, that this package aims to supplant.
+
+%TODO: Comment from @mservillat: End of paragraph 1: what are the "lessons learned" exactly? Is it what is described in the next paragraph? then a clear link is needed (add "For example", "In particular"...). 
 
 The sub-package has been designed to present a natural Python interface for
 representing coordinates in computations, simplify input and output formatting,
@@ -767,6 +771,8 @@ The \texttt{astropy.wcs} sub-package also serves as a useful FITS WCS validation
 tool, as it is able to report on many common mistakes or deviations from the
 standard in a given FITS file.
 
+%TODO: Comment from @mservillat: naive question, but is there any link (or future link) with the coordinates subpackage? I think some people will have the question in mind at the end of this section.
+
 \subsection{Cosmology}
 
 \label{sec:cosmology}
@@ -881,6 +887,8 @@ changes. We have also implemented a feature that means that anyone reading the
 documentation at \url{http://docs.astropy.org} can suggest improvements to the
 documentation with just a few clicks in a web browser without any prior
 knowledge of the git version control system.
+
+%TODO: Comment from @mservillat: there is nothing about the license for Astropy (just a word in the intro about some affiliated packages not being compatible with the Astropy license). Shouldn't we say a word about the license?
 
 \section{Planned functionality}
 
