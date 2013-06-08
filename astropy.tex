@@ -414,7 +414,7 @@ physical quantities and user-specified quantities.
 The \texttt{astropy.time} package provides functionality for manipulating times
 and dates. Specific emphasis is placed on supporting time scales (e.g. UTC,
 TAI, UT1) and time formats/representations (e.g. JD, MJD, ISO 8601) that are
-used in astronomy. Examples of using this sub-package are provided in Figure
+used in astronomy \citep{guinot88,kovalevsky01,sofa_wallace}. Examples of using this sub-package are provided in Figure
 \ref{code:time}.
 
 The most common way to use \texttt{astropy.time} is to create a \texttt{Time}
@@ -509,7 +509,7 @@ units to be in hours, minutes, and seconds, so this value is alone sufficient
 to pass to the angle initializer. This functionality is built around the
 \texttt{Angle} object, which can be instantiated and used on its own. It
 provides additional functionality like string formatting and mechanisms to
-specify the valid bounds of an angle.
+specify the valid bounds of an angle. As a convenience, it is also possible to query the online SIMBAD database to resolve the name of a source (see Figure~\ref{fig:code_coordinates} for an example showing how to find the ICRS coordinates of M32).
 
 \begin{figure}
 \center
