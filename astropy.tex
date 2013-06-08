@@ -122,7 +122,7 @@ Andy Ptak\inst{\ref{inst:gsfc}}  % confirmed
   \and
 Brian Refsdal  % confirmed
   \and
-Mathieu Servillat\inst{\ref{inst:saclay}}  % confirmed
+Mathieu Servillat\inst{\ref{inst:saclay},\ref{inst:cfa}}  % confirmed
   \and
 Ole Streicher\inst{\ref{inst:leibniz}}  % confirmed
 }
@@ -344,15 +344,13 @@ identical.
 
 This sub-package includes the concept of ``equivalencies'' in units, which is
 intended to be used where there exists an equation that provides a relationship
-between two different physical quantities such that providing either one
-uniquely defines the other. A standard astronomical example is the
+between two different physical quantities. A standard astronomical example is the
 relationships between the frequency, wavelength and energy of a photon - it is
 common practice to treat such units as equivalent even though they are not
-strictly comparable. The inclusion of these equivalencies is an important
+strictly comparable. Such a conversion can be carried out in \texttt{astropy.units} by supplying an equivalency list
+(see Figure~\ref{code:quantities}). The inclusion of these equivalencies is an important
 improvement over existing unit-handling software, which typically does not
-have this functionality. For example, wavelength and frequency are not normally
-convertible, but by passing an equivalency list, the conversion is supported
-(see Figure~\ref{code:quantities}). Equivalencies are also included for flux
+have this functionality. Equivalencies are also included for flux
 densities, and users can easily implement their own equivalencies.
 
 There are multiple string representations for units used in the astronomy
