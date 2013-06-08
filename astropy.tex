@@ -102,7 +102,7 @@ D. J. Burke\inst{\ref{inst:cfa}}  % confirmed
   \and
 Andy Casey\inst{\ref{inst:stromlo}}  % confirmed
   \and
-Steve Crawford\inst{\ref{inst:saao}}  % confirmed
+Steve M. Crawford\inst{\ref{inst:saao}}  % confirmed
   \and
 Nadia Dencheva\inst{\ref{inst:stsci}}  % confirmed
   \and
@@ -605,9 +605,9 @@ However, for use in astronomy all of these implementations lack some key
 features. The data that is stored in arrays and tables often contains vital
 metadata: the data is associated with units, and might also contain additional
 arrays that either mask or provide additional attributes to each cell.
-Furthermore, the data often has a parameter/value dataset attached with it.
+Furthermore, the data often includes a set of keyword-value pairs and comments (such as FITS headers).
 Finally, the data comes in a plethora of astronomy specific formats (FITS,
-specially formatted ASCII tables, etc.) which are not recognized by the
+specially formatted ASCII tables, etc.), which are not recognized by the
 pre-existing packages.
 
 The \texttt{astropy.table} and \texttt{astropy.nddata} sub-packages contain
@@ -896,6 +896,7 @@ publicly-available developer version):
 \item Supporting more file formats for reading and writing \texttt{Table} and \texttt{NDData} objects
 \item Implementing a Virtual Observatory cone search tool
 \item Implementing a generalized model-fitting framework
+\item Implementing statistical functions commonly used in Astronomy
 \end{itemize}
 
 In the longer term, we are already planning the following functionality:
@@ -903,7 +904,7 @@ In the longer term, we are already planning the following functionality:
 \begin{itemize}
 \item More Virtual Observatory tools
 \item A SAMP server/client (based on the SAMPy\footnote{\url{http://pythonhosted.org/sampy/}} package)
-\item Aperture and PSF photometry tools
+\item Image analysis tools, including aperture and point spread function (PSF) photometry
 \item Spectroscopic analysis tools
 \item Generalized WCS transformations beyond the FITS WCS standard
 \end{itemize}
