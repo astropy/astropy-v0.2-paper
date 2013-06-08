@@ -13,13 +13,14 @@ Make use of the unit equivalencies:
 <Quantity 95.37245609234003 Angstrom>
 
 Combine quantities:
->>> x = 1.4e11*u.km / (0.7*u.Myr) / (4.1e11*u.s)
-<Quantity 0.487804878049 km / (Myr s)>
+>>> x = 1.4e11 * u.km / (0.7 * u.Myr)
+>>> x
+<Quantity 2e+11 km / Myr>
 
 Convert to SI units:
 >>> x.si
-<Quantity 1.54576038117e-11 m / s2>
+<Quantity 6.33761756281 m / s>
 
 Convert to CGS units:
 >>> x.cgs
-<Quantity 1.54576038117e-09 Gal>
+<Quantity 633.761756281 cm / s>
