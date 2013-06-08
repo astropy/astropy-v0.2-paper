@@ -108,7 +108,7 @@ Nadia Dencheva\inst{\ref{inst:stsci}}  % confirmed
   \and
 Justin Ely\inst{\ref{inst:stsci}}  % confirmed
   \and
-Tim Jenness\inst{\ref{inst:jac}}  % confirmed
+Tim Jenness\inst{\ref{inst:jac},\ref{inst:cornell}}  % confirmed
   \and
 Kathleen Labrie\inst{\ref{inst:gemini_n}}  % confirmed
   \and
@@ -197,6 +197,9 @@ Marseille, France
     \and
   Joint Astronomy Centre, 660 North A'ohoku Place, Hilo, HI 96720, USA
   \label{inst:jac}
+    \and
+  Department of Astronomy, Cornell University, Ithaca, NY 14853
+  \label{inst:cornell}
     \and
   Gemini Observatory, 670 N. A'ohoku Place, Hilo, Hawaii 96720, USA
   \label{inst:gemini_n}
@@ -354,13 +357,13 @@ have this functionality. Equivalencies are also included for flux
 densities, and users can easily implement their own equivalencies.
 
 There are multiple string representations for units used in the astronomy
-community. The FITS Standard \cite{fits2008} defines a unit standard, as well
+community. The FITS Standard \citep{fits2008} defines a unit standard, as well
 as both the Centre de Donn\'ees astronomiques de Strasbourg (CDS)
 \citep{ochsenbein2000cds} and NASA/Goddard's Office of Guest Investigator
 Programs (OGIP) \citep{george1995ogip}. In addition, the International Virtual
 Observatory Alliance (IVOA) has a forthcoming VOUnit standard
 \citep{derriere2012vounit} in an attempt to resolve some of these differences.
-Rather than choose one of these, \texttt{astropy.units} supports all of these
+Rather than choose one of these, \texttt{astropy.units} supports most of these
 standards\footnote{OGIP support is forthcoming at the time of this writing.},
 and allows the user to select the appropriate one when reading and writing unit
 string definitions to and from external file formats.
@@ -483,8 +486,8 @@ package is to provide a common application programming interface (API) for
 Python astronomy packages that use coordinates, and to relieve users from
 having to (re)implement extremely common utilities. To achieve this, it
 leverages important lessons learned from existing Python coordinates packages
-such as \texttt{kapteyn}, \texttt{pyast}, \texttt{pyephem} \citep{pyephem}, and
-\texttt{astropysics} \citep{astropysics} that this package aims to supplant.
+such as \texttt{kapteyn} \citep{kapteyn}, \texttt{pyast} \citep{pyast}, \texttt{pyephem} \citep{pyephem}, \texttt{palpy} \citep{palpy}, and
+\texttt{astropysics} \citep{astropysics}, that this package aims to supplant.
 
 The sub-package has been designed to present a natural Python interface for
 representing coordinates in computations, simplify input and output formatting,
@@ -523,19 +526,15 @@ defaults. For some classes, they also contain added functionality specific to a
 subset of systems, such as code to precess a coordinate to a new equinox. The
 implemented systems include a variety of equatorial coordinate systems (ICRS,
 FK4, and FK5), Galactic coordinates, and horizontal (Alt/Az) coordinates.
-Future versions of Astropy will include additional common systems, including
+Coordinate objects can easily be transformed from one coordinate system to another: Figure \ref{fig:code_coordinates}
+illustrates the most basic use of this functionality to convert a position on the sky from ICRS to
+Galactic coordinates. Transformations are provided between all coordinate
+systems built into version v0.2 of Astropy, with the exception of conversions
+from celestial to horizontal coordinates. Future versions of Astropy will
+include additional common systems, including
 ecliptic systems, supergalactic coordinates, and all necessary intermediate
 coordinate systems for the IAU 2000/2006 equatorial-to-horizontal mapping
 \citep[e.g.,][]{soffel03, usnocircular179}.
-
-Another major feature of \texttt{astropy.coordinates} is the methodology for
-transforming between coordinate systems. Figure \ref{fig:code_coordinates}
-illustrates the most basic use of this functionality to convert from ICRS to
-Galactic coordinates. Transformations are provided between all coordinate
-systems built into version 0.2 of Astropy, with the exception of conversions
-from celestial to horizontal coordinates. This is planned for the next major
-release, using the transformation architecture endorsed by the IAU 2000/2006
-resolutions \citep[see e.g.,][]{soffel03, usnocircular179}.
 
 A final significant feature of \texttt{astropy.coordinates} is support for
 line-of-sight distances. While the term ``celestial coordinates'' can be taken
@@ -581,6 +580,8 @@ example, Galactic coordinates are defined relative to FK4 coordinates rather
 than with respect to a set of other common coordinate systems \citep{galcoords,
 reid04}.
 
+% TODO: Comment from Tim Jenness: We should state whether we support the modern nutation and precession models in general (I don't think we do but ERFA/SOFA does).
+
 \subsection{Tables and Gridded data}
 
 % Authors: Tom A., Tom R., Wolfgang K., Erik T.
@@ -598,7 +599,7 @@ sub-package.\label{code:tables}}
 Tables and $n$-dimensional data arrays are the most common forms of data
 encountered in astronomy. The \gls{python}-community has various solutions for
 tables, such as \gls{numpy} structured arrays or \texttt{DataFrame} objects in
-Pandas\footnote{\url{http://pandas.pydata.org}} to name only a couple. For
+Pandas \citep{pandas} to name only a couple. For
 n-dimensional data the \gls{numpy} \texttt{ndarray} is the most popular.
 
 However, for use in astronomy all of these implementations lack some key
@@ -705,10 +706,10 @@ The \texttt{astropy.io.ascii} sub-package (formerly the standalone project
 provides the ability to read and write tabular data for a wide variety of
 ASCII-based formats. In addition to generic formats such as space-delimited,
 tab-delimited or comma-separated values, \texttt{astropy.io.ascii} provides
-classes for specialized table formats like
+classes for specialized table formats such as
 CDS\footnote{\url{http://vizier.u-strasbg.fr/doc/catstd.htx}},
 IPAC\footnote{\url{http://irsa.ipac.caltech.edu/applications/DDGEN/Doc/ipac_tbl.html}},
-IRAF DAOphot, and LaTeX. There is also a flexible class for handling a wide
+IRAF DAOphot \citep{daophot}, and LaTeX. There is also a flexible class for handling a wide
 variety of fixed-width table formats. Finally, this sub-package is designed to be
 extensible, making it easy for users to define their own readers and writers for
 any other ASCII formats.
@@ -758,7 +759,7 @@ This sub-package is a wrapper around Mark Calabretta's \texttt{wcslib}
 using \texttt{wcslib}, it is assured the same behavior as the many other tools
 that use \texttt{wcslib}. On top of the basic FITS WCS support, it adds support
 for the Simple Imaging Polynomial (SIP) convention and table lookup distortions
-as defined in the draft WCS ``Paper IV'' \citep{calabretta2004wcs}. Each of
+\citep{calabretta_sip,sip}. Each of
 these transformations can be used independently or together in a fixed
 pipeline.
 

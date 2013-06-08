@@ -137,7 +137,7 @@ archivePrefix = "ascl",
 
 @manual{fits2008,
   title={Definition of the Flexible Image Transport System (FITS)},
-  author={FITS Working Group},
+  author={{FITS Working Group}},
   year={2008},
   publisher={International Astronomical Union},
   journal={http://fits.gsfc.nasa.gov/standard30/fits_standard30aa.pdf}
@@ -162,7 +162,7 @@ archivePrefix = "ascl",
 
 @manual{derriere2012vounit,
   title={Units in the VO, Version 1.0},
-  edition={IVOA Proposed Recommendation 20 August 2012},
+  edition={{IVOA Proposed Recommendation 20 August 2012}},
   author={Derriere, S. and Gray, N. and Louys, M. and McDowell, J. and
     Ochsenbein, F. and Osuna, P. and Rino, B. and Salgado, J.},
   year={2012},
@@ -181,16 +181,16 @@ archivePrefix = "ascl",
  note         = "http://www.iausofa.org"
  }
  
-@INPROCEEDINGS{sofa_wallace,
+@ARTICLE{sofa_wallace,
    author = {{Wallace}, P.~T.},
-    title = "{The IAU SOFA Initiative}",
-booktitle = {Astronomical Data Analysis Software and Systems V},
-     year = 1996,
-   series = {Astronomical Society of the Pacific Conference Series},
-   volume = 101,
-   editor = {{Jacoby}, G.~H. and {Barnes}, J.},
-    pages = {207},
-   adsurl = {http://adsabs.harvard.edu/abs/1996ASPC..101..207W},
+    title = "{Software for timescale applications}",
+  journal = {Metrologia},
+     year = 2011,
+    month = aug,
+   volume = 48,
+    pages = {200},
+      doi = {10.1088/0026-1394/48/4/S11},
+   adsurl = {http://adsabs.harvard.edu/abs/2011Metro..48S.200W},
   adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 }
 
@@ -198,11 +198,54 @@ booktitle = {Astronomical Data Analysis Software and Systems V},
 % Celestial Coordinates
 % =====================
 
+@INPROCEEDINGS{pyast,
+   author = {{Berry}, D.~S. and {Jenness}, T.},
+    title = "{New Features in AST: A WCS Management and Manipulation Library}",
+booktitle = {Astronomical Data Analysis Software and Systems XXI},
+     year = 2012,
+   series = {Astronomical Society of the Pacific Conference Series},
+   volume = 461,
+archivePrefix = "arXiv",
+   eprint = {1210.5483},
+ primaryClass = "astro-ph.IM",
+   editor = {{Ballester}, P. and {Egret}, D. and {Lorente}, N.~P.~F.},
+    month = sep,
+    pages = {825},
+   adsurl = {http://adsabs.harvard.edu/abs/2012ASPC..461..825B},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
 
+@MANUAL{kapteyn,
+   organization = "{Kapteyn Astronomical Institute}",
+   author       = {{Terlouw}, J.~P. and {Vogelaar}, M.~G.~R.},
+   title        = "{Kapteyn Package, version 2.2}",
+   year         = 2012,
+   month        = apr,
+   address      = "Groningen",
+   note         = "Available from \url{http://www.astro.rug.nl/software/kapteyn/}"
+}
+
+@inproceedings{palpy,
+  author = {Tim Jenness and David S. Berry},
+  booktitle = "ADASS XXII",
+  year = 2013,
+  editor = {D. Friedel and M. Freemon and R. Plante},
+  series = "ASP Conf Ser.",
+  volume = "TBD",
+  pages = "in press",
+  publisher = "ASP",
+  address = "San Francisco"
+}
 
 % Tables and Gridded data
 % =======================
 
+@book{pandas,
+  title={Python for Data Analysis},
+  author={McKinney, William},
+  year={2012},
+  publisher={O'Reilly Media, Incorporated}
+}
 
 
 % File Formats
@@ -226,7 +269,19 @@ booktitle = {Astronomical Data Analysis Software and Systems VIII},
 % ASCII Table Formats
 % -------------------
 
-
+@ARTICLE{daophot,
+   author = {{Stetson}, P.~B.},
+    title = "{DAOPHOT - A computer program for crowded-field stellar photometry}",
+  journal = {\pasp},
+ keywords = {ALGORITHMS, ASTRONOMICAL PHOTOMETRY, COMPUTER PROGRAMS, CHARGE COUPLED DEVICES, COLOR-MAGNITUDE DIAGRAM, MAGELLANIC CLOUDS, POINT SPREAD FUNCTIONS, TELEVISION CAMERAS},
+     year = 1987,
+    month = mar,
+   volume = 99,
+    pages = {191-222},
+      doi = {10.1086/131977},
+   adsurl = {http://adsabs.harvard.edu/abs/1987PASP...99..191S},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
 
 % VO Table
 % --------
@@ -287,12 +342,34 @@ booktitle = {Astronomical Data Analysis Software and Systems VIII},
   note={http://www.atnf.csiro.au/people/mcalabre/WCS/scs.pdf}
 }
 
-@article{calabretta2004wcs,
-  title={Representations of distortions in FITS world coordinate systems},
-  author={Calabretta, M. R. and Valdes, F. G. and Greisen, E. W. and Allen S. L.},
-  year={2004},
-  journal={Unpublished draft},
-  note={http://www.atnf.csiro.au/people/mcalabre/WCS/dcs_20040422.pdf}
+@INPROCEEDINGS{calabretta_sip,
+   author = {{Calabretta}, M.~R. and {Valdes}, F. and {Greisen}, E.~W. and 
+	{Allen}, S.~L.},
+    title = "{Representations of distortions in FITS world coordinate systems}",
+booktitle = {Astronomical Data Analysis Software and Systems (ADASS) XIII},
+     year = 2004,
+   series = {Astronomical Society of the Pacific Conference Series},
+   volume = 314,
+   editor = {{Ochsenbein}, F. and {Allen}, M.~G. and {Egret}, D.},
+    month = jul,
+    pages = {551},
+   adsurl = {http://adsabs.harvard.edu/abs/2004ASPC..314..551C},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+@INPROCEEDINGS{sip,
+   author = {{Shupe}, D.~L. and {Moshir}, M. and {Li}, J. and {Makovoz}, D. and 
+	{Narron}, R. and {Hook}, R.~N.},
+    title = "{The SIP Convention for Representing Distortion in FITS Image Headers}",
+booktitle = {Astronomical Data Analysis Software and Systems XIV},
+     year = 2005,
+   series = {Astronomical Society of the Pacific Conference Series},
+   volume = 347,
+   editor = {{Shopbell}, P. and {Britton}, M. and {Ebert}, R.},
+    month = dec,
+    pages = {491},
+   adsurl = {http://adsabs.harvard.edu/abs/2005ASPC..347..491S},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
 }
 
 @manual{calabretta2013wcslib,
