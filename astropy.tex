@@ -598,7 +598,7 @@ sub-package.\label{code:tables}}
 \end{figure}
 
 Tables and $n$-dimensional data arrays are the most common forms of data
-encountered in astronomy. The \gls{python}-community has various solution for
+encountered in astronomy. The \gls{python}-community has various solutions for
 tables, such as \gls{numpy} structured arrays or \texttt{DataFrame} objects in
 Pandas\footnote{\url{http://pandas.pydata.org}} to name only a couple. For
 n-dimensional data the \gls{numpy} \texttt{ndarray} is the most popular.
@@ -621,7 +621,7 @@ of \texttt{astropy.table} are shown in Figure~\ref{code:tables}.
 The \texttt{Table} class provides a high-level wrapper to \gls{numpy} structured
 arrays, which are essentially arrays that have fields (or columns) with
 heterogeneous data types, and any number of rows. \gls{numpy} structured arrays are
-however difficult to manipulate or modify, so the \texttt{Table} class makes it
+however difficult to modify, so the \texttt{Table} class makes it
 easy for users to create a table from columns, add and remove columns or rows,
 and mask values from the table. Furthermore, tables can be easily read from and
 written to common file formats using the \texttt{Table.read} and
