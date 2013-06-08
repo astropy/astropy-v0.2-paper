@@ -100,7 +100,7 @@ K. Azalee Bostroem\inst{\ref{inst:stsci}}  % confirmed
   \and
 D. J. Burke\inst{\ref{inst:cfa}}  % confirmed
   \and
-Andy Casey\inst{\ref{inst:stromlo}}  % confirmed
+Andrew R. Casey\inst{\ref{inst:stromlo}}  % confirmed
   \and
 Steve M. Crawford\inst{\ref{inst:saao}}  % confirmed
   \and
@@ -189,7 +189,7 @@ Marseille, France
   Department of Physics and Astronomy, Louisiana State University, Nicholson Hall, Baton Rouge, LA 70803, USA
   \label{inst:louisiana}
     \and
-  Research School of Astronomy and Astrophysics, Australian National University, Mount Stromlo Observatory
+  Research School of Astronomy and Astrophysics, Australian National University, Mount Stromlo Observatory, via Cotter Road, Weston Creek ACT 2611, Australia
   \label{inst:stromlo}
     \and
   SAAO, P.O. Box 9, Observatory 7935, Cape Town, South Africa
@@ -258,7 +258,7 @@ Motivated by these issues, the Astropy project was started in
 2011\footnote{Following discussions on the \texttt{astropy} mailing list at
 \url{http://mail.scipy.org/mailman/listinfo/astropy}} out of a desire to bring
 together developers across the field of astronomy in order to coordinate the
-development of a common set of Python tools for astronomers in order to
+development of a common set of Python tools for astronomers and
 simplify the landscape of available packages. The project has grown rapidly,
 and to date, over 180 people are signed up to the development mailing list for
 the Astropy project\footnote{
@@ -377,7 +377,7 @@ the units themselves, a more common use-case is to attach the units to
 quantities, and use them together in expressions. The \texttt{astropy.units}
 package allows units to be attached to Python scalars, or \gls{numpy} arrays,
 producing \texttt{Quantity} objects. These objects support arithmetic with
-other numbers and \texttt{Quantity} objects and preserve their units. For
+other numbers and \texttt{Quantity} objects while preserving their units. For
 multiplication and division, the resulting object will retain all units used in
 the expression. The final object can then be converted to a specified set of
 units or decomposed, effectively canceling and combining any equivalent units
@@ -387,7 +387,7 @@ demonstrated in Figure~\ref{code:quantities}.
 Using the \texttt{.to()} method, \texttt{Quantity} objects can easily be
 converted to different units. The units must either be dimensionally
 equivalent, or users should pass equivalencies through the
-\texttt{equivalencies} argument (c.f. \S\ref{sec:units}).
+\texttt{equivalencies} argument (c.f. \S\ref{sec:units} or Figure~\ref{code:quantities}).
 
 \begin{figure}
 \center
@@ -422,7 +422,7 @@ object by supplying one or more input time values as well as the time
 format or representation and time scale of those values. The input time(s) can
 either be a single scalar like \verb|"2010-01-01 00:00:00"| or \verb|2455348.5|
 or a sequence of such values; the format or representation specifies how to
-interpret the input values, such as ISO or JD or Unix time; and the scale
+interpret the input values, such as ISO, JD, or Unix time; and the scale
 specifies the time standard used for the values, such as Coordinated Universal
 Time (UTC), Terrestial Time (TT), or International Atomic Time (TAI). The full
 list of available time scales is given in Table~\ref{tab:time_systems}. Many
@@ -441,7 +441,7 @@ feature of the SOFA time library which is supported by \texttt{astropy.time} is
 that each time is represented as a pair of double-precision (64-bit)
 floating-point values, which enables extremely high precision time
 computations. Using two 64-bit floating-point values allows users to represent
-times with a dynamic range of 30 orders of magnitude, for instance times
+times with a dynamic range of 30 orders of magnitude, providing for example times
 accurate to better than a nanosecond over timescales of tens of Gyr. All time
 scale conversions are done by vectorized versions of the SOFA routines using
 Cython\footnote{\url{http://www.cython.org/}} \citep{cython}, a Python package
@@ -598,7 +598,7 @@ sub-package.\label{code:tables}}
 \fbox{\includegraphics[scale=0.82,clip]{examples/code_tables.pdf}}
 \end{figure}
 
-Tables and n-dimensional data arrays are the most common forms of data
+Tables and $n$-dimensional data arrays are the most common forms of data
 encountered in astronomy. The \gls{python}-community has various solution for
 tables, such as \gls{numpy} structured arrays or \texttt{DataFrame} objects in
 Pandas\footnote{\url{http://pandas.pydata.org}} to name only a couple. For
@@ -616,7 +616,7 @@ pre-existing packages.
 The \texttt{astropy.table} and \texttt{astropy.nddata} sub-packages contain
 classes (\texttt{Table} and \texttt{NDData}) that try to alleviate these
 problems. They allow users to represent astronomical data in the form of tables
-or n-dimensional gridded datasets, including all meta-data. Examples of usage
+or n-dimensional gridded datasets, including all metadata. Examples of usage
 of \texttt{astropy.table} are shown in Figure~\ref{code:tables}.
 
 The \texttt{Table} class provides a high-level wrapper to \gls{numpy} structured
@@ -634,12 +634,12 @@ tables to be seamlessly read or written respectively.
 In addition to providing easy manipulation and input or output of table objects,
 the \texttt{Table} class allows units to be specified for each column using the
 \texttt{astropy.units} framework, and also allows the \texttt{Table} object to
-contain arbitrary meta-data (stored in \texttt{Table.meta}).
+contain arbitrary metadata (stored in \texttt{Table.meta}).
 
 Similarly, the \texttt{NDData} class provides a way to easily store n-dimensional array
 data and builds upon the \gls{numpy} \texttt{ndarray} class. The actual data is
 stored in an \texttt{ndarray}, which allows for easy compatibility with
-other scientific packages. In addition to keyword-value meta-data, the
+other scientific packages. In addition to keyword-value metadata, the
 \texttt{NDData} class can store a boolean mask with the same dimensions as the
 data, several sets of flags (n-dimensional arrays that store attributes for
 each cell of the data array), uncertainties, units, and a transformation
