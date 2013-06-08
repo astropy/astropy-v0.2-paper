@@ -492,7 +492,7 @@ The sub-package has been designed to present a natural Python interface for
 representing coordinates in computations, simplify input and output formatting,
 and allow straightforward transformation between coordinate systems. It also
 supports implementation of new or custom coordinate systems that work
-consistently with the built-in systems. A future design goal is to also
+consistently with the built-in systems. A future design goal is also to 
 seamlessly support arbitrarily large data sets.
 
 To that end, Figure \ref{fig:code_coordinates} shows some typical usage
@@ -635,8 +635,8 @@ the \texttt{Table} class allows units to be specified for each column using the
 \texttt{astropy.units} framework, and also allows the \texttt{Table} object to
 contain arbitrary metadata (stored in \texttt{Table.meta}).
 
-Similarly, the \texttt{NDData} class provides a way to easily store n-dimensional array
-data and builds upon the \gls{numpy} \texttt{ndarray} class. The actual data is
+Similarly, the \texttt{NDData} class provides a way to store n-dimensional array
+data easily and builds upon the \gls{numpy} \texttt{ndarray} class. The actual data is
 stored in an \texttt{ndarray}, which allows for easy compatibility with
 other scientific packages. In addition to keyword-value metadata, the
 \texttt{NDData} class can store a boolean mask with the same dimensions as the
@@ -793,7 +793,7 @@ parameter as a function of redshift.
 
 The fundamental model for this sub-package is that any given cosmology is
 represented by a class. An instance of this class has attributes giving all the
-parameters required to uniquely specify the cosmology, such as the Hubble
+parameters required to specify the cosmology uniquely, such as the Hubble
 parameter, CMB temperature and the baryonic, cold dark matter, and dark energy
 densities at $z=0$. One can then use methods of this class to perform
 calculations using these parameters.
@@ -923,7 +923,7 @@ and will never be considered `complete' in the traditional sense.
 
 We have presented the first public release of the Astropy package (v0.2), a
 core Python package for astronomers. In this paper we have described the main
-functionality, which includes:
+functionality in this release, which includes:
 
 \begin{itemize}
 \item Units and unit conversions (\S\ref{sec:units_main})
