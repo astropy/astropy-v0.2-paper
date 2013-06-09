@@ -388,6 +388,8 @@ Using the \texttt{.to()} method, \texttt{Quantity} objects can easily be
 converted to different units. The units must either be dimensionally
 equivalent, or users should pass equivalencies through the
 \texttt{equivalencies} argument (c.f. \S\ref{sec:units} or Figure~\ref{code:quantities}).
+Since \texttt{Quantity} objects can operate with \gls{numpy} arrays, it very simple
+and efficient to convert the units on large datasets.
 
 \begin{figure}
 \center
