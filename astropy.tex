@@ -487,17 +487,22 @@ Astropy by the \texttt{astropy.coordinates} sub-package. The aim of this
 package is to provide a common application programming interface (API) for
 Python astronomy packages that use coordinates, and to relieve users from
 having to (re)implement extremely common utilities. To achieve this, it
-leverages important lessons learned from existing Python coordinates packages
-such as \texttt{kapteyn} \citep{kapteyn}, \texttt{pyast} \citep{pyast}, \texttt{pyephem} \citep{pyephem}, \texttt{palpy} \citep{palpy}, and
-\texttt{astropysics} \citep{astropysics}, that this package aims to supplant.
-
-%TODO: Comment from @mservillat: End of paragraph 1: what are the "lessons learned" exactly? Is it what is described in the next paragraph? then a clear link is needed (add "For example", "In particular"...). 
+combines API and implementation ideas from existing Python coordinates packages.
+Some aspects, such as coordinate transformation approaches from
+\texttt{kapteyn} \citep{kapteyn} and class structures resembling
+\texttt{astropysics} \citep{astropysics}, have already been implemented.
+Others, like the frames of \texttt{palpy} \citep{palpy}
+and \texttt{pyast} \citep{pyast} or the ephemeris system of
+\texttt{pyephem} \citep{pyephem}, are still under design for \texttt{astropy}.
+By combining the best aspects of these other packages, as well as
+testing against them, \texttt{astropy.coordinates} seeks to provide a high-quality,
+flexible python coordinates library.
 
 The sub-package has been designed to present a natural Python interface for
 representing coordinates in computations, simplify input and output formatting,
 and allow straightforward transformation between coordinate systems. It also
 supports implementation of new or custom coordinate systems that work
-consistently with the built-in systems. A future design goal is also to 
+consistently with the built-in systems. A future design goal is also to
 seamlessly support arbitrarily large data sets.
 
 To that end, Figure \ref{fig:code_coordinates} shows some typical usage
@@ -839,7 +844,7 @@ calculations performed with \textsc{Mathematica}.
 % Authors: Tom R., Erik T., Perry G.
 
 A primary guiding philosophy of Astropy is that it is developed for and (at least in part)
-\emph{by} the astronomy user community.  This ensures the interface is 
+\emph{by} the astronomy user community.  This ensures the interface is
 designed with the workflow of working astronomers in mind.  At the same time, it aims
 to make use of the expertise of software developers to design code that encourages
 good software practices such as a consistent and clean API, thorough documentation,
@@ -847,9 +852,9 @@ and integrated testing.  It is also dedicated to remaining open source, allowing
 all users and assisting wider adoption. Achieving these aims requires code collaboration
 between over 30 geographically-distributed developers, and here we describe
 our development workflow with the hope that it may be replicated by other astronomy
-software projects that are likely to have similar needs. 
+software projects that are likely to have similar needs.
 
-To enable this collaboration, we have made use of the 
+To enable this collaboration, we have made use of the
 GitHub\footnote{\url{http://www.github.com}} open source code hosting and
 development  platform. The main repository for \astropy is stored in a
 git\footnote{\url{http://git-scm.com/}} repository on GitHub, and any
