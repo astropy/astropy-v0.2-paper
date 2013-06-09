@@ -1,4 +1,4 @@
-\begin{thebibliography}{40}
+\begin{thebibliography}{38}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Barrett} \& {Bridgman}(1999)}]{barrett1999pyfits}
@@ -15,11 +15,6 @@ Behnel, S., Bradshaw, R., Citro, C., Dalcin, L., Seljebotn, D., \& Smith, K.
 {Berry}, D.~S., \& {Jenness}, T. 2012, in Astronomical Society of the Pacific
   Conference Series, Vol. 461, Astronomical Data Analysis Software and Systems
   XXI, ed. P.~{Ballester}, D.~{Egret}, \& N.~P.~F. {Lorente}, 825, 1210.5483
-
-\bibitem[{{Blaauw} {et~al.}(1960){Blaauw}, {Gum}, {Pawsey}, \&
-  {Westerhout}}]{galcoords}
-{Blaauw}, A., {Gum}, C.~S., {Pawsey}, J.~L., \& {Westerhout}, G. 1960, \mnras,
-  121, 123
 
 \bibitem[{Calabretta(2013)}]{calabretta2013wcslib}
 Calabretta, M.~R. 2013, WCSLIB 4.17 and PGSBOX 4.17 Documentation
@@ -137,9 +132,6 @@ Oschenbein, F. {et~al.} 2004, VOTable Format Definition, Version 1.1,
 {Pontzen}, A., {Ro{\v s}kar}, R., {Stinson}, G.~S., {Woods}, R., {Reed}, D.~M.,
   {Coles}, J., \& {Quinn}, T.~R. 2013, {pynbody: Astrophysics Simulation
   Analysis for Python}
-
-\bibitem[{{Reid} \& {Brunthaler}(2004)}]{reid04}
-{Reid}, M.~J., \& {Brunthaler}, A. 2004, \apj, 616, 872, arXiv:astro-ph/0408107
 
 \bibitem[{{Rhodes}(2011)}]{pyephem}
 {Rhodes}, B.~C. 2011, {PyEphem: Astronomical Ephemeris for Python}, 1112.014

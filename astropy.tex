@@ -562,35 +562,22 @@ physical distances. Figure \ref{fig:code_coordinates} illustrates an
 application of this information in the form of computing three-dimensional
 distances between two objects.
 
-These features are made more useful by the design philosophy of
-\texttt{astropy.coordinates} that it should be easy for a user to add new
-systems with minimal bookkeeping. In fact, it is possible for a new contributor
-or user to add a new coordinate system with only a class definition and two
-transformation functions. Coordinate systems added in this manner are
-``first-class citizens'' of the package, meaning that they have all the
-capabilities of the systems that are included in the package. An example of
-such a user-defined system is provided in the
-documentation\footnote{\url{http://docs.astropy.org/en/v0.2/coordinates/sgr-example.html#complete-code-for-example}},
-illustrating the definition of a coordinate system useful for a specific
-scientific task (Johnston \& Price-Whelan 2013, in prep).
-
-% The start of the following paragraph can be shortened if needed.
-
-This flexibility is achieved in \texttt{astropy.coordinates} through the use of
-a transformation graph. All coordinate systems are represented as classes;
-internally, the transformation infrastructure keeps track of a network of
+The \texttt{astropy.coordinates} sub-package was designed such that it should be easy for a user to easily add new
+coordinate systems, with only a class definition and two transformation functions.
+This flexibility is achieved in \texttt{astropy.coordinates} through the internal use of
+a transformation graph, which keeps track of a network of
 coordinate systems and the transformations between them. When a coordinate
 object is to be transformed from one system into another, the package
 determines the shortest path on the transformation graph to the new system and
 applies the necessary sequence of transformations. Thus, implementing a new
-coordinate system only requires implementing one pair of transformations to and
+coordinate system simply requires implementing one pair of transformations to and
 from a system that is already connected to the transformation graph. Once this
 pair is specified, \texttt{astropy.coordinates} can transform from that
-coordinate system to any other in the graph. This greatly simplifies
-implementation and mirrors the way most coordinate systems are defined. For
-example, Galactic coordinates are defined relative to FK4 coordinates rather
-than with respect to a set of other common coordinate systems \citep{galcoords,
-reid04}.
+coordinate system to any other in the graph.
+An example of a user-defined system is provided in the
+documentation\footnote{\url{http://docs.astropy.org/en/v0.2/coordinates/sgr-example.html#complete-code-for-example}},
+illustrating the definition of a coordinate system useful for a specific
+scientific task (Johnston \& Price-Whelan 2013, in prep).
 
 \subsection{Tables and Gridded data}
 
