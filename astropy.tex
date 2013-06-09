@@ -487,17 +487,22 @@ Astropy by the \texttt{astropy.coordinates} sub-package. The aim of this
 package is to provide a common application programming interface (API) for
 Python astronomy packages that use coordinates, and to relieve users from
 having to (re)implement extremely common utilities. To achieve this, it
-leverages important lessons learned from existing Python coordinates packages
-such as \texttt{kapteyn} \citep{kapteyn}, \texttt{pyast} \citep{pyast}, \texttt{pyephem} \citep{pyephem}, \texttt{palpy} \citep{palpy}, and
-\texttt{astropysics} \citep{astropysics}, that this package aims to supplant.
-
-%TODO: Comment from @mservillat: End of paragraph 1: what are the "lessons learned" exactly? Is it what is described in the next paragraph? then a clear link is needed (add "For example", "In particular"...). 
+combines API and implementation ideas from existing Python coordinates packages.
+Some aspects, such as coordinate transformation approaches from
+\texttt{kapteyn} \citep{kapteyn} and class structures resembling
+\texttt{astropysics} \citep{astropysics}, have already been implemented.
+Others, like the frames of \texttt{palpy} \citep{palpy}
+and \texttt{pyast} \citep{pyast} or the ephemeris system of
+\texttt{pyephem} \citep{pyephem}, are still under design for \texttt{astropy}.
+By combining the best aspects of these other packages, as well as
+testing against them, \texttt{astropy.coordinates} seeks to provide a high-quality,
+flexible python coordinates library.
 
 The sub-package has been designed to present a natural Python interface for
 representing coordinates in computations, simplify input and output formatting,
 and allow straightforward transformation between coordinate systems. It also
 supports implementation of new or custom coordinate systems that work
-consistently with the built-in systems. A future design goal is also to 
+consistently with the built-in systems. A future design goal is also to
 seamlessly support arbitrarily large data sets.
 
 To that end, Figure \ref{fig:code_coordinates} shows some typical usage
@@ -529,7 +534,8 @@ provide customized initializers and appropriate formatting and representation
 defaults. For some classes, they also contain added functionality specific to a
 subset of systems, such as code to precess a coordinate to a new equinox. The
 implemented systems include a variety of equatorial coordinate systems (ICRS,
-FK4, and FK5), Galactic coordinates, and horizontal (Alt/Az) coordinates.
+FK4, and FK5), Galactic coordinates, and horizontal (Alt/Az) coordinates, and
+modern (IAU 2006/200A) precession/nutation models for the relevant systems.
 Coordinate objects can easily be transformed from one coordinate system to another: Figure \ref{fig:code_coordinates}
 illustrates the most basic use of this functionality to convert a position on the sky from ICRS to
 Galactic coordinates. Transformations are provided between all coordinate
@@ -583,8 +589,6 @@ implementation and mirrors the way most coordinate systems are defined. For
 example, Galactic coordinates are defined relative to FK4 coordinates rather
 than with respect to a set of other common coordinate systems \citep{galcoords,
 reid04}.
-
-% TODO: Comment from Tim Jenness: We should state whether we support the modern nutation and precession models in general (I don't think we do but ERFA/SOFA does).
 
 \subsection{Tables and Gridded data}
 
@@ -765,13 +769,17 @@ that use \texttt{wcslib}. On top of the basic FITS WCS support, it adds support
 for the Simple Imaging Polynomial (SIP) convention and table lookup distortions
 \citep{calabretta_sip,sip}. Each of
 these transformations can be used independently or together in a fixed
-pipeline.
-
-The \texttt{astropy.wcs} sub-package also serves as a useful FITS WCS validation
+pipeline. The \texttt{astropy.wcs} sub-package also serves as a useful FITS WCS validation
 tool, as it is able to report on many common mistakes or deviations from the
 standard in a given FITS file.
 
-%TODO: Comment from @mservillat: naive question, but is there any link (or future link) with the coordinates subpackage? I think some people will have the question in mind at the end of this section.
+As mentioned above, the long-term plan is to build a ``generalized'' WCS for mapping
+world coordinates to image coordinates (and vice versa).  While only in early
+planning stages, such a package would aim to not be tied to the FITS representation
+used for the current \texttt{astropy.wcs}.  Such a package would also include
+closer connection to other parts of Astropy like \texttt{astropy.coordinates},
+although such interconnections may also occur in future releases of \texttt{astropy.wcs},
+depending on the pace of development of the new package.
 
 \subsection{Cosmology}
 
@@ -839,17 +847,20 @@ calculations performed with \textsc{Mathematica}.
 % Authors: Tom R., Erik T., Perry G.
 
 A primary guiding philosophy of Astropy is that it is developed for and (at least in part)
-\emph{by} the astronomy user community.  This ensures the interface is 
+\emph{by} the astronomy user community.  This ensures the interface is
 designed with the workflow of working astronomers in mind.  At the same time, it aims
 to make use of the expertise of software developers to design code that encourages
 good software practices such as a consistent and clean API, thorough documentation,
-and integrated testing.  It is also dedicated to remaining open source, allowing input from
-all users and assisting wider adoption. Achieving these aims requires code collaboration
+and integrated testing.  It is also dedicated to remaining open source to enable wide adoption
+and render input from all users easier, and is thus
+released with a 3-clause BSD-style license\footnote{A license of this sort is ``permissive''
+in that it allows usage of the code for any purposes as long as notice of the Astropy copyright
+and disclaimers of warranty are given.}. Achieving these aims requires code collaboration
 between over 30 geographically-distributed developers, and here we describe
 our development workflow with the hope that it may be replicated by other astronomy
-software projects that are likely to have similar needs. 
+software projects that are likely to have similar needs.
 
-To enable this collaboration, we have made use of the 
+To enable this collaboration, we have made use of the
 GitHub\footnote{\url{http://www.github.com}} open source code hosting and
 development  platform. The main repository for \astropy is stored in a
 git\footnote{\url{http://git-scm.com/}} repository on GitHub, and any
@@ -883,8 +894,6 @@ changes. We have also implemented a feature that means that anyone reading the
 documentation at \url{http://docs.astropy.org} can suggest improvements to the
 documentation with just a few clicks in a web browser without any prior
 knowledge of the git version control system.
-
-%TODO: Comment from @mservillat: there is nothing about the license for Astropy (just a word in the intro about some affiliated packages not being compatible with the Astropy license). Shouldn't we say a word about the license?
 
 \section{Planned functionality}
 
