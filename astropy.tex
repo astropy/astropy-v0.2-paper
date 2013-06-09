@@ -140,7 +140,7 @@ Ole Streicher\inst{\ref{inst:leibniz}}  % confirmed
   Hubble Fellow
   \label{inst:hubble}
     \and
-  Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218
+  Space Telescope Science Institute, 3700 San Martin Drive, Baltimore, MD 21218, USA
   \label{inst:stsci}
     \and
   Harvard-Smithsonian Center for Astrophysics, 60 Garden Street, Cambridge, MA, 02138, USA
@@ -201,7 +201,7 @@ Marseille, France
   Joint Astronomy Centre, 660 North A'ohoku Place, Hilo, HI 96720, USA
   \label{inst:jac}
     \and
-  Department of Astronomy, Cornell University, Ithaca, NY 14853
+  Department of Astronomy, Cornell University, Ithaca, NY 14853, USA
   \label{inst:cornell}
     \and
   Gemini Observatory, 670 N. A'ohoku Place, Hilo, Hawaii 96720, USA
@@ -248,7 +248,7 @@ participate in the development of future Astropy versions.
 
 % Authors: Tom R., Erik T., Perry G.
 
-The Python programming language\footnote{\url{http://www.python.org}} has been
+The Python programming language\footnote{\url{http://www.python.org}} has become
 one of the fastest-growing programming languages in the astronomy community in
 the last decade (see e.g. \citealt{greenfield11} for a recent review). While there have been a number of efforts to develop Python
 packages for astronomy-specific functionality, these efforts have been
@@ -266,7 +266,7 @@ Motivated by these issues, the Astropy project was started in
 together developers across the field of astronomy in order to coordinate the
 development of a common set of Python tools for astronomers and
 simplify the landscape of available packages. The project has grown rapidly,
-and to date, over 180 people are signed up to the development mailing list for
+and to date, over 190 individuals are signed up to the development mailing list for
 the Astropy project\footnote{
 \url{https://groups.google.com/forum/?fromgroups#!forum/astropy-dev}}.
 
@@ -360,7 +360,7 @@ have this functionality. Equivalencies are also included for flux
 densities, and users can easily implement their own equivalencies.
 
 There are multiple string representations for units used in the astronomy
-community. The FITS Standard \citep{fits2008} defines a unit standard, as well
+community. The FITS Standard \citep{fits3} defines a unit standard, as well
 as both the Centre de Donn\'ees astronomiques de Strasbourg (CDS)
 \citep{ochsenbein2000cds} and NASA/Goddard's Office of Guest Investigator
 Programs (OGIP) \citep{george1995ogip}. In addition, the International Virtual
@@ -634,20 +634,18 @@ the \texttt{Table} class allows units to be specified for each column using the
 \texttt{astropy.units} framework (\S\ref{sec:units_main}), and also allows the \texttt{Table} object to
 contain arbitrary metadata (stored in \texttt{Table.meta}).
 
-Similarly, the \texttt{NDData} class provides a way to store n-dimensional array
+Similarly, the \texttt{NDData} class provides a way to store $n$-dimensional array
 data easily and builds upon the \gls{numpy} \texttt{ndarray} class. The actual data is
 stored in an \texttt{ndarray}, which allows for easy compatibility with
 other scientific packages. In addition to keyword-value metadata, the
 \texttt{NDData} class can store a boolean mask with the same dimensions as the
-data, several sets of flags (n-dimensional arrays that store attributes for
+data, several sets of flags ($n$-dimensional arrays that store attributes for
 each cell of the data array), uncertainties, units, and a transformation
 between array-index coordinate system and other coordinate systems (c.f.
 \S\ref{sec:wcs}). In addition, the \texttt{NDData} class intends to provide
 methods to arithmetically combine the data in a meaningful way. \texttt{NDData}
 is not meant for direct user interaction but more for providing a framework for
-higher-level subclasses like a spectrum class or an astronomical image class.
-The \texttt{NDData} class currently does not have any built-in readers and
-writers.
+higher-level subclasses that can represent for example spectra or astronomical images.
 
 \subsection{File Formats}
 
@@ -671,28 +669,41 @@ Support for reading and writing FITS files is provided by the
 port of the
 PyFITS\footnote{\url{http://www.stsci.edu/institute/software_hardware/pyfits}}
 project \citep{barrett1999pyfits}. Users already familiar with PyFITS will
-therefore feel at home with this package. Although PyFITS will continue to be
-released as a separate product in the near term, the long term plan is to
+therefore feel at home with this package.
+
+The \texttt{astropy.io.fits} sub-package implements all features from the FITS
+standard \citep{fits3} such as images, binary tables, and ASCII tables, and
+includes common compression algorithms. Header-data units (HDUs) are
+represented by Python classes, with the data itself stored using NumPy arrays,
+and with the headers stored using a \texttt{Header} class. Files can easily be
+read and written, and once in memory can be easily modified.
+Figure~\ref{code:fits} shows a simple example of how to open an existing FITS
+file, access and modify the header and data, and write a new file back to disk.
+Creating new FITS files is also made simple. Since the code in this sub-package
+was developed for over a decade, it has over time been made to work with an
+extensive variety of FITS files, including ones that deviate from the FITS
+standard. A command-line utility, \texttt{fitscheck}, is included with Astropy
+and can be used to validate FITS files against the standard.
+
+Because the interface is exactly the same as that of PyFITS, users may directly
+replace PyFITS with Astropy in existing code by changing import statements like
+\texttt{import pyfits} to \texttt{from astropy.io import fits as pyfits}
+without any additional code changes. Although PyFITS will continue to be
+released as a separate package in the near term, the long term plan is to
 discontinue PyFITS releases in favor of Astropy. It is expected that direct
 support of PyFITS will end mid-2014, so users of PyFITS should plan to make
 suitable changes to support the eventual transition to Astropy.
 
-Figure~\ref{code:fits} shows an example of how to open an existing FITS file,
-access and modify the header and data, and write a new file back to disk.
-Because the interface is exactly the same as that of PyFITS, users may directly
-replace PyFITS with Astropy in existing code by changing import statements like
-\texttt{import pyfits} to \texttt{from astropy.io import fits as pyfits}
-without any additional code changes.
-
-Becoming integrated with Astropy as the \texttt{astropy.io.fits} sub-package will
-greatly enhance future development on the existing PyFITS code base in several
-areas. First and perhaps foremost is integration with Astropy's \texttt{Table}
-interface which is much more flexible and powerful than PyFITS' current table
-interface. We will also be able to integrate Astropy's unit support in order to
-attach units to FITS table columns as well as header values that specify units
-in their comments in accordance with the FITS standard. Finally, as the PyWCS
-package has also been integrated into Astropy as \texttt{astropy.wcs} (c.f.
-\S\ref{sec:wcs}) tighter association between data from FITS files and their
+Becoming integrated with Astropy as the \texttt{astropy.io.fits} sub-package
+will greatly enhance future development on the existing PyFITS code base in
+several areas. First and perhaps foremost is integration with Astropy's
+\texttt{Table} interface (\S\ref{sec:table}) which is much more flexible and
+powerful than PyFITS' current table interface. We will also be able to
+integrate Astropy's unit support (\S\ref{sec:units_main}) in order to attach
+units to FITS table columns as well as header values that specify units in
+their comments in accordance with the FITS standard. Finally, as the PyWCS
+package has also been integrated into Astropy as \texttt{astropy.wcs}
+(\S\ref{sec:wcs}) tighter association between data from FITS files and their
 world coordinate system (WCS) will be possible.
 
 \subsubsection{ASCII table formats}
@@ -709,7 +720,7 @@ tab-delimited or comma-separated values, \texttt{astropy.io.ascii} provides
 classes for specialized table formats such as
 CDS\footnote{\url{http://vizier.u-strasbg.fr/doc/catstd.htx}},
 IPAC\footnote{\url{http://irsa.ipac.caltech.edu/applications/DDGEN/Doc/ipac_tbl.html}},
-IRAF DAOphot \citep{daophot}, and LaTeX. There is also a flexible class for handling a wide
+IRAF DAOphot \citep{daophot}, and LaTeX. Also included is a flexible class for handling a wide
 variety of fixed-width table formats. Finally, this sub-package is designed to be
 extensible, making it easy for users to define their own readers and writers for
 any other ASCII formats.
@@ -769,9 +780,7 @@ As mentioned above, the long-term plan is to build a ``generalized'' WCS for map
 world coordinates to image coordinates (and vice versa).  While only in early
 planning stages, such a package would aim to not be tied to the FITS representation
 used for the current \texttt{astropy.wcs}.  Such a package would also include
-closer connection to other parts of Astropy like \texttt{astropy.coordinates},
-although such interconnections may also occur in future releases of \texttt{astropy.wcs},
-depending on the pace of development of the new package.
+closer connection to other parts of Astropy, for example \texttt{astropy.coordinates} (\S\ref{sec:coordinates}).
 
 \subsection{Cosmology}
 
@@ -803,7 +812,7 @@ parameter, CMB temperature and the baryonic, cold dark matter, and dark energy
 densities at $z=0$. One can then use methods of this class to perform
 calculations using these parameters.
 
-Figure~\ref{code:cosmology} shows how \texttt{FlatLambdaCDM} can be used to
+Figure~\ref{code:cosmology} shows how the \texttt{FlatLambdaCDM} class can be used to
 create an object representing a flat $\Lambda$CDM cosmology, and how the
 methods of this object can be called to calculate the comoving volume, age and
 transverse separation at a given redshift. Further calculations can be performed using the
@@ -815,8 +824,10 @@ a keyword argument.
 The sub-package provides several pre-defined cosmology instances corresponding
 to commonly used cosmological parameter sets. Currently parameters from the
 WMAP 5-year \citep{Komatsu09}, 7-year \citep{Komatsu11} and 9-year results
-\citep{Hinshaw13} are included (\texttt{WMAP5}, \texttt{WMAP7} and
-\texttt{WMAP9}). The parameters from the \textit{Planck} results \citep{Planck13} will be included in the next release of Astropy. There are several classes corresponding to non-flat
+\citep{Hinshaw13} are included (the \texttt{WMAP5}, \texttt{WMAP7}, and
+\texttt{WMAP9} classes). The parameters from the \textit{Planck} results
+\citep{Planck13} will be included in the next release of Astropy. There are
+several classes corresponding to non-flat
 cosmologies, and the most common dark energy models are supported: a
 cosmological constant, constant $w$, and $w(a) = w_0 + w_a (1-a)$ (e.g.
 \citealt{Linder03}, here $a$ is the scale factor). Figure~\ref{code:cosmology}
@@ -898,7 +909,8 @@ the next (v0.3) release (some of which have already been implemented in the
 publicly-available developer version):
 
 \begin{itemize}
-\item Seamlessly integrating the \texttt{Quantity} framework across all sub-packages
+\item Improving inter-operability between packages, which includes for example seamlessly integrating the \texttt{astropy.units} framework across all sub-packages
+\item Adding support for NumPy arrays in the coordinates sub-package, which will allow the efficient representation and conversions of coordinates in large datasets
 \item Supporting more file formats for reading and writing \texttt{Table} and \texttt{NDData} objects
 \item Implementing a Virtual Observatory cone search tool
 \item Implementing a generalized model-fitting framework
@@ -908,8 +920,8 @@ publicly-available developer version):
 In the longer term, we are already planning the following functionality:
 
 \begin{itemize}
-\item More Virtual Observatory tools
-\item A SAMP server/client (based on the SAMPy\footnote{\url{http://pythonhosted.org/sampy/}} package)
+\item More Virtual Observatory tools, such as support for the Simple Image Access Protocol (SIAP)
+\item A SAMP server/client (ported from the SAMPy\footnote{\url{http://pythonhosted.org/sampy/}} package)
 \item Image analysis tools, including aperture and point spread function (PSF) photometry
 \item Spectroscopic analysis tools
 \item Generalized WCS transformations beyond the FITS WCS standard
@@ -917,7 +929,7 @@ In the longer term, we are already planning the following functionality:
 
 \noindent and undoubtedly the core functionality will grow beyond this. In
 fact, the \astropy package will likely remain a continuously-evolving package,
-and will never be considered `complete' in the traditional sense.
+and will thus never be considered `complete' in the traditional sense.
 
 \section{Summary}
 
@@ -950,7 +962,7 @@ their own projects, reporting any issues, and whenever possible, developing new
 functionality.
 
 
-\section{Acknowledgements}
+\section*{Acknowledgements}
 
 \label{sec:acknowledgements}
 

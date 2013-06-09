@@ -35,10 +35,6 @@ Derriere, S., Gray, N., Louys, M., McDowell, J., Ochsenbein, F., Osuna, P.,
   Rino, B., \& Salgado, J. 2012, Units in the VO, Version 1.0, {IVOA Proposed
   Recommendation 20 August 2012} edn.
 
-\bibitem[{{FITS Working Group}(2008)}]{fits2008}
-{FITS Working Group}. 2008, Definition of the Flexible Image Transport System
-  (FITS)
-
 \bibitem[{George \& Angelini(1995)}]{george1995ogip}
 George, I., \& Angelini, L. 1995, Specification of Physical Units within OGIP
   (Office of Guest Investigator Programs) FITS files
@@ -121,6 +117,11 @@ Oschenbein, F. {et~al.} 2004, VOTable Format Definition, Version 1.1,
   Wicenec}]{ochsenbein2009votable}
 ------. 2009, VOTable Format Definition, Version 1.2, International Virtual
   Observatory Alliance (IVOA)
+
+\bibitem[{{Pence} {et~al.}(2010){Pence}, {Chiappetti}, {Page}, {Shaw}, \&
+  {Stobie}}]{fits3}
+{Pence}, W.~D., {Chiappetti}, L., {Page}, C.~G., {Shaw}, R.~A., \& {Stobie}, E.
+  2010, \aap, 524, A42
 
 \bibitem[{{Planck Collaboration} {et~al.}(2013){Planck Collaboration}, {Ade},
   {Aghanim}, {Armitage-Caplan}, {Arnaud}, {Ashdown}, {Atrio-Barandela},
