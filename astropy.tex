@@ -769,13 +769,17 @@ that use \texttt{wcslib}. On top of the basic FITS WCS support, it adds support
 for the Simple Imaging Polynomial (SIP) convention and table lookup distortions
 \citep{calabretta_sip,sip}. Each of
 these transformations can be used independently or together in a fixed
-pipeline.
-
-The \texttt{astropy.wcs} sub-package also serves as a useful FITS WCS validation
+pipeline. The \texttt{astropy.wcs} sub-package also serves as a useful FITS WCS validation
 tool, as it is able to report on many common mistakes or deviations from the
 standard in a given FITS file.
 
-%TODO: Comment from @mservillat: naive question, but is there any link (or future link) with the coordinates subpackage? I think some people will have the question in mind at the end of this section.
+As mentioned above, the long-term plan is to build a ``generalized'' WCS for mapping
+world coordinates to image coordinates (and vice versa).  While only in early
+planning stages, such a package would aim to not be tied to the FITS representation
+used for the current \texttt{astropy.wcs}.  Such a package would also include
+closer connection to other parts of Astropy like \texttt{astropy.coordinates},
+although such interconnections may also occur in future releases of \texttt{astropy.wcs},
+depending on the pace of development of the new package.
 
 \subsection{Cosmology}
 
