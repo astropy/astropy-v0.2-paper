@@ -1,6 +1,6 @@
 Read in a FITS file from disk
 >>> from astropy.io import fits
->>> hdus = fits.open('sample.fits')
+>>> hdus = fits.open("sample.fits")
 
 Access the header of the first HDU:
 >>> hdus[0].header
@@ -18,11 +18,11 @@ Access the shape of the data in the first HDU:
 (10, 200, 200)
 
 Update/add header keywords
->>> hdus[0].header['TELESCOP'] = 'Python'
->>> hdus[0].header['INSTRUME'] = 'Computer'
+>>> hdus[0].header["TELESCOP"] = "Mt Wilson"
+>>> hdus[0].header["INSTRUME"] = "Edwin Hubble"
 
 Multiply data by 1.2
 >>> hdus[0].data *= 1.2
 
 Write out to disk
->>> hdus.writeto('new_file.fits')
+>>> hdus.writeto("new_file.fits")

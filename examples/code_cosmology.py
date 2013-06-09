@@ -7,7 +7,7 @@ FlatLambdaCDM(H0=70, Om0=0.3, Ode0=0.7)
 Compute the comoving volume to z=6.5 in cubic Mpc using
 this cosmology
 >>> cosmo.comoving_volume(6.5)
-1074707289417.6837
+2521696198211.6924
 
 Compute the age of the universe in Gyr using the
 pre-defined WMAP 5-year and WMAP 9-year cosmologies
