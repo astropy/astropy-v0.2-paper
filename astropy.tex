@@ -534,7 +534,8 @@ provide customized initializers and appropriate formatting and representation
 defaults. For some classes, they also contain added functionality specific to a
 subset of systems, such as code to precess a coordinate to a new equinox. The
 implemented systems include a variety of equatorial coordinate systems (ICRS,
-FK4, and FK5), Galactic coordinates, and horizontal (Alt/Az) coordinates.
+FK4, and FK5), Galactic coordinates, and horizontal (Alt/Az) coordinates, and
+modern (IAU 2006/200A) precession/nutation models for the relevant systems.
 Coordinate objects can easily be transformed from one coordinate system to another: Figure \ref{fig:code_coordinates}
 illustrates the most basic use of this functionality to convert a position on the sky from ICRS to
 Galactic coordinates. Transformations are provided between all coordinate
@@ -588,8 +589,6 @@ implementation and mirrors the way most coordinate systems are defined. For
 example, Galactic coordinates are defined relative to FK4 coordinates rather
 than with respect to a set of other common coordinate systems \citep{galcoords,
 reid04}.
-
-% TODO: Comment from Tim Jenness: We should state whether we support the modern nutation and precession models in general (I don't think we do but ERFA/SOFA does).
 
 \subsection{Tables and Gridded data}
 
