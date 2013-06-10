@@ -1,4 +1,4 @@
-\begin{thebibliography}{38}
+\begin{thebibliography}{37}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 
 \bibitem[{{Barrett} \& {Bridgman}(1999)}]{barrett1999pyfits}
@@ -15,9 +15,6 @@ Behnel, S., Bradshaw, R., Citro, C., Dalcin, L., Seljebotn, D., \& Smith, K.
 {Berry}, D.~S., \& {Jenness}, T. 2012, in Astronomical Society of the Pacific
   Conference Series, Vol. 461, Astronomical Data Analysis Software and Systems
   XXI, ed. P.~{Ballester}, D.~{Egret}, \& N.~P.~F. {Lorente}, 825, 1210.5483
-
-\bibitem[{Calabretta(2013)}]{calabretta2013wcslib}
-Calabretta, M.~R. 2013, WCSLIB 4.17 and PGSBOX 4.17 Documentation
 
 \bibitem[{Calabretta \& Greisen(2002)}]{calabretta2002wcs}
 Calabretta, M.~R., \& Greisen, E.~W. 2002, Astronomy \& Astrophysics, 1077
@@ -132,10 +129,11 @@ Oschenbein, F. {et~al.} 2004, VOTable Format Definition, Version 1.1,
   {Reed}, {Coles}, \& {Quinn}}]{pynbody}
 {Pontzen}, A., {Ro{\v s}kar}, R., {Stinson}, G.~S., {Woods}, R., {Reed}, D.~M.,
   {Coles}, J., \& {Quinn}, T.~R. 2013, {pynbody: Astrophysics Simulation
-  Analysis for Python}
+  Analysis for Python}, Astrophysics Source Code Library, ascl:1305.002
 
 \bibitem[{{Rhodes}(2011)}]{pyephem}
-{Rhodes}, B.~C. 2011, {PyEphem: Astronomical Ephemeris for Python}, 1112.014
+{Rhodes}, B.~C. 2011, {PyEphem: Astronomical Ephemeris for Python},
+  Astrophysics Source Code Library, ascl:1112.014
 
 \bibitem[{{Shupe} {et~al.}(2005){Shupe}, {Moshir}, {Li}, {Makovoz}, {Narron},
   \& {Hook}}]{sip}
@@ -158,7 +156,8 @@ Oschenbein, F. {et~al.} 2004, VOTable Format Definition, Version 1.1,
   {Kapteyn Astronomical Institute}, Groningen
 
 \bibitem[{{Tollerud}(2012)}]{astropysics}
-{Tollerud}, E. 2012, {Astropysics: Astrophysics utilities for python}, 1207.007
+{Tollerud}, E. 2012, {Astropysics: Astrophysics utilities for python},
+  Astrophysics Source Code Library, ascl:1207.007
 
 \bibitem[{Van Der~Walt {et~al.}(2011)Van Der~Walt, Colbert, \&
   Varoquaux}]{van2011numpy}
