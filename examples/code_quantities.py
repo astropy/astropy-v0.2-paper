@@ -17,10 +17,16 @@ Combine quantities:
 >>> x
 <Quantity 2e+11 km / Myr>
 
-Convert to SI units:
+Convert to SI and CGS units:
 >>> x.si
 <Quantity 6.33761756281 m / s>
-
-Convert to CGS units:
 >>> x.cgs
 <Quantity 633.761756281 cm / s>
+
+Use units with NumPy arrays
+>>> import numpy as np
+>>> d = np.array([1, 2, 3, 4]) * u.m
+>>> d.to(u.cm)
+<Quantity [ 100.  200.  300.  400.] cm>
+>>> d * 1. / 50. * u.s ** -1
+<Quantity [ 2.  4.  6.  8.] cm / s>
