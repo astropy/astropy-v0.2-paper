@@ -19,12 +19,12 @@ Convert to Galactic coordinates
 <Angle -21.57280 deg>
 
 Create a separate object in Galactic coordinates
+>>> from astropy import units as u
 >>> g = c.transform_to(coords.GalacticCoordinates)
->>> g.l.format("degree", sep=":", precision=3)
+>>> g.l.format(u.degree, sep=":", precision=3)
 '121:10:27.499'
 
 Set the distance and view the cartesian coordinates
->>> from astropy import units as u
 >>> c.distance = coords.Distance(770., u.kpc)
 >>> c.x
 568.7128882165681

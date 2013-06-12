@@ -65,9 +65,9 @@ Kyle Barbary\inst{\ref{inst:argonne}}  % confirmed
   \and
 Demitri Muna\inst{\ref{inst:osu}}  % confirmed
   \and
-Henry Ferguson\inst{\ref{inst:stsci}}
+Henry Ferguson\inst{\ref{inst:stsci}}  % confirmed
   \and
-Frederic Grollier
+Frederic Grollier\inst{\ref{inst:freelance}}  % confirmed
   \and
 Madhura M. Parikh\inst{\ref{inst:surat}}  % confirmed
   \and
@@ -79,11 +79,11 @@ Christoph Deil\inst{\ref{inst:mpik}}  % confirmed
   \and
 Julien Woillez\inst{\ref{inst:eso_garching}}  % confirmed
   \and
-Simon Conseil\inst{\ref{inst:oamp}}
+Simon Conseil\inst{\ref{inst:oamp}}  % confirmed
   \and
 Roban Kramer\inst{\ref{inst:eth}}  % confirmed
   \and
-James Turner\inst{\ref{inst:gemini_s}}  % confirmed
+James E. H. Turner\inst{\ref{inst:gemini_s}}  % confirmed
   \and
 Leo Singer\inst{\ref{inst:ligo}}  % confirmed
   \and
@@ -103,7 +103,7 @@ D. J. Burke\inst{\ref{inst:cfa}}  % confirmed
   \and
 Andrew R. Casey\inst{\ref{inst:stromlo}}  % confirmed
   \and
-Steve M. Crawford\inst{\ref{inst:saao}}  % confirmed
+Steven M. Crawford\inst{\ref{inst:saao}}  % confirmed
   \and
 Nadia Dencheva\inst{\ref{inst:stsci}}  % confirmed
   \and
@@ -121,7 +121,7 @@ Andrew Pontzen\inst{\ref{inst:oxford},\ref{inst:ucl}}  % confirmed
   \and
 Andy Ptak\inst{\ref{inst:gsfc}}  % confirmed
   \and
-Brian Refsdal  % confirmed
+Brian Refsdal\inst{\ref{inst:cfa}}  % confirmed
   \and
 Mathieu Servillat\inst{\ref{inst:saclay},\ref{inst:cfa}}  % confirmed
   \and
@@ -259,14 +259,13 @@ are sometimes no longer maintained, or simply become unavailable, which is
 detrimental to long-term research and reproducibility.
 
 Motivated by these issues, the Astropy project was started in
-2011\footnote{Following discussions on the \texttt{astropy} mailing list at
-\url{http://mail.scipy.org/mailman/listinfo/astropy}} out of a desire to bring
+2011 out of a desire to bring
 together developers across the field of astronomy in order to coordinate the
 development of a common set of Python tools for astronomers and
 simplify the landscape of available packages. The project has grown rapidly,
 and to date, over 190 individuals are signed up to the development mailing list for
-the Astropy project\footnote{
-\url{https://groups.google.com/forum/?fromgroups#!forum/astropy-dev}}.
+the Astropy project.\footnote{
+\url{https://groups.google.com/forum/?fromgroups#!forum/astropy-dev}}
 
 One of the primary aims of the Astropy \textit{project} is to develop a core
 \astropy \textit{package} that covers much of the astronomy-specific
@@ -295,7 +294,7 @@ package. We provide an overview of the current capabilities
 (\S\ref{sec:capabilities}), our development workflow (\S\ref{sec:workflow}),
 and planned functionality (\S\ref{sec:future}). This paper is not intended to
 provide a detailed documentation for the package (which is available
-online\footnote{\url{http://docs.astropy.org}}), but is rather intended to give
+online,\footnote{\url{http://docs.astropy.org}}) but is rather intended to give
 an overview of the functionality and design.
 
 \section{Capabilities}
@@ -308,7 +307,7 @@ celestial coordinates (\S\ref{sec:coordinates}), tabular and gridded data
 coordinate system transformations (\S\ref{sec:wcs}), and cosmological utilities
 (\S\ref{sec:cosmology}). We have illustrated each section with simple and
 concise code examples, but for more details and examples, we refer the reader
-to the online documentation\footnotemark[4].
+to the online documentation.\footnotemark[4]
 
 \label{sec:capabilities}
 
@@ -320,7 +319,7 @@ to the online documentation\footnotemark[4].
 
 The \texttt{astropy.units} sub-package provides support for physical units. It
 originates from code in the \texttt{pynbody} package \citep{pynbody}, but has been
-significantly enhanced in behavior and implementation\footnote{with the intent that the \texttt{pynbody} will eventually become interoperable with \texttt{astropy.units}}. This sub-package can be
+significantly enhanced in behavior and implementation (with the intent that the \texttt{pynbody} will eventually become interoperable with \texttt{astropy.units}). This sub-package can be
 used to attach units to scalars and arrays, convert from one set of units to
 another, define custom units, define equivalencies for units that are not
 strictly the same (such as wavelength and frequency), and decompose units into
@@ -365,7 +364,7 @@ Programs (OGIP) \citep{george1995ogip}. In addition, the International Virtual
 Observatory Alliance (IVOA) has a forthcoming VOUnit standard
 \citep{derriere2012vounit} in an attempt to resolve some of these differences.
 Rather than choose one of these, \texttt{astropy.units} supports most of these
-standards\footnote{OGIP support is forthcoming at the time of this writing.},
+standards (OGIP support is planned for the next major release of \astropy),
 and allows the user to select the appropriate one when reading and writing unit
 string definitions to and from external file formats.
 
@@ -437,7 +436,7 @@ well as the conversion to a different time scale, for instance from UTC to TT.
 
 This package is based on a derived version of the Standards of Fundamental
 Astronomy (SOFA) time and calendar
-library\footnote{\url{http://www.iausofa.org/}} \citep{sofa_wallace}.
+library\footnote{\url{http://www.iausofa.org}} \citep{sofa_wallace}.
 Leveraging the robust and well-tested SOFA routines ensures that the
 fundamental time scale conversions are being computed correctly. An important
 feature of the SOFA time library which is supported by \texttt{astropy.time} is
@@ -447,7 +446,7 @@ computations. Using two 64-bit floating-point values allows users to represent
 times with a dynamic range of 30 orders of magnitude, providing for example times
 accurate to better than a nanosecond over timescales of tens of Gyr. All time
 scale conversions are done by vectorized versions of the SOFA routines using
-Cython\footnote{\url{http://www.cython.org/}} \citep{cython}, a Python package
+Cython \citep{cython}, a Python package
 that makes it easy to use C code in Python.
 
 \begin{table}
@@ -574,7 +573,7 @@ from a system that is already connected to the transformation graph. Once this
 pair is specified, \texttt{astropy.coordinates} can transform from that
 coordinate system to any other in the graph.
 An example of a user-defined system is provided in the
-documentation\footnote{\url{http://docs.astropy.org/en/v0.2/coordinates/sgr-example.html#complete-code-for-example}},
+documentation,\footnote{\url{http://docs.astropy.org/en/v0.2/coordinates/sgr-example.html}}
 illustrating the definition of a coordinate system useful for a specific
 scientific task (Johnston \& Price-Whelan 2013, in prep).
 
@@ -663,7 +662,7 @@ higher-level subclasses that can represent for example spectra or astronomical i
 Support for reading and writing FITS files is provided by the
 \texttt{astropy.io.fits} sub-package, which at the time of writing is a direct
 port of the
-PyFITS\footnote{\url{http://www.stsci.edu/institute/software_hardware/pyfits}}
+PyFITS\footnote{\url{http://www.stsci.edu/institute/software_hardware/}}
 project \citep{barrett1999pyfits}. Users already familiar with PyFITS will
 therefore feel at home with this package.
 
@@ -714,8 +713,8 @@ provides the ability to read and write tabular data for a wide variety of
 ASCII-based formats. In addition to generic formats such as space-delimited,
 tab-delimited or comma-separated values, \texttt{astropy.io.ascii} provides
 classes for specialized table formats such as
-CDS\footnote{\url{http://vizier.u-strasbg.fr/doc/catstd.htx}},
-IPAC\footnote{\url{http://irsa.ipac.caltech.edu/applications/DDGEN/Doc/ipac_tbl.html}},
+CDS,\footnote{\url{http://vizier.u-strasbg.fr/doc/catstd.htx}}
+IPAC,\footnote{\url{http://irsa.ipac.caltech.edu/applications/DDGEN/}}
 IRAF DAOphot \citep{daophot}, and LaTeX. Also included is a flexible class for handling a wide
 variety of fixed-width table formats. Finally, this sub-package is designed to be
 extensible, making it easy for users to define their own readers and writers for
@@ -761,8 +760,7 @@ to FITS as described in the FITS WCS papers
 planned Astropy package that will handle WCS transformations in general,
 regardless of their representation.
 
-This sub-package is a wrapper around Mark Calabretta's \texttt{wcslib}
-\footnote{\url{http://www.atnf.csiro.au/people/mcalabre/WCS/wcslib/index.html}}. Since all of the FITS header parsing is done
+This sub-package is a wrapper around the \texttt{wcslib} library.\footnote{\url{http://www.atnf.csiro.au/people/mcalabre/WCS/}} Since all of the FITS header parsing is done
 using \texttt{wcslib}, it is assured the same behavior as the many other tools
 that use \texttt{wcslib}. On top of the basic FITS WCS support, it adds support
 for the Simple Imaging Polynomial (SIP) convention and table lookup distortions
@@ -834,8 +832,8 @@ cosmology classes.
 
 All of the code in the sub-package is tested against the web-based cosmology
 calculator by \citet{Wright06} and two other widely-used
-calculators\footnote{\url{http://www.kempner.net/cosmic.php}}$^,$\footnote{\url
-{http://www.icosmos.co.uk/index.html}}. In cases when these calculators are not
+calculators.\footnote{\url{http://www.kempner.net/cosmic.php}}$^,$\footnote{\url
+{http://www.icosmos.co.uk}} In cases when these calculators are not
 precise enough to enable a meaningful comparison, the code is tested against
 calculations performed with \textsc{Mathematica}.
 
@@ -852,9 +850,9 @@ to make use of the expertise of software developers to design code that encourag
 good software practices such as a consistent and clean API, thorough documentation,
 and integrated testing.  It is also dedicated to remaining open source to enable wide adoption
 and render input from all users easier, and is thus
-released with a 3-clause BSD-style license\footnote{A license of this sort is ``permissive''
+released with a 3-clause BSD-style license (A license of this sort is ``permissive''
 in that it allows usage of the code for any purposes as long as notice of the Astropy copyright
-and disclaimers of warranty are given.}. Achieving these aims requires code collaboration
+and disclaimers of warranty are given). Achieving these aims requires code collaboration
 between over 30 geographically-distributed developers, and here we describe
 our development workflow with the hope that it may be replicated by other astronomy
 software projects that are likely to have similar needs.
@@ -862,7 +860,7 @@ software projects that are likely to have similar needs.
 To enable this collaboration, we have made use of the
 GitHub\footnote{\url{http://www.github.com}} open source code hosting and
 development  platform. The main repository for \astropy is stored in a
-git\footnote{\url{http://git-scm.com/}} repository on GitHub, and any
+git\footnote{\url{http://git-scm.com}} repository on GitHub, and any
 non-trivial changes are made via \textit{pull requests}, which are a mechanism
 for submitting code for review by other developers prior to merging into the
 main code base. This workflow aids in increasing the quality, documentation and
@@ -881,9 +879,9 @@ configurations (such as different versions of Python or \gls{numpy}, and on diff
 platforms) in order to ensure that the package is held to the highest standard
 of stability. In particular, any change made via a pull request is subject to
 extensive testing before being merged into the core repository. For the latter,
-we make use of Travis\footnote{\url{https://travis-ci.org/}}, while for running
+we make use of Travis,\footnote{\url{https://travis-ci.org}} while for running
 more extensive tests across Linux, MacOS X, and Windows, we make use of
-Jenkins\footnote{\url{http://jenkins-ci.org/}} (both are examples of continuous
+Jenkins\footnote{\url{http://jenkins-ci.org}} (both are examples of continuous
 integration systems).
 
 This development workflow has worked very well so far, allowing contributions
@@ -917,7 +915,7 @@ In the longer term, we are already planning the following functionality:
 
 \begin{itemize}
 \item More Virtual Observatory tools, such as support for the Simple Image Access Protocol (SIAP)
-\item A SAMP server/client (ported from the SAMPy\footnote{\url{http://pythonhosted.org/sampy/}} package)
+\item A SAMP server/client (ported from the SAMPy\footnote{\url{http://pythonhosted.org/sampy}} package)
 \item Image analysis tools, including aperture and point spread function (PSF) photometry
 \item Spectroscopic analysis tools
 \item Generalized WCS transformations beyond the FITS WCS standard
@@ -971,6 +969,7 @@ an excellent free development platform. We also are grateful to Read The Docs
 (\url{https://www.travis-ci.org/}) for providing free documentation
 hosting and testing respectively. Finally, we would like to thank all the
 \astropy users that have provided feedback and submitted bug reports.
+The contribution by T. Aldcroft was is funded by NASA contract NAS8-39073.
 
 \bibliographystyle{apj_custom}
 \bibliography{apj-jour,references}
