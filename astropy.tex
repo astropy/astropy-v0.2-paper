@@ -293,7 +293,7 @@ package. We provide an overview of the current capabilities
 (\S\ref{sec:capabilities}), our development workflow (\S\ref{sec:workflow}),
 and planned functionality (\S\ref{sec:future}). This paper is not intended to
 provide a detailed documentation for the package (which is available
-online,\footnote{\url{http://docs.astropy.org}}) but is rather intended to give
+online\footnote{\url{http://docs.astropy.org}}), but is rather intended to give
 an overview of the functionality and design.
 
 \section{Capabilities}
@@ -414,14 +414,14 @@ physical quantities and user-specified quantities.
 
 The \texttt{astropy.time} package provides functionality for manipulating times
 and dates. Specific emphasis is placed on supporting time scales (e.g. UTC,
-TAI, UT1) and time formats/representations (e.g. JD, MJD, ISO 8601) that are
+TAI, UT1) and time formats or representations (e.g. JD, MJD, ISO 8601) that are
 used in astronomy \citep{guinot88,kovalevsky01,sofa_wallace}. Examples of using this sub-package are provided in Figure
 \ref{code:time}.
 
 The most common way to use \texttt{astropy.time} is to create a \texttt{Time}
 object by supplying one or more input time values as well as the time
 format or representation and time scale of those values. The input time(s) can
-either be a single scalar like \verb|"2010-01-01 00:00:00"| or \verb|2455348.5|
+either be a single scalar such as \verb|"2010-01-01 00:00:00"| or \verb|2455348.5|
 or a sequence of such values; the format or representation specifies how to
 interpret the input values, such as ISO, JD, or Unix time; and the scale
 specifies the time standard used for the values, such as Coordinated Universal
@@ -516,7 +516,7 @@ astronomer seeing the input string ``12h53m11.5123s'' would understand the
 units to be in hours, minutes, and seconds, so this value is alone sufficient
 to pass to the angle initializer. This functionality is built around the
 \texttt{Angle} object, which can be instantiated and used on its own. It
-provides additional functionality like string formatting and mechanisms to
+provides additional functionality such as string formatting and mechanisms to
 specify the valid bounds of an angle. As a convenience, it is also possible to query the online SIMBAD database to resolve the name of a source (see Figure~\ref{fig:code_coordinates} for an example showing how to find the ICRS coordinates of M32).
 
 \begin{figure}
@@ -560,7 +560,7 @@ application of this information in the form of computing three-dimensional
 distances between two objects.
 
 The \texttt{astropy.coordinates} sub-package was designed such that it should be easy for a user to easily add new
-coordinate systems, with only a class definition and two transformation functions.
+coordinate systems.
 This flexibility is achieved in \texttt{astropy.coordinates} through the internal use of
 a transformation graph, which keeps track of a network of
 coordinate systems and the transformations between them. When a coordinate
@@ -674,13 +674,13 @@ read and written, and once in memory can be easily modified.
 Figure~\ref{code:fits} shows a simple example of how to open an existing FITS
 file, access and modify the header and data, and write a new file back to disk.
 Creating new FITS files is also made simple. Since the code in this sub-package
-was developed for over a decade, it has over time been made to work with an
+has been developed over more than a decade, it has been made to work with an
 extensive variety of FITS files, including ones that deviate from the FITS
 standard. A command-line utility, \texttt{fitscheck}, is included with Astropy
 and can be used to validate FITS files against the standard.
 
 Because the interface is exactly the same as that of PyFITS, users may directly
-replace PyFITS with Astropy in existing code by changing import statements like
+replace PyFITS with Astropy in existing code by changing import statements such as
 \texttt{import pyfits} to \texttt{from astropy.io import fits as pyfits}
 without any additional code changes. Although PyFITS will continue to be
 released as a separate package in the near term, the long term plan is to
@@ -902,7 +902,7 @@ the next (v0.3) release (some of which have already been implemented in the
 publicly-available developer version):
 
 \begin{itemize}
-\item Improving inter-operability between packages, which includes for example seamlessly integrating the \texttt{astropy.units} framework across all sub-packages
+\item Improving interoperability between packages, which includes for example seamlessly integrating the \texttt{astropy.units} framework across all sub-packages
 \item Adding support for NumPy arrays in the coordinates sub-package, which will allow the efficient representation and conversions of coordinates in large datasets
 \item Supporting more file formats for reading and writing \texttt{Table} and \texttt{NDData} objects
 \item Implementing a Virtual Observatory cone search tool
@@ -968,7 +968,7 @@ an excellent free development platform. We also are grateful to Read The Docs
 (\url{https://www.travis-ci.org/}) for providing free documentation
 hosting and testing respectively. Finally, we would like to thank all the
 \astropy users that have provided feedback and submitted bug reports.
-The contribution by T. Aldcroft was is funded by NASA contract NAS8-39073.
+The contribution by T. Aldcroft was funded by NASA contract NAS8-39073.
 
 \bibliographystyle{apj_custom}
 \bibliography{apj-jour,references}
