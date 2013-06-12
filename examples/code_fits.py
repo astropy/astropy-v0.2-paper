@@ -19,7 +19,7 @@ Access the shape of the data in the first HDU:
 
 Update/add header keywords
 >>> hdus[0].header["TELESCOP"] = "Mt Wilson"
->>> hdus[0].header["INSTRUME"] = "Edwin Hubble"
+>>> hdus[0].header["OBSERVER"] = "Edwin Hubble"
 
 Multiply data by 1.2
 >>> hdus[0].data *= 1.2
