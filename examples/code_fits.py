@@ -9,7 +9,7 @@ BITPIX  =                  -32
 NAXIS   =                    3
 NAXIS1   =                 200
 NAXIS2   =                 200
-NAXIS2   =                  10
+NAXIS3   =                  10
 EXTEND  =                    T
 ...
 
