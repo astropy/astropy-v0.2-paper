@@ -725,13 +725,16 @@ any other ASCII formats.
 
 % Authors: Mike D.
 
-The \texttt{astropy.io.votable} sub-package (formerly the standalone project
-\texttt{vo.table}) provides full support for reading and writing VOTable format
-files versions 1.1, 1.2, and the proposed 1.3
-\citep{ochsenbein2004votable,ochsenbein2009votable}. It efficently stores the
-tables in memory as \gls{numpy} structured arrays. The file is read using streaming
-to avoid reading in the entire file at once and greatly reducing the memory
-footprint.
+The \texttt{astropy.io.votable} sub-package (formerly the standalone
+project \texttt{vo.table}) provides full support for reading and
+writing VOTable format files versions 1.1, 1.2, and the proposed 1.3
+\citep{ochsenbein2004votable,ochsenbein2009votable}. It efficently
+stores the tables in memory as \gls{numpy} structured arrays. The file
+is read using streaming to avoid reading in the entire file at once
+and greatly reducing the memory footprint.  \textbf{VOTable files are
+compressed using the \gls{gzip} and \gls{bzip2} algorithms are
+supported transparently.  It also supports reading VOTable files
+where the table data is stored in an external FITS file.}
 
 It is possible to convert any one of the tables in a VOTable file to a
 \texttt{Table} object (\S\ref{sec:table}), where it can be edited and then
