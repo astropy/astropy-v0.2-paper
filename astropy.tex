@@ -677,23 +677,25 @@ standard \citep{fits3} such as images, binary tables, and ASCII tables, and
 includes common compression algorithms. Header-data units (HDUs) are
 represented by Python classes, with the data itself stored using NumPy arrays,
 and with the headers stored using a \texttt{Header} class. Files can easily be
-read and written, and once in memory can be easily modified.
+read and written, and once in memory can be easily modified. \textbf{This
+includes support for transparently reading from and writing to gzip-compressed
+FITS files.}
 Figure~\ref{code:fits} shows a simple example of how to open an existing FITS
 file, access and modify the header and data, and write a new file back to disk.
-This includes ssupport for transparently reading from and writing to
-gzip-compressed FITS files.  Creating new FITS files is also made simple. Since
-the code in this sub-package has been developed over more than a decade, it has
-been made to work with an extensive variety of FITS files, including ones that
-deviate from the FITS standard. This includes support for deprecated formats
-such as \texttt{GROUPS} HDUs as well as more obscure non-standard HDU types
-such as \texttt{FITS} HDUs which allow encapsulating multiple FITS files within
-FITS files. Support is also included for common but non-standard header
-conventions such as \texttt{CONTINUE} cards and ESO \texttt{HIERARCH} cards.
-Two command-line utilities for working with FITS files are packaged with
-Astropy: \texttt{fitscheck} can be used to validate FITS files against the
-standard. \texttt{fitsdiff} can be used to compare two FITS files on a number
-of criteria, and also includes a powerful API for programmatically comparing
-FITS files.
+
+Creating new FITS files is also made simple. Since the code in this sub-package
+has been developed over more than a decade, it has been made to work with an
+extensive variety of FITS files, including ones that deviate from the FITS
+standard. \textbf{This includes support for deprecated formats such as
+\texttt{GROUPS} HDUs as well as more obscure non-standard HDU types such as
+\texttt{FITS} HDUs which allow encapsulating multiple FITS files within FITS
+files. Support is also included for common but non-standard header conventions
+such as \texttt{CONTINUE} cards and ESO \texttt{HIERARCH} cards.  Two
+command-line utilities for working with FITS files are packaged with Astropy:
+\texttt{fitscheck} can be used to validate FITS files against the standard.
+\texttt{fitsdiff} can be used to compare two FITS files on a number of
+criteria, and also includes a powerful API for programmatically comparing FITS
+files.}
 
 Because the interface is exactly the same as that of PyFITS, users may directly
 replace PyFITS with Astropy in existing code by changing import statements such as
