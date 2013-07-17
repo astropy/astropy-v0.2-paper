@@ -352,8 +352,10 @@ common practice to treat such units as equivalent even though they are not
 strictly comparable. Such a conversion can be carried out in \texttt{astropy.units} by supplying an equivalency list
 (see Figure~\ref{code:quantities}). The inclusion of these equivalencies is an important
 improvement over existing unit-handling software, which typically does not
-have this functionality. Equivalencies are also included for flux
-densities, and users can easily implement their own equivalencies.
+have this functionality. Equivalencies are also included for
+\textbf{monochromatic flux densities, which allows users to convert from
+$F_\nu$ to $F_\lambda$,} and users can easily implement their own
+equivalencies.
 
 There are multiple string representations for units used in the astronomy
 community. The FITS Standard \citep{fits3} defines a unit standard, as well
@@ -733,12 +735,12 @@ any other ASCII formats.
 The \texttt{astropy.io.votable} sub-package (formerly the standalone
 project \texttt{vo.table}) provides full support for reading and
 writing VOTable format files versions 1.1, 1.2, and the proposed 1.3
-\citep{ochsenbein2004votable,ochsenbein2009votable}. It efficently
+\citep{ochsenbein2004votable,ochsenbein2009votable}. It efficiently
 stores the tables in memory as \gls{numpy} structured arrays. The file
 is read using streaming to avoid reading in the entire file at once
 and greatly reducing the memory footprint.  \textbf{VOTable files are
-compressed using the \gls{gzip} and \gls{bzip2} algorithms are
-supported transparently.  It also supports reading VOTable files
+compressed using the \texttt{gzip} and \texttt{bzip2} algorithms are
+supported transparently, as are VOTable files
 where the table data is stored in an external FITS file.}
 
 It is possible to convert any one of the tables in a VOTable file to a
