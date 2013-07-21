@@ -14,8 +14,7 @@ Behnel, S., Bradshaw, R., Citro, C., Dalcin, L., Seljebotn, D., \& Smith, K.
 \bibitem[{{Berry} \& {Jenness}(2012)}]{pyast}
 {Berry}, D.~S., \& {Jenness}, T. 2012, in Astronomical Society of the Pacific
   Conference Series, Vol. 461, Astronomical Data Analysis Software and Systems
-  XXI, ed. P.~{Ballester}, D.~{Egret}, \& N.~P.~F. {Lorente}, 825,
-  arXiv:1210.5483
+  XXI, ed. P.~{Ballester}, D.~{Egret}, \& N.~P.~F. {Lorente}, 825
 
 \bibitem[{Calabretta \& Greisen(2002)}]{calabretta2002wcs}
 Calabretta, M.~R., \& Greisen, E.~W. 2002, Astronomy \& Astrophysics, 1077
@@ -70,20 +69,19 @@ Jenness, T., \& Berry, D.~S. 2013, in ASP Conf Ser., Vol. TBD, ADASS XXII, ed.
 Jones, E., Oliphant, T., \& Peterson, P. 2001, http://www. scipy. org/
 
 \bibitem[{{Kaplan}(2005)}]{usnocircular179}
-{Kaplan}, G.~H. 2005, U.S.~Naval Observatory Circulars, 179,
-  arXiv:astro-ph/0602086
+{Kaplan}, G.~H. 2005, U.S.~Naval Observatory Circulars, 179
 
 \bibitem[{{Komatsu} {et~al.}(2009){Komatsu}, {Dunkley}, {Nolta}, {Bennett},
   {Gold}, {Hinshaw}, {Jarosik}, {Larson}, {Limon}, {Page}, {Spergel},
   {Halpern}, {Hill}, {Kogut}, {Meyer}, {Tucker}, {Weiland}, {Wollack}, \&
   {Wright}}]{Komatsu09}
-{Komatsu}, E. {et~al.} 2009, \apjs, 180, 330, 0803.0547
+{Komatsu}, E. {et~al.} 2009, \apjs, 180, 330
 
 \bibitem[{{Komatsu} {et~al.}(2011){Komatsu}, {Smith}, {Dunkley}, {Bennett},
   {Gold}, {Hinshaw}, {Jarosik}, {Larson}, {Nolta}, {Page}, {Spergel},
   {Halpern}, {Hill}, {Kogut}, {Limon}, {Meyer}, {Odegard}, {Tucker}, {Weiland},
   {Wollack}, \& {Wright}}]{Komatsu11}
-------. 2011, \apjs, 192, 18, arXiv:1001.4538
+------. 2011, \apjs, 192, 18
 
 \bibitem[{{Kovalevsky}(2001)}]{kovalevsky01}
 {Kovalevsky}, J. 2001, in Journ{\'e}es 2000 - syst{\`e}mes de r{\'e}f{\'e}rence
@@ -91,8 +89,7 @@ Jones, E., Oliphant, T., \& Peterson, P. 2001, http://www. scipy. org/
   and astronomical models, ed. N.~{Capitaine}, 218--224
 
 \bibitem[{{Linder}(2003)}]{Linder03}
-{Linder}, E.~V. 2003, Physical Review Letters, 90, 091301,
-  arXiv:astro-ph/0208512
+{Linder}, E.~V. 2003, Physical Review Letters, 90, 091301
 
 \bibitem[{{Louys} {et~al.}(2011){Louys}, {Bonnarel}, {Schade}, {Dowler},
   {Micol}, {Durand}, {Tody}, {Michel}, {Salgado}, {Chilingarian}, {Rino},
@@ -182,6 +179,6 @@ Van Der~Walt, S., Colbert, S., \& Varoquaux, G. 2011, Computing in Science \&
   arXiv:1110.0498
 
 \bibitem[{{Wright}(2006)}]{Wright06}
-{Wright}, E.~L. 2006, \pasp, 118, 1711, arXiv:astro-ph/0609593
+{Wright}, E.~L. 2006, \pasp, 118, 1711
 
 \end{thebibliography}
