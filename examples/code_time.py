@@ -19,6 +19,6 @@ Convert time to the TT scale
 <Time object: scale="tt" format="iso"
               vals=2010-06-01 00:01:06.184>
 
-Find the julian date in the TT scale
+Find the Julian Date in the TT scale
 >>> t.tt.jd
 2455348.5007660184
