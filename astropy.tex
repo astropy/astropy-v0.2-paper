@@ -262,7 +262,7 @@ Motivated by these issues, the Astropy project was started in
 together developers across the field of astronomy in order to coordinate the
 development of a common set of Python tools for astronomers and
 simplify the landscape of available packages. The project has grown rapidly,
-and to date, over \textbf{200} individuals are signed up to the development mailing list for
+and to date, over 200 individuals are signed up to the development mailing list for
 the Astropy project.\footnote{
 \url{https://groups.google.com/forum/?fromgroups#!forum/astropy-dev}}
 
@@ -353,8 +353,8 @@ strictly comparable. Such a conversion can be carried out in \texttt{astropy.uni
 (see Figure~\ref{code:quantities}). The inclusion of these equivalencies is an important
 improvement over existing unit-handling software, which typically does not
 have this functionality. Equivalencies are also included for
-\textbf{monochromatic flux densities, which allows users to convert between
-$F_\nu$ to $F_\lambda$,} and users can easily implement their own
+monochromatic flux densities, which allows users to convert between
+$F_\nu$ to $F_\lambda$, and users can easily implement their own
 equivalencies.
 
 There are multiple string representations for units used in the astronomy
@@ -406,7 +406,7 @@ uncertainties. These can be used along with \texttt{Quantity} objects to
 provide a convenient framework for computing any quantity in astronomy.
 Figure~\ref{code:constants} includes a simple example that shows how the
 gravitational force between two bodies can be calculated in Newtons using
-physical \textbf{constants} and user-specified quantities.
+physical constants and user-specified quantities.
 
 \subsection{Time}
 
@@ -434,8 +434,8 @@ important to treat the different time scales properly when converting between
 celestial coordinate systems. To facilitate this, the \texttt{Time} class makes
 the conversion to a different format such as Julian Date straightforward, as
 well as the conversion to a different time scale, for instance from UTC to TT.
-\textbf{We note that the \texttt{Time} class includes support for leap seconds
-in the UTC time scale}.
+We note that the \texttt{Time} class includes support for leap seconds
+in the UTC time scale.
 
 This package is based on a derived version of the Standards of Fundamental
 Astronomy (SOFA) time and calendar
@@ -522,7 +522,7 @@ to pass to the angle initializer. This functionality is built around the
 \texttt{Angle} object, which can be instantiated and used on its own. It
 provides additional functionality such as string formatting and mechanisms to
 specify the valid bounds of an angle. As a convenience, it is also possible to
-query the online SIMBAD\footnote{\textbf{\url{http://simbad.u-strasbg.fr}}} database to
+query the online SIMBAD\footnote{\url{http://simbad.u-strasbg.fr}} database to
 resolve the name of a source (see Figure~\ref{fig:code_coordinates} for an
 example showing how to find the ICRS coordinates of M32).
 
@@ -677,16 +677,16 @@ standard \citep{fits3} such as images, binary tables, and ASCII tables, and
 includes common compression algorithms. Header-data units (HDUs) are
 represented by Python classes, with the data itself stored using NumPy arrays,
 and with the headers stored using a \texttt{Header} class. Files can easily be
-read and written, and once in memory can be easily modified. \textbf{This
+read and written, and once in memory can be easily modified. This
 includes support for transparently reading from and writing to gzip-compressed
-FITS files.}
+FITS files.
 Figure~\ref{code:fits} shows a simple example of how to open an existing FITS
 file, access and modify the header and data, and write a new file back to disk.
 
 Creating new FITS files is also made simple. Since the code in this sub-package
 has been developed over more than a decade, it has been made to work with an
 extensive variety of FITS files, including ones that deviate from the FITS
-standard. \textbf{This includes support for deprecated formats such as
+standard. This includes support for deprecated formats such as
 \texttt{GROUPS} HDUs as well as more obscure non-standard HDU types such as
 \texttt{FITS} HDUs which allow encapsulating multiple FITS files within FITS
 files. Support is also included for common but non-standard header conventions
@@ -695,7 +695,7 @@ command-line utilities for working with FITS files are packaged with Astropy:
 \texttt{fitscheck} can be used to validate FITS files against the standard.
 \texttt{fitsdiff} can be used to compare two FITS files on a number of
 criteria, and also includes a powerful API for programmatically comparing FITS
-files.}
+files.
 
 Because the interface is exactly the same as that of PyFITS, users may directly
 replace PyFITS with Astropy in existing code by changing import statements such as
@@ -749,9 +749,9 @@ writing VOTable format files versions 1.1, 1.2, and the proposed 1.3
 \citep{ochsenbein2004votable,ochsenbein2009votable}. It efficiently
 stores the tables in memory as \gls{numpy} structured arrays. The file
 is read using streaming to avoid reading in the entire file at once
-and greatly reducing the memory footprint. \textbf{VOTable files compressed
+and greatly reducing the memory footprint. VOTable files compressed
 using the gzip and bzip2 algorithms are supported transparently, as are
-VOTable files where the table data is stored in an external FITS file.}
+VOTable files where the table data is stored in an external FITS file.
 
 It is possible to convert any one of the tables in a VOTable file to a
 \texttt{Table} object (\S\ref{sec:table}), where it can be edited and then
@@ -917,9 +917,9 @@ knowledge of the git version control system.
 
 % Authors: Tom R., Erik T., Perry G.
 
-Development on the Astropy package is very active, and \textbf{in addition to
+Development on the Astropy package is very active, and in addition to
 some of the incremental improvements to existing sub-packages described in the
-text,} we are focusing on \textbf{implementing major new functionality in}
+text, we are focusing on implementing major new functionality in
 several areas for the next (v0.3) release (some of which have already been
 implemented in the publicly-available developer version):
 
@@ -927,20 +927,20 @@ implemented in the publicly-available developer version):
 \item Improving interoperability between packages, which includes for example seamlessly integrating the \texttt{astropy.units} framework across all sub-packages
 \item Adding support for NumPy arrays in the coordinates sub-package, which will allow the efficient representation and conversions of coordinates in large datasets
 \item Supporting more file formats for reading and writing \texttt{Table} and \texttt{NDData} objects
-\item Implementing a Virtual Observatory cone search tool \textbf{\citep{vo-cone-search}}
+\item Implementing a Virtual Observatory cone search tool \citep{vo-cone-search}
 \item Implementing a generalized model-fitting framework
 \item Implementing statistical functions commonly used in Astronomy
 \end{itemize}
 
-In the longer term, we are already planning the following \textbf{major} functionality:
+In the longer term, we are already planning the following major functionality:
 
 \begin{itemize}
 \item Image analysis tools, including aperture and point spread function (PSF) photometry
 \item Spectroscopic analysis tools
 \item Generalized WCS transformations beyond the FITS WCS standard
 \item A SAMP server/client (ported from the SAMPy\footnote{\url{http://pythonhosted.org/sampy}} package)
-\item Support for the Simple Image Access Protocol (SIAP) \textbf{\citep{vo-siap}}
-\item \textbf{Support for the Table Access Protocol (TAP) \citep{vo-tap} is under consideration}
+\item Support for the Simple Image Access Protocol (SIAP) \citep{vo-siap}
+\item Support for the Table Access Protocol (TAP) \citep{vo-tap} is under consideration
 \end{itemize}
 
 \noindent and undoubtedly the core functionality will grow beyond this. In
@@ -982,7 +982,7 @@ functionality.
 
 \label{sec:acknowledgements}
 
-\textbf{We thank the referee, Igor Chiligarian, for suggestions that helped improve this paper}.
+We thank the referee, Igor Chiligarian, for suggestions that helped improve this paper.
 We would like to thank the \gls{numpy}, \gls{scipy}, \gls{ipython} and
 \gls{matplotlib} communities for providing their packages which are invaluable
 to the development of Astropy. We thank the GitHub team for providing us with
@@ -993,9 +993,9 @@ an excellent free development platform. We also are grateful to Read The Docs
 hosting and testing respectively. Finally, we would like to thank all the
 \astropy users that have provided feedback and submitted bug reports.
 The contribution by T. Aldcroft was funded by NASA contract NAS8-39073.
-\textbf{The name resolution functionality shown in
+The name resolution functionality shown in
 Figure~\ref{fig:code_coordinates} makes use of the SIMBAD database, operated
-at CDS, Strasbourg, France}
+at CDS, Strasbourg, France.
 
 \bibliographystyle{apj_custom}
 \bibliography{apj-jour,references}
