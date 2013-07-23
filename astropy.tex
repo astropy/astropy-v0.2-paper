@@ -354,7 +354,7 @@ strictly comparable. Such a conversion can be carried out in \texttt{astropy.uni
 improvement over existing unit-handling software, which typically does not
 have this functionality. Equivalencies are also included for
 monochromatic flux densities, which allows users to convert between
-$F_\nu$ to $F_\lambda$, and users can easily implement their own
+$F_\nu$ and $F_\lambda$, and users can easily implement their own
 equivalencies.
 
 There are multiple string representations for units used in the astronomy
@@ -566,7 +566,7 @@ physical distances. Figure \ref{fig:code_coordinates} illustrates an
 application of this information in the form of computing three-dimensional
 distances between two objects.
 
-The \texttt{astropy.coordinates} sub-package was designed such that it should be easy for a user to easily add new
+The \texttt{astropy.coordinates} sub-package was designed such that it should be easy for a user to add new
 coordinate systems.
 This flexibility is achieved in \texttt{astropy.coordinates} through the internal use of
 a transformation graph, which keeps track of a network of
@@ -598,7 +598,7 @@ sub-package.\label{code:tables}}
 \end{figure}
 
 Tables and $n$-dimensional data arrays are the most common forms of data
-encountered in astronomy. The \gls{python}-community has various solutions for
+encountered in astronomy. The \gls{python} community has various solutions for
 tables, such as \gls{numpy} structured arrays or \texttt{DataFrame} objects in
 Pandas \citep{pandas} to name only a couple. For
 n-dimensional data the \gls{numpy} \texttt{ndarray} is the most popular.
