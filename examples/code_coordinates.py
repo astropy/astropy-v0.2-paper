@@ -8,7 +8,7 @@ Access the RA/Dec values
 >>> c.dec
 <Dec 41.26917 deg>
 >>> c.ra.degrees
-10.684583333333332
+10.68458333333333
 >>> c.ra.hms
 (0.0, 42, 44.299999999999784)
 
@@ -29,16 +29,16 @@ Set the distance and view the cartesian coordinates
 >>> c.x
 568.7128882165681
 >>> c.y
-107.3009359688103
+107.30093596881028
 >>> c.z
 507.8899092486349
 
 Query SIMBAD to get coordinates from object names
 >>> m = coords.ICRSCoordinates.from_name("M32")
 >>> m
-<ICRSCoordinates RA=10.67446 deg, Dec=40.86589 deg>
+<ICRSCoordinates RA=10.67427 deg, Dec=40.86517 deg>
 
 Two coordinates can be used to get distances
 >>> m.distance = coords.Distance(765., u.kpc)
 >>> m.separation_3d(c)
-<Distance 7.36155 kpc>
+<Distance 7.36865 kpc>
