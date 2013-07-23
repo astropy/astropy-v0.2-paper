@@ -26,7 +26,7 @@ Manipulate columns
 >>> t2.rename_column("Source", "sources")
 
 Write a table to a file
->>> t2.write("new_catalog.hdf5")
+>>> t2.write("new_catalog.hdf5", path='/table')
 >>> t2.write("new_catalog.rdb")
 >>> t2.write("new_catalog.tex")
 

@@ -7,11 +7,10 @@ Access the header of the first HDU:
 SIMPLE  =                    T
 BITPIX  =                  -32
 NAXIS   =                    3
-NAXIS1   =                 200
-NAXIS2   =                 200
-NAXIS3   =                  10
+NAXIS1  =                  200
+NAXIS2  =                  200
+NAXIS3  =                   10
 EXTEND  =                    T
-...
 
 Access the shape of the data in the first HDU:
 >>> hdus[0].data.shape

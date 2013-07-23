@@ -12,4 +12,4 @@ Combine quantities and constants:
 >>> F = (c.G * (3 * c.M_sun) * (2 * u.kg) /
 ...      (1.5 * u.au) ** 2)
 >>> F.to(u.N)
-<Quantity 0.01581795428812989 N>
+<Quantity 0.0158179542881 N>
