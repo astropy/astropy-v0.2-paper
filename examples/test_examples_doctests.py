@@ -75,12 +75,6 @@ def preprocess(string):
 
         # EXCEPTIONS - things where we know the output has been deliberately modified for the paper
 
-        # Single quotes cause issue with copy and pasting from PDF
-
-        line = line.replace('"utc"', "'utc'")
-        line = line.replace('"iso"', "'iso'")
-        line = line.replace('"tt"', "'tt'")
-
         # FITS header is padded to 80 characters
 
         if line.startswith(('SIMPLE', 'BITPIX', 'NAXIS', 'EXTEND')):
